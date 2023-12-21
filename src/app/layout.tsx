@@ -1,5 +1,3 @@
-import type { Metadata } from "next";
-
 import { getBlogConfig } from "@/utils/config";
 
 import "./globals.css";
