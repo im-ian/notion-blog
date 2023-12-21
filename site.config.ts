@@ -1,6 +1,9 @@
 import type { Config } from "@/types";
 
 const CONFIG: Config = {
+  notion: {
+    pageId: process.env.NOTION_PAGE_ID || "",
+  },
   // Metadata
   meta: {
     title: {

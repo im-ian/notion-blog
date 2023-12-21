@@ -1,3 +1,6 @@
-import BLOG_CONFIG from "../../blog.config";
+import SITE_CONFIG from "../../site.config";
 
-export const getBlogConfig = () => BLOG_CONFIG;
+type ConfigType = keyof typeof SITE_CONFIG;
+
+export const getSiteConfig = <T extends ConfigType>(type: T) =>
+  SITE_CONFIG[type];

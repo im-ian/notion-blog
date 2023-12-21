@@ -1,9 +1,8 @@
-import { getBlogConfig } from "@/utils/config";
+import { getSiteConfig } from "@/utils/config";
 
-import "./globals.css";
+import "../css/global.css";
 
-const { meta } = getBlogConfig();
-export const metadata = meta;
+export const metadata = getSiteConfig("meta");
 
 export default function RootLayout({
   children,
