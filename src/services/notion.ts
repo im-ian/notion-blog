@@ -5,7 +5,7 @@ const api = new NotionAPI();
 
 const cache: Map<string, Promise<ExtendedRecordMap>> = new Map();
 
-export function getPage(pageId: string) {
+export function getPageData(pageId: string) {
   if (!cache.has(pageId)) {
     cache.set(pageId, api.getPage(pageId));
   }

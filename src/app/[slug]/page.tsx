@@ -1,38 +1,57 @@
-import type { NextPage } from "next";
+import { NotionAPI } from "notion-client";
+import { NotionPage } from "@/components/NotionRenderer";
 
-import { getPage } from "@/services/notion";
+// import { getPageData } from "@/services/notion";
 import { getSiteConfig } from "@/utils/config";
-import { getCollectionView } from "@/utils/notion";
+import { getSchema, getPageProperties, getPages } from "@/utils/notion";
 
-type PageProps = NextPage<{
-  slug: string;
-}>;
+type PageProps = {
+  params: {
+    slug: string;
+  };
+};
 
-export async function getNotionPage() {
+// export async function generateStaticParams() {
+//   return {
+//     paths: [],
+//     fallback: false,
+//   };
+// }
+
+export async function getNotionPage(slug: string) {
+  const api = new NotionAPI();
+
   const { pageId } = getSiteConfig("notion");
-  const page = await getPage(pageId);
+  const page = await api.getPage(pageId);
 
-  console.log(
-    page?.collection["5ca116cb-03ca-4190-87d6-847336e07be1"].value.schema
-  );
+  if (!page) {
+    return {
+      page: undefined,
+    };
+  }
 
-  // if (page?.block) {
-  //   console.log(getCollectionView(page));
-  // }
+  const scheme = getSchema(page.collection);
+  const pages = getPages(page.block);
+
+  const filteredPage = pages.filter((p) => {
+    const properties = getPageProperties(p.value.properties, scheme);
+    return properties.slug.value === slug;
+  });
+
+  const resultPage = filteredPage[0] || undefined;
 
   return {
-    props: {
-      page,
-    },
+    page: resultPage ? await api.getPage(resultPage.value.id) : undefined,
   };
 }
 
 export default async function BlogArticlePage(props: PageProps) {
-  const page = await getNotionPage();
+  const { page } = await getNotionPage(props.params.slug);
 
   return (
     <div>
       <h1>Blog Article Page</h1>
+      {page && <NotionPage recordMap={page} />}
     </div>
   );
 }
