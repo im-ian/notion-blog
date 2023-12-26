@@ -3,6 +3,7 @@ import type { Config } from "@/types";
 const CONFIG: Config = {
   notion: {
     pageId: process.env.NOTION_PAGE_ID || "",
+    viewId: process.env.NOTION_VIEW_ID || "",
   },
   // Metadata
   meta: {
