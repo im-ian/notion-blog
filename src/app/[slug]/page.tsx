@@ -4,6 +4,7 @@ import { NotionPage } from "@/components/NotionRenderer";
 // import { getPageData } from "@/services/notion";
 import { getSiteConfig } from "@/utils/config";
 import { getSchema, getPageProperties, getPages } from "@/utils/notion";
+import Head from "next/head";
 
 type PageProps = {
   params: {
@@ -27,6 +28,7 @@ export async function getNotionPage(slug: string) {
   if (!page) {
     return {
       page: undefined,
+      properties: undefined,
     };
   }
 
@@ -39,19 +41,31 @@ export async function getNotionPage(slug: string) {
   });
 
   const resultPage = filteredPage[0] || undefined;
+  const properties = getPageProperties(resultPage.value.properties, scheme);
 
   return {
     page: resultPage ? await api.getPage(resultPage.value.id) : undefined,
+    properties,
   };
 }
 
 export default async function BlogArticlePage(props: PageProps) {
-  const { page } = await getNotionPage(props.params.slug);
+  const { page, properties } = await getNotionPage(props.params.slug);
+
+  const title = properties?.title.value;
 
   return (
-    <div>
-      <h1>Blog Article Page</h1>
+    <>
+      <Head>
+        <title>{title}</title>
+
+        <meta property="og:title" content={title} />
+        <meta name="twitter:title" content={title} />
+        <meta name="twitter:creator" content="@transitive_bs" />
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
+      {title && <h1>{title}</h1>}
       {page && <NotionPage recordMap={page} />}
-    </div>
+    </>
   );
 }

@@ -1,7 +1,4 @@
 "use client";
-
-import Head from "next/head";
-// import Image from 'next/image'
 import Link from "next/link";
 
 import { ExtendedRecordMap } from "notion-types";
@@ -45,81 +42,22 @@ import "prismjs/components/prism-swift.js";
 import "prismjs/components/prism-wasm.js";
 import "prismjs/components/prism-yaml.js";
 
-export const NotionPage = ({
-  recordMap,
-  previewImagesEnabled,
-  rootPageId,
-  rootDomain,
-}: {
-  recordMap: ExtendedRecordMap;
-  previewImagesEnabled?: boolean;
-  rootPageId?: string;
-  rootDomain?: string;
-}) => {
-  if (!recordMap) {
-    return null;
-  }
-
-  const title = getPageTitle(recordMap);
-  console.log(title, recordMap);
-
-  // useful for debugging from the dev console
-  if (typeof window !== "undefined") {
-    const keys = Object.keys(recordMap?.block || {});
-    const block = recordMap?.block?.[keys[0]]?.value;
-    const g = window as any;
-    g.recordMap = recordMap;
-    g.block = block;
-  }
-
-  const socialDescription = "React Notion X Demo";
-  const socialImage =
-    "https://react-notion-x-demo.transitivebullsh.it/social.jpg";
+export const NotionPage = ({ recordMap }: { recordMap: ExtendedRecordMap }) => {
+  if (!recordMap) return null;
 
   return (
-    <>
-      <Head>
-        {socialDescription && (
-          <>
-            <meta name="description" content={socialDescription} />
-            <meta property="og:description" content={socialDescription} />
-            <meta name="twitter:description" content={socialDescription} />
-          </>
-        )}
-
-        {socialImage ? (
-          <>
-            <meta name="twitter:card" content="summary_large_image" />
-            <meta name="twitter:image" content={socialImage} />
-            <meta property="og:image" content={socialImage} />
-          </>
-        ) : (
-          <meta name="twitter:card" content="summary" />
-        )}
-
-        <title>{title}</title>
-        <meta property="og:title" content={title} />
-        <meta name="twitter:title" content={title} />
-        <meta name="twitter:creator" content="@transitive_bs" />
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
-
-      <NotionRenderer
-        disableHeader
-        pageTitle={false}
-        recordMap={recordMap}
-        fullPage={true}
-        darkMode={false}
-        rootDomain={rootDomain}
-        rootPageId={rootPageId}
-        previewImages={previewImagesEnabled}
-        components={{
-          nextLink: Link,
-          Code,
-          Equation,
-          Modal,
-        }}
-      />
-    </>
+    <NotionRenderer
+      disableHeader
+      pageTitle={false}
+      recordMap={recordMap}
+      fullPage={true}
+      darkMode={false}
+      components={{
+        nextLink: Link,
+        Code,
+        Equation,
+        Modal,
+      }}
+    />
   );
 };
