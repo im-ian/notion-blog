@@ -1,37 +1,16 @@
-import * as React from "react";
-import dynamic from "next/dynamic";
+"use client";
+
 import Head from "next/head";
-// import Image from "next/image";
+// import Image from 'next/image'
 import Link from "next/link";
 
 import { ExtendedRecordMap } from "notion-types";
 import { getPageTitle } from "notion-utils";
 import { NotionRenderer } from "react-notion-x";
 
-// -----------------------------------------------------------------------------
-// dynamic imports for optional components
-// -----------------------------------------------------------------------------
-
-const Collection = dynamic(() =>
-  import("react-notion-x/build/third-party/collection").then(
-    (m) => m.Collection
-  )
-);
-const Equation = dynamic(() =>
-  import("react-notion-x/build/third-party/equation").then((m) => m.Equation)
-);
-const Pdf = dynamic(
-  () => import("react-notion-x/build/third-party/pdf").then((m) => m.Pdf),
-  {
-    ssr: false,
-  }
-);
-const Modal = dynamic(
-  () => import("react-notion-x/build/third-party/modal").then((m) => m.Modal),
-  {
-    ssr: false,
-  }
-);
+import { Code } from "react-notion-x/build/third-party/code";
+import { Equation } from "react-notion-x/build/third-party/equation";
+import { Modal } from "react-notion-x/build/third-party/modal";
 
 export const NotionPage = ({
   recordMap,
@@ -93,6 +72,7 @@ export const NotionPage = ({
       </Head>
 
       <NotionRenderer
+        disableHeader
         recordMap={recordMap}
         fullPage={true}
         darkMode={false}
@@ -100,17 +80,11 @@ export const NotionPage = ({
         rootPageId={rootPageId}
         previewImages={previewImagesEnabled}
         components={{
-          // NOTE (transitive-bullshit 3/12/2023): I'm disabling next/image for this repo for now because the amount of traffic started costing me hundreds of dollars a month in Vercel image optimization costs. I'll probably re-enable it in the future if I can find a better solution.
-          // nextImage: Image,
           nextLink: Link,
-          Collection,
+          Code,
           Equation,
-          Pdf,
           Modal,
         }}
-
-        // NOTE: custom images will only take effect if previewImages is true and
-        // if the image has a valid preview image defined in recordMap.preview_images[src]
       />
     </>
   );

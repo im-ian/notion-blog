@@ -16,12 +16,14 @@
     "next": "14.0.4",
     "notion-client": "^6.16.0",
     "notion-utils": "^6.16.0",
+    "prismjs": "^1.29.0",
     "react": "^18",
     "react-dom": "^18",
     "react-notion-x": "^6.16.0"
   },
   "devDependencies": {
     "@types/node": "^20",
+    "@types/prismjs": "^1.26.3",
     "@types/react": "^18",
     "@types/react-dom": "^18",
     "eslint": "^8",

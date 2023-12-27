@@ -10,7 +10,7 @@ globalStyle("*", {
   padding: 0,
 });
 
-globalStyle("html, body, input", {
+globalStyle("html, body, input, .notion-text", {
   fontFamily: "Pretendard, sans-serif",
   fontSize: "16px",
   lineHeight: "1.5",
