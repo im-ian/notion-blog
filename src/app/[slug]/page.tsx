@@ -5,6 +5,8 @@ import { NotionPage } from "@/components/NotionRenderer";
 import { getSiteConfig } from "@/utils/config";
 import { getSchema, getPageProperties, getPages } from "@/utils/notion";
 import Head from "next/head";
+import { Layout } from "@/components/Layouts";
+import { Date, Heading } from "@/components/Texts";
 
 type PageProps = {
   params: {
@@ -53,9 +55,10 @@ export default async function BlogArticlePage(props: PageProps) {
   const { page, properties } = await getNotionPage(props.params.slug);
 
   const title = properties?.title.value;
+  const date = properties?.date.value;
 
   return (
-    <>
+    <Layout>
       <Head>
         <title>{title}</title>
 
@@ -64,8 +67,11 @@ export default async function BlogArticlePage(props: PageProps) {
         <meta name="twitter:creator" content="@transitive_bs" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      {title && <h1>{title}</h1>}
+      <div>
+        {title && <Heading>{title}</Heading>}
+        {title && <Date>{date}</Date>}
+      </div>
       {page && <NotionPage recordMap={page} />}
-    </>
+    </Layout>
   );
 }
