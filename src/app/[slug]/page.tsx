@@ -20,6 +20,7 @@ export async function generateStaticParams() {
 
   const scheme = getSchema(pageData.collection);
   const pages = getPages(pageData.block);
+
   return pages.map((page) => {
     const properties = getPageProperties(page.value.properties, scheme);
     return { slug: properties?.slug.value };
