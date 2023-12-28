@@ -1,5 +1,5 @@
 import { Card, Layout } from "@/components/Layouts";
-import { Date, Heading, Tag } from "@/components/Texts";
+import { Date as DateText, Heading, Tag } from "@/components/Texts";
 import { sprinkles } from "@/css/sprinkles.css";
 import { getPageContent } from "@/services/notion";
 import { getPageProperties, getPages, getSchema } from "@/utils/notion";
@@ -11,14 +11,22 @@ async function getArticleList() {
   const scheme = getSchema(pageData.collection);
   const pages = getPages(pageData.block);
 
-  return pages.map((page) => getPageProperties(page.value.properties, scheme));
+  return pages
+    .map((page) => getPageProperties(page.value.properties, scheme))
+    .sort(
+      (a, b) => +new Date(b?.date.value || 0) - +new Date(a?.date.value || 0)
+    );
 }
 
 async function Home() {
   const articles = await getArticleList();
 
   return (
-    <Layout>
+    <Layout
+      className={sprinkles({
+        padding: "medium",
+      })}
+    >
       {articles.map((article) => {
         const tags = article.tags.value?.split(",");
 
@@ -31,14 +39,14 @@ async function Home() {
               <p>{article.summary.value}</p>
               <div
                 className={sprinkles({
-                  paddingY: "small",
+                  paddingY: "medium",
                 })}
               >
                 {tags?.map((tag) => (
                   <Tag key={tag}>{tag}</Tag>
                 ))}
               </div>
-              <Date>{article.date.value}</Date>
+              <DateText>{article.date.value}</DateText>
             </Card>
           </a>
         );
