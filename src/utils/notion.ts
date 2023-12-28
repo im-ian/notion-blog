@@ -44,7 +44,7 @@ export function getPageProperties(
 
     const [id, { name, type }] = data;
 
-    const decoration = properties[id];
+    const decoration = properties?.[id];
     let value = null;
 
     if (type === "date") {
