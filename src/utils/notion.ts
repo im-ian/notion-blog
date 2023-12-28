@@ -37,29 +37,6 @@ export function getPageProperties(
   properties: Record<string, Decoration[]>,
   scheme: CollectionPropertySchemaMap
 ): PageProperties {
-  /*
-    Properties
-    {
-      'NX\\Q': [ [ '‣', [Array] ] ],
-      '`gQ~': [ [ 'Post' ] ],
-      'd]hq': [ [ 'react-detect-localstorage-change' ] ],
-      ppED: [ [ '💻 Frontend' ] ],
-      'sD^m': [ [ 'React' ] ],
-      'wz|S': [ [ '로컬 스토리지의 값이 변경되면 이벤트를 실행시켜보자' ] ],
-      '~rC=': [ [ '‣', [Array] ] ],
-      title: [ [ 'localStorage 값 변경 감지하기' ] ],
-      'f211bdc0-ee00-4186-9a7d-f68c055ec2ee': [ [ 'Public' ] ]
-    }
-  */
-  /*
-    Scheme
-    {
-      'NX\\Q': { name: 'date', type: 'date' },
-      WxpT: { name: 'thumbnail', type: 'file' },
-      '`gQ~': { name: 'type', type: 'select', options: [ [Object], [Object] ] },
-    }
-  */
-
   const result: PageProperties = {};
 
   for (const data of Object.entries(scheme)) {
