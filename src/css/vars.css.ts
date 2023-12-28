@@ -6,10 +6,12 @@ export const vars = createGlobalTheme(":root", {
     small: "4px",
     medium: "8px",
     large: "16px",
+    extraLarge: "32px",
     center: "0 auto",
   },
   color: {
     white: "#fff",
+    black: "#333",
 
     "gray-50": "#f9fafb",
     "gray-100": "#f3f4f6",
