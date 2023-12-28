@@ -15,12 +15,18 @@ type PageProps = {
   };
 };
 
-// export async function generateStaticParams() {
-//   return {
-//     paths: [],
-//     fallback: false,
-//   };
-// }
+export async function generateStaticParams() {
+  const { pageId } = getSiteConfig("notion");
+  const pageData = await getPageContent(pageId);
+  if (!pageData) return [];
+
+  const scheme = getSchema(pageData.collection);
+  const pages = getPages(pageData.block);
+  return pages.map((page) => {
+    const properties = getPageProperties(page.value.properties, scheme);
+    return { slug: properties?.slug.value };
+  });
+}
 
 async function getNotionPage(slug: string) {
   const { pageId } = getSiteConfig("notion");
