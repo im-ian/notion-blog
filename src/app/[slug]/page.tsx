@@ -1,7 +1,5 @@
-import { NotionAPI } from "notion-client";
 import { NotionPage } from "@/components/NotionRenderer";
 
-// import { getPageData } from "@/services/notion";
 import { getSchema, getPageProperties, getPages } from "@/utils/notion";
 import Head from "next/head";
 import { Layout } from "@/components/Layouts";
@@ -71,7 +69,7 @@ async function ArticlePage({ params }: PageProps) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <div>
-        {title && <Heading>{title}</Heading>}
+        {title && <Heading tint>{title}</Heading>}
         {title && <Date>{date}</Date>}
       </div>
       {page && <NotionPage recordMap={page} />}
