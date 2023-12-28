@@ -38,9 +38,6 @@ export const vars = createGlobalTheme(":root", {
     "sub-600": "#2196f3",
     "sub-700": "#1e88e5",
   },
-  width: {
-    "fit-notion": "720px",
-  },
   borderWidth: {
     none: "0",
     thin: "1px",
