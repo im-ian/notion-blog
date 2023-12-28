@@ -9,7 +9,7 @@ const responsiveProperties = defineProperties({
   },
   defaultCondition: "mobile",
   properties: {
-    width: ["720px", "100vw"],
+    width: ["720px", "100%", "100vw"],
     height: ["100vh", "2.5rem"],
 
     display: ["none", "flex", "block", "inline", "inline-block"],
