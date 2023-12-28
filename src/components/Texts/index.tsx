@@ -29,7 +29,3 @@ export function Heading({
 export function Date(props: HTMLAttributes<HTMLSpanElement>) {
   return <span className={DateClassName} {...props} />;
 }
-
-export function Tag(props: HTMLAttributes<HTMLSpanElement>) {
-  return <span className={TagClassName} {...props} />;
-}

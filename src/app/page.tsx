@@ -1,5 +1,6 @@
 import { Card, Layout } from "@/components/Layouts";
-import { Date as DateText, Heading, Tag } from "@/components/Texts";
+import { Tags } from "@/components/Tags";
+import { Date as DateText, Heading } from "@/components/Texts";
 import { sprinkles } from "@/css/sprinkles.css";
 import { getPageContent } from "@/services/notion";
 import { getPageProperties, getPages, getSchema } from "@/utils/notion";
@@ -28,8 +29,6 @@ async function Home() {
       })}
     >
       {articles.map((article) => {
-        const tags = article.tags.value?.split(",");
-
         return (
           <a key={article.slug.value} href={`/${article.slug.value}`}>
             <Card>
@@ -37,15 +36,7 @@ async function Home() {
                 {article.title.value}
               </Heading>
               <p>{article.summary.value}</p>
-              <div
-                className={sprinkles({
-                  paddingY: "medium",
-                })}
-              >
-                {tags?.map((tag) => (
-                  <Tag key={tag}>{tag}</Tag>
-                ))}
-              </div>
+              <Tags tags={article.tags.value} />
               <DateText>{article.date.value}</DateText>
             </Card>
           </a>

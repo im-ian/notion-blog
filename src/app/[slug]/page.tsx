@@ -6,6 +6,7 @@ import { Layout } from "@/components/Layouts";
 import { Date, Heading } from "@/components/Texts";
 import { getPageContent } from "@/services/notion";
 import { sprinkles } from "@/css/sprinkles.css";
+import { Tags } from "@/components/Tags";
 
 type PageProps = {
   params: {
@@ -57,6 +58,7 @@ async function ArticlePage({ params }: PageProps) {
   const { page, properties } = await getNotionPage(params.slug);
 
   const title = properties?.title.value;
+  const tags = properties?.tags.value;
   const date = properties?.date.value;
 
   return (
@@ -81,7 +83,8 @@ async function ArticlePage({ params }: PageProps) {
         })}
       >
         {title && <Heading tint>{title}</Heading>}
-        {title && <Date>{date}</Date>}
+        {tags && <Tags tags={tags} />}
+        {date && <Date>{date}</Date>}
       </div>
       {page && <NotionPage recordMap={page} />}
     </Layout>
