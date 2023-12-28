@@ -42,7 +42,7 @@ export async function getNotionPage(slug: string) {
   });
 
   const resultPage = filteredPage?.[0];
-  const properties = getPageProperties(resultPage.value.properties, scheme);
+  const properties = getPageProperties(resultPage?.value.properties, scheme);
 
   return {
     page: resultPage ? await getPageContent(resultPage.value.id) : undefined,
