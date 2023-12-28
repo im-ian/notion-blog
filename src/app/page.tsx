@@ -36,7 +36,7 @@ async function Home() {
                 {article.title.value}
               </Heading>
               <p>{article.summary.value}</p>
-              <Tags tags={article.tags.value} />
+              <Tags tags={article.tags.value || ""} />
               <DateText>{article.date.value}</DateText>
             </Card>
           </a>
