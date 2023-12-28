@@ -45,7 +45,7 @@ export function getPageProperties(
     const [id, { name, type }] = data;
 
     const decoration = properties?.[id];
-    let value = null;
+    let value: string | undefined;
 
     if (type === "date") {
       const date = getDateValue(decoration);
