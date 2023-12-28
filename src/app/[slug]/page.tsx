@@ -22,7 +22,7 @@ type PageProps = {
 //   };
 // }
 
-export async function getNotionPage(slug: string) {
+async function getNotionPage(slug: string) {
   const { pageId } = getSiteConfig("notion");
   const pageData = await getPageContent(pageId);
 
