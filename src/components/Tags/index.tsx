@@ -1,6 +1,7 @@
 import { sprinkles } from "@/css/sprinkles.css";
 import { HTMLAttributes } from "react";
 import { TagClassName } from "./index.css";
+import { classNames } from "@/utils/string";
 
 export function Tags({ tags }: { tags: string }) {
   const tagList = tags.split(",");
@@ -18,6 +19,6 @@ export function Tags({ tags }: { tags: string }) {
   );
 }
 
-export function Tag(props: HTMLAttributes<HTMLSpanElement>) {
-  return <span className={TagClassName} {...props} />;
+export function Tag({ className, ...props }: HTMLAttributes<HTMLSpanElement>) {
+  return <span className={classNames([TagClassName, className])} {...props} />;
 }

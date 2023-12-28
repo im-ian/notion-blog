@@ -1,5 +1,5 @@
 import { HTMLAttributes, PropsWithChildren } from "react";
-import { DateClassName, TagClassName, headingColorVariant } from "./index.css";
+import { DateClassName, headingColorVariant } from "./index.css";
 import { classNames } from "@/utils/string";
 import { vars } from "@/css/vars.css";
 import { sprinkles } from "@/css/sprinkles.css";
@@ -26,6 +26,6 @@ export function Heading({
   );
 }
 
-export function Date(props: HTMLAttributes<HTMLSpanElement>) {
-  return <span className={DateClassName} {...props} />;
+export function Date({ className, ...props }: HTMLAttributes<HTMLSpanElement>) {
+  return <span className={classNames([DateClassName, className])} {...props} />;
 }
