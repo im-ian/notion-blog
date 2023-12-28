@@ -2,7 +2,6 @@ import { NotionAPI } from "notion-client";
 import { NotionPage } from "@/components/NotionRenderer";
 
 // import { getPageData } from "@/services/notion";
-import { getSiteConfig } from "@/utils/config";
 import { getSchema, getPageProperties, getPages } from "@/utils/notion";
 import Head from "next/head";
 import { Layout } from "@/components/Layouts";
@@ -16,8 +15,7 @@ type PageProps = {
 };
 
 export async function generateStaticParams() {
-  const { pageId } = getSiteConfig("notion");
-  const pageData = await getPageContent(pageId);
+  const pageData = await getPageContent();
   if (!pageData) return [];
 
   const scheme = getSchema(pageData.collection);
@@ -29,8 +27,7 @@ export async function generateStaticParams() {
 }
 
 async function getNotionPage(slug: string) {
-  const { pageId } = getSiteConfig("notion");
-  const pageData = await getPageContent(pageId);
+  const pageData = await getPageContent();
 
   if (!pageData) {
     return {
