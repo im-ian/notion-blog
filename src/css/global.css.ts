@@ -10,8 +10,18 @@ globalStyle("*", {
   padding: 0,
 });
 
+globalStyle("html, body", {
+  width: "100%",
+  maxWidth: "100%",
+});
+
 globalStyle("html, body, input, .notion-text", {
   fontFamily: "Pretendard, sans-serif",
   fontSize: "16px",
   lineHeight: "1.5",
+});
+
+globalStyle("a", {
+  color: "inherit",
+  textDecoration: "none",
 });
