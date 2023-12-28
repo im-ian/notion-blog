@@ -5,6 +5,7 @@ import Head from "next/head";
 import { Layout } from "@/components/Layouts";
 import { Date, Heading } from "@/components/Texts";
 import { getPageContent } from "@/services/notion";
+import { sprinkles } from "@/css/sprinkles.css";
 
 type PageProps = {
   params: {
@@ -59,7 +60,12 @@ async function ArticlePage({ params }: PageProps) {
   const date = properties?.date.value;
 
   return (
-    <Layout>
+    <Layout
+      className={sprinkles({
+        paddingTop: "large",
+        paddingX: "large",
+      })}
+    >
       <Head>
         <title>{title}</title>
 
@@ -68,7 +74,12 @@ async function ArticlePage({ params }: PageProps) {
         <meta name="twitter:creator" content="@transitive_bs" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <div>
+      <div
+        className={sprinkles({
+          paddingTop: "large",
+          paddingX: "large",
+        })}
+      >
         {title && <Heading tint>{title}</Heading>}
         {title && <Date>{date}</Date>}
       </div>
