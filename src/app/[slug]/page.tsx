@@ -7,6 +7,7 @@ import { getSchema, getPageProperties, getPages } from "@/utils/notion";
 import Head from "next/head";
 import { Layout } from "@/components/Layouts";
 import { Date, Heading } from "@/components/Texts";
+import { getPageContent } from "@/services/notion";
 
 type PageProps = {
   params: {
@@ -22,37 +23,35 @@ type PageProps = {
 // }
 
 export async function getNotionPage(slug: string) {
-  const api = new NotionAPI();
-
   const { pageId } = getSiteConfig("notion");
-  const page = await api.getPage(pageId);
+  const pageData = await getPageContent(pageId);
 
-  if (!page) {
+  if (!pageData) {
     return {
       page: undefined,
       properties: undefined,
     };
   }
 
-  const scheme = getSchema(page.collection);
-  const pages = getPages(page.block);
+  const scheme = getSchema(pageData.collection);
+  const pages = getPages(pageData.block);
 
   const filteredPage = pages.filter((p) => {
     const properties = getPageProperties(p.value.properties, scheme);
     return properties.slug.value === slug;
   });
 
-  const resultPage = filteredPage[0] || undefined;
+  const resultPage = filteredPage?.[0];
   const properties = getPageProperties(resultPage.value.properties, scheme);
 
   return {
-    page: resultPage ? await api.getPage(resultPage.value.id) : undefined,
+    page: resultPage ? await getPageContent(resultPage.value.id) : undefined,
     properties,
   };
 }
 
-export default async function BlogArticlePage(props: PageProps) {
-  const { page, properties } = await getNotionPage(props.params.slug);
+async function ArticlePage({ params }: PageProps) {
+  const { page, properties } = await getNotionPage(params.slug);
 
   const title = properties?.title.value;
   const date = properties?.date.value;
@@ -75,3 +74,5 @@ export default async function BlogArticlePage(props: PageProps) {
     </Layout>
   );
 }
+
+export default ArticlePage;
