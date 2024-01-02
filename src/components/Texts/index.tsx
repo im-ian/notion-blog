@@ -1,8 +1,10 @@
 import { PropsWithChildren } from "react";
+
 import { DateClassName, headingColorVariant } from "./index.css";
-import { classNames, toDateFormat } from "@/utils/string";
-import { vars } from "@/css/vars.css";
+
 import { sprinkles } from "@/css/sprinkles.css";
+import { vars } from "@/css/vars.css";
+import { classNames, toDateFormat } from "@/utils/string";
 
 export function Heading({
   tint = false,

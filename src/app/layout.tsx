@@ -1,5 +1,4 @@
 import { Header } from "@/components/Pages";
-
 import { getSiteConfig } from "@/utils/config";
 
 import "../css/global.css";
@@ -14,7 +13,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
+    <html lang={"en"}>
       <body>
         <Header />
         {children}

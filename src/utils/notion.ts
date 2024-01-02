@@ -1,4 +1,3 @@
-import { PageProperties } from "@/types/notion";
 import {
   BlockMap,
   CollectionMap,
@@ -7,6 +6,8 @@ import {
   ExtendedRecordMap,
 } from "notion-types";
 import { getDateValue, getTextContent } from "notion-utils";
+
+import { PageProperties } from "@/types/notion";
 
 function getFirstId(block: Record<string, unknown>) {
   return Object.keys(block)[0];
@@ -35,7 +36,7 @@ export function getPages(block: BlockMap) {
 
 export function getPageProperties(
   properties: Record<string, Decoration[]>,
-  scheme: CollectionPropertySchemaMap
+  scheme: CollectionPropertySchemaMap,
 ): PageProperties {
   const result: PageProperties = {};
 

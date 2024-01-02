@@ -1,5 +1,7 @@
 import { style, styleVariants } from "@vanilla-extract/css";
+
 import { sprinkles } from "../../css/sprinkles.css";
+
 import { vars } from "@/css/vars.css";
 
 export const headingColorVariant = styleVariants({

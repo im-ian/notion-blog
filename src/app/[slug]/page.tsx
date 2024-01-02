@@ -1,14 +1,12 @@
 import Head from "next/head";
 
-import { NotionPage } from "@/components/NotionRenderer";
 import { Flex, Layout } from "@/components/Layouts";
-import { Date, Heading } from "@/components/Texts";
+import { NotionPage } from "@/components/NotionRenderer";
 import { Tags } from "@/components/Tags";
-
+import { Date, Heading } from "@/components/Texts";
 import { sprinkles } from "@/css/sprinkles.css";
-import { getSchema, getPageProperties, getPages } from "@/utils/notion";
-
 import { getPageContent } from "@/services/notion";
+import { getSchema, getPageProperties, getPages } from "@/utils/notion";
 
 type PageProps = {
   params: {
@@ -74,10 +72,10 @@ async function ArticlePage({ params }: PageProps) {
       <Head>
         <title>{title}</title>
 
-        <meta property="og:title" content={title} />
-        <meta name="twitter:title" content={title} />
-        <meta name="twitter:creator" content="@transitive_bs" />
-        <link rel="icon" href="/favicon.ico" />
+        <meta property={"og:title"} content={title} />
+        <meta name={"twitter:title"} content={title} />
+        <meta name={"twitter:creator"} content={"@transitive_bs"} />
+        <link rel={"icon"} href={"/favicon.ico"} />
       </Head>
       <div
         className={sprinkles({

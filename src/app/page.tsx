@@ -1,5 +1,5 @@
-import { Card, Flex, FlexItem, Layout } from "@/components/Layouts";
-import { Tag, Tags } from "@/components/Tags";
+import { Card, Flex, Layout } from "@/components/Layouts";
+import { Tags } from "@/components/Tags";
 import { Date as DateText, Heading } from "@/components/Texts";
 import { sprinkles } from "@/css/sprinkles.css";
 import { getPageContent } from "@/services/notion";
@@ -15,7 +15,7 @@ async function getArticleList() {
   return pages
     .map((page) => getPageProperties(page.value.properties, scheme))
     .sort(
-      (a, b) => +new Date(b?.date.value || 0) - +new Date(a?.date.value || 0)
+      (a, b) => +new Date(b?.date.value || 0) - +new Date(a?.date.value || 0),
     );
 }
 

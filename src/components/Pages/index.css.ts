@@ -1,5 +1,6 @@
-import { sprinkles } from "@/css/sprinkles.css";
 import { style } from "@vanilla-extract/css";
+
+import { sprinkles } from "@/css/sprinkles.css";
 
 export const HeaderContainerClassName = style([
   sprinkles({

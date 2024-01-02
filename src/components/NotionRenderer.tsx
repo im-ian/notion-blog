@@ -1,10 +1,7 @@
 "use client";
 import Link from "next/link";
-
 import { ExtendedRecordMap } from "notion-types";
-import { getPageTitle } from "notion-utils";
 import { NotionRenderer } from "react-notion-x";
-
 import { Code } from "react-notion-x/build/third-party/code";
 import { Equation } from "react-notion-x/build/third-party/equation";
 import { Modal } from "react-notion-x/build/third-party/modal";

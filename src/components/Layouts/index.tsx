@@ -1,7 +1,6 @@
-import { HTMLAttributes, PropsWithChildren } from "react";
 import { assignInlineVars } from "@vanilla-extract/dynamic";
+import { HTMLAttributes, PropsWithChildren } from "react";
 
-import { classNames } from "@/utils/string";
 import {
   CardClassName,
   FlexClassName,
@@ -9,6 +8,8 @@ import {
   alignItemsVariant,
   flexDirectionVariant,
 } from "./index.css";
+
+import { classNames } from "@/utils/string";
 
 export function Box({ className, ...props }: HTMLAttributes<HTMLDivElement>) {
   return <div className={className} {...props} />;

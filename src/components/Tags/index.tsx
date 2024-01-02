@@ -1,8 +1,8 @@
+import { TagClassName } from "./index.css";
+
 import { sprinkles } from "@/css/sprinkles.css";
 import { vars } from "@/css/vars.css";
 import { classNames } from "@/utils/string";
-
-import { TagClassName } from "./index.css";
 
 export function Tags({ tags }: { tags: string }) {
   const tagList = tags.split(",");
@@ -13,9 +13,7 @@ export function Tags({ tags }: { tags: string }) {
         paddingY: "medium",
       })}
     >
-      {tagList?.map((tag) => (
-        <Tag key={tag} label={tag} />
-      ))}
+      {tagList?.map((tag) => <Tag key={tag} label={tag} />)}
     </div>
   );
 }
