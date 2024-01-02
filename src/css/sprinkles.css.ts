@@ -29,7 +29,10 @@ const responsiveProperties = defineProperties({
     marginBottom: vars.space,
     marginLeft: vars.space,
 
-    borderWidth: vars.borderWidth,
+    borderTopWidth: vars.borderWidth,
+    borderRightWidth: vars.borderWidth,
+    borderBottomWidth: vars.borderWidth,
+    borderLeftWidth: vars.borderWidth,
     borderStyle: ["solid", "dashed", "dotted"],
     borderRadius: vars.borderRadius,
 
@@ -53,6 +56,13 @@ const responsiveProperties = defineProperties({
 
     marginX: ["marginLeft", "marginRight"],
     marginY: ["marginTop", "marginBottom"],
+
+    borderWidth: [
+      "borderTopWidth",
+      "borderRightWidth",
+      "borderBottomWidth",
+      "borderLeftWidth",
+    ],
   },
 });
 
