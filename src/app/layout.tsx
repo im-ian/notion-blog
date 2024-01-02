@@ -1,3 +1,5 @@
+import { Header } from "@/components/Pages";
+
 import { getSiteConfig } from "@/utils/config";
 
 import "../css/global.css";
@@ -13,7 +15,10 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body>
+        <Header />
+        {children}
+      </body>
     </html>
   );
 }
