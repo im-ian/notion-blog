@@ -1,12 +1,14 @@
-import { NotionPage } from "@/components/NotionRenderer";
-
-import { getSchema, getPageProperties, getPages } from "@/utils/notion";
 import Head from "next/head";
-import { Layout } from "@/components/Layouts";
+
+import { NotionPage } from "@/components/NotionRenderer";
+import { Flex, Layout } from "@/components/Layouts";
 import { Date, Heading } from "@/components/Texts";
-import { getPageContent } from "@/services/notion";
-import { sprinkles } from "@/css/sprinkles.css";
 import { Tags } from "@/components/Tags";
+
+import { sprinkles } from "@/css/sprinkles.css";
+import { getSchema, getPageProperties, getPages } from "@/utils/notion";
+
+import { getPageContent } from "@/services/notion";
 
 type PageProps = {
   params: {
@@ -58,6 +60,7 @@ async function ArticlePage({ params }: PageProps) {
   const { page, properties } = await getNotionPage(params.slug);
 
   const title = properties?.title.value;
+  const category = properties?.category.value;
   const tags = properties?.tags.value;
   const date = properties?.date.value;
 
@@ -83,7 +86,10 @@ async function ArticlePage({ params }: PageProps) {
         })}
       >
         {title && <Heading tint>{title}</Heading>}
-        {tags && <Tags tags={tags} />}
+        <Flex>
+          {category && <Tags tags={category} />}
+          {tags && <Tags tags={tags} />}
+        </Flex>
         {date && <Date date={date} />}
       </div>
       {page && <NotionPage recordMap={page} />}

@@ -1,4 +1,4 @@
-import { Card, Flex, Layout } from "@/components/Layouts";
+import { Card, Flex, FlexItem, Layout } from "@/components/Layouts";
 import { Tag, Tags } from "@/components/Tags";
 import { Date as DateText, Heading } from "@/components/Texts";
 import { sprinkles } from "@/css/sprinkles.css";
