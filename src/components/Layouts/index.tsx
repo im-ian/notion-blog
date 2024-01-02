@@ -1,4 +1,7 @@
 import { HTMLAttributes, PropsWithChildren } from "react";
+import { assignInlineVars } from "@vanilla-extract/dynamic";
+
+import { classNames } from "@/utils/string";
 import {
   CardClassName,
   FlexClassName,
@@ -6,15 +9,17 @@ import {
   alignItemsVariant,
   flexDirectionVariant,
 } from "./index.css";
-import { classNames } from "@/utils/string";
-import { assignInlineVars } from "@vanilla-extract/dynamic";
+
+export function Box({ className, ...props }: HTMLAttributes<HTMLDivElement>) {
+  return <div className={className} {...props} />;
+}
 
 export function Layout({
   className,
   ...props
 }: HTMLAttributes<HTMLDivElement>) {
   return (
-    <div className={classNames([LayoutClassName, className])} {...props}></div>
+    <Box className={classNames([LayoutClassName, className])} {...props} />
   );
 }
 
@@ -29,7 +34,7 @@ export function Flex({
   children,
 }: PropsWithChildren<FlexProps>) {
   return (
-    <div
+    <Box
       className={FlexClassName}
       style={assignInlineVars({
         [flexDirectionVariant]: flexDirection,
@@ -37,7 +42,7 @@ export function Flex({
       })}
     >
       {children}
-    </div>
+    </Box>
   );
 }
 
@@ -49,11 +54,9 @@ export function FlexItem({
   flex = 1,
   children,
 }: PropsWithChildren<FlexItemProps>) {
-  return <div style={{ flex }}>{children}</div>;
+  return <Box style={{ flex }}>{children}</Box>;
 }
 
 export function Card({ className, ...props }: HTMLAttributes<HTMLDivElement>) {
-  return (
-    <div className={classNames([CardClassName, className])} {...props}></div>
-  );
+  return <Box className={classNames([CardClassName, className])} {...props} />;
 }

@@ -43,6 +43,7 @@ const responsiveProperties = defineProperties({
 
     fontSize: vars.fontSize,
     fontFamily: vars.fontFamily,
+    textAlign: ["left", "center", "right"],
 
     transitionProperty: ["none", "all"],
     transitionDuration: {
