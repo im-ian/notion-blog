@@ -13,6 +13,9 @@ const CONFIG: Config = {
     },
     description: "My Blog Description",
   },
+  site: {
+    title: "다람쥐 헌 쳇바퀴에 타고파",
+  },
 };
 
 export default CONFIG;
