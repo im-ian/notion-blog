@@ -1,7 +1,9 @@
+import { Menu, Search } from "react-feather";
+
 import { Box, Flex, FlexItem, Layout } from "../Layouts";
 import { Heading } from "../Texts";
 
-import { HeaderContainerClassName } from "./index.css";
+import { HeaderContainerClassName, HeaderIconClassName } from "./index.css";
 
 import { sprinkles } from "@/css/sprinkles.css";
 import { getSiteConfig } from "@/utils/config";
@@ -13,18 +15,23 @@ export function Header() {
     <div className={HeaderContainerClassName}>
       <Layout>
         <Flex>
-          <FlexItem>
+          <FlexItem flex={"1"}>
             <Heading size={"2x"}>
               <a href={"/"}>{title}</a>
             </Heading>
           </FlexItem>
-          <FlexItem>
+          <FlexItem flex={"none"}>
             <Box
               className={sprinkles({
                 textAlign: "right",
               })}
             >
-              asd
+              <Box className={HeaderIconClassName}>
+                <Search />
+              </Box>
+              <Box className={HeaderIconClassName}>
+                <Menu />
+              </Box>
             </Box>
           </FlexItem>
         </Flex>

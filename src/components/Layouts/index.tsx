@@ -7,6 +7,8 @@ import {
   LayoutClassName,
   alignItemsVariant,
   flexDirectionVariant,
+  flexItemClassName,
+  flexVariant,
 } from "./index.css";
 
 import { classNames } from "@/utils/string";
@@ -48,14 +50,23 @@ export function Flex({
 }
 
 interface FlexItemProps {
-  flex?: string | number;
+  flex?: string;
 }
 
 export function FlexItem({
-  flex = 1,
+  flex = "1",
   children,
 }: PropsWithChildren<FlexItemProps>) {
-  return <Box style={{ flex }}>{children}</Box>;
+  return (
+    <Box
+      className={flexItemClassName}
+      style={assignInlineVars({
+        [flexVariant]: flex,
+      })}
+    >
+      {children}
+    </Box>
+  );
 }
 
 export function Card({ className, ...props }: HTMLAttributes<HTMLDivElement>) {

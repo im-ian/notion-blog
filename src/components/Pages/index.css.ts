@@ -27,3 +27,17 @@ export const HeaderContainerClassName = style([
     backgroundColor: "white",
   },
 ]);
+
+export const HeaderIconClassName = style([
+  sprinkles({
+    display: "inline-block",
+    marginX: "medium",
+  }),
+  {
+    height: "24px",
+    verticalAlign: "middle",
+    ":last-child": {
+      marginRight: 0,
+    },
+  },
+]);

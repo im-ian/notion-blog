@@ -23,6 +23,15 @@ export const FlexClassName = style({
   alignItems: alignItemsVariant,
 });
 
+export const flexVariant = createVar();
+
+export const flexItemClassName = style({
+  vars: {
+    [flexVariant]: "1",
+  },
+  flex: flexVariant,
+});
+
 export const CardClassName = style([
   sprinkles({
     padding: "extraLarge",
