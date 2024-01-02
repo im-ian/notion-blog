@@ -16,6 +16,7 @@ const responsiveProperties = defineProperties({
 
     display: ["none", "flex", "block", "inline", "inline-block"],
     flexDirection: ["row", "column"],
+    alignItems: ["flex-start", "center", "flex-end"],
     gap: vars.space,
 
     padding: vars.space,

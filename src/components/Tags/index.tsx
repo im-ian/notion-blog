@@ -1,7 +1,8 @@
 import { sprinkles } from "@/css/sprinkles.css";
-import { HTMLAttributes } from "react";
-import { TagClassName } from "./index.css";
+import { vars } from "@/css/vars.css";
 import { classNames } from "@/utils/string";
+
+import { TagClassName } from "./index.css";
 
 export function Tags({ tags }: { tags: string }) {
   const tagList = tags.split(",");
@@ -13,12 +14,28 @@ export function Tags({ tags }: { tags: string }) {
       })}
     >
       {tagList?.map((tag) => (
-        <Tag key={tag}>{tag}</Tag>
+        <Tag key={tag} label={tag} />
       ))}
     </div>
   );
 }
 
-export function Tag({ className, ...props }: HTMLAttributes<HTMLSpanElement>) {
-  return <span className={classNames([TagClassName, className])} {...props} />;
+interface TagProps {
+  label: string;
+  bgColor?: keyof typeof vars.color;
+}
+
+export function Tag({ label, bgColor }: TagProps) {
+  return (
+    <span
+      className={classNames([
+        TagClassName,
+        sprinkles({
+          background: bgColor,
+        }),
+      ])}
+    >
+      {label}
+    </span>
+  );
 }

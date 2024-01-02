@@ -1,6 +1,6 @@
-import { HTMLAttributes, PropsWithChildren } from "react";
+import { PropsWithChildren } from "react";
 import { DateClassName, headingColorVariant } from "./index.css";
-import { classNames } from "@/utils/string";
+import { classNames, toDateFormat } from "@/utils/string";
 import { vars } from "@/css/vars.css";
 import { sprinkles } from "@/css/sprinkles.css";
 
@@ -26,6 +26,10 @@ export function Heading({
   );
 }
 
-export function Date({ className, ...props }: HTMLAttributes<HTMLSpanElement>) {
-  return <span className={classNames([DateClassName, className])} {...props} />;
+interface DateProps {
+  date: string;
+}
+
+export function Date({ date }: DateProps) {
+  return <span className={DateClassName}>{toDateFormat(date)}</span>;
 }

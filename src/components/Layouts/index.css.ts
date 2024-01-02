@@ -1,4 +1,4 @@
-import { style } from "@vanilla-extract/css";
+import { createVar, style } from "@vanilla-extract/css";
 import { sprinkles } from "../../css/sprinkles.css";
 
 export const LayoutClassName = style([
@@ -8,6 +8,19 @@ export const LayoutClassName = style([
     margin: "center",
   }),
 ]);
+
+export const flexDirectionVariant = createVar();
+export const alignItemsVariant = createVar();
+
+export const FlexClassName = style({
+  vars: {
+    [flexDirectionVariant]: "column",
+    [alignItemsVariant]: "center",
+  },
+  display: "flex",
+  flexDirection: flexDirectionVariant,
+  alignItems: alignItemsVariant,
+});
 
 export const CardClassName = style([
   sprinkles({

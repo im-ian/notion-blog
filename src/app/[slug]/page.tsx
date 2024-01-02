@@ -84,7 +84,7 @@ async function ArticlePage({ params }: PageProps) {
       >
         {title && <Heading tint>{title}</Heading>}
         {tags && <Tags tags={tags} />}
-        {date && <Date>{date}</Date>}
+        {date && <Date date={date} />}
       </div>
       {page && <NotionPage recordMap={page} />}
     </Layout>

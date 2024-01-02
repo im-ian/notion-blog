@@ -1,5 +1,5 @@
-import { Card, Layout } from "@/components/Layouts";
-import { Tags } from "@/components/Tags";
+import { Card, Flex, Layout } from "@/components/Layouts";
+import { Tag, Tags } from "@/components/Tags";
 import { Date as DateText, Heading } from "@/components/Texts";
 import { sprinkles } from "@/css/sprinkles.css";
 import { getPageContent } from "@/services/notion";
@@ -36,8 +36,13 @@ async function Home() {
                 {article.title.value}
               </Heading>
               <p>{article.summary.value}</p>
-              <Tags tags={article.tags.value || ""} />
-              <DateText>{article.date.value}</DateText>
+              <Flex>
+                {article.category.value && (
+                  <Tags tags={article.category.value} />
+                )}
+                {article.tags.value && <Tags tags={article.tags.value} />}
+              </Flex>
+              {article.date.value && <DateText date={article.date.value} />}
             </Card>
           </a>
         );
