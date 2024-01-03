@@ -35,22 +35,21 @@ export async function getPages() {
 
   const pages: Pages = {
     schema,
-    pages: pageList.map((page) => ({
-      role: page.role,
-      value: {
-        ...page.value,
-        attributes: getPageAttribute(page.value.properties, schema),
-      },
-    })),
-  };
+    pages: pageList
+      .map((page) => ({
+        role: page.role,
+        value: {
+          ...page.value,
+          attributes: getPageAttribute(page.value.properties, schema),
+        },
+      }))
+      .sort((a, b) => {
+        const aDate = +new Date(a?.value?.attributes?.date?.value || 0);
+        const bDate = +new Date(b?.value?.attributes?.date?.value || 0);
 
-  pages.pages
-    .map((page) => page.value)
-    .sort(
-      (a, b) =>
-        +new Date(b?.attributes.date.value || 0) -
-        +new Date(a?.attributes.date.value || 0),
-    );
+        return bDate - aDate;
+      }),
+  };
 
   pageCache = pages;
 
