@@ -2,6 +2,7 @@
 import { Card, Flex, Layout } from "@/components/Layouts";
 import { Tags } from "@/components/Tags";
 import { Date as DateText, Heading } from "@/components/Texts";
+import { Routes } from "@/constants";
 import { useNotionContext } from "@/contexts/NotionContext";
 import { sprinkles } from "@/css/sprinkles.css";
 
@@ -19,7 +20,10 @@ function Home() {
         const { attributes } = value;
 
         return (
-          <a key={attributes.slug.value} href={`/${attributes.slug.value}`}>
+          <a
+            key={attributes.slug.value}
+            href={Routes.Post(attributes.slug.value || "")}
+          >
             <Card>
               <Heading size={"2x"} tint>
                 {attributes.title.value}

@@ -4,6 +4,7 @@ import { Flex, Layout } from "@/components/Layouts";
 import { NotionPage } from "@/components/NotionRenderer";
 import { Tags } from "@/components/Tags";
 import { Date, Heading } from "@/components/Texts";
+import { Routes } from "@/constants";
 import { sprinkles } from "@/css/sprinkles.css";
 import { getPageContent } from "@/services/notion";
 import { getSchema, getPageAttribute, getPageList } from "@/utils/notion";
@@ -23,7 +24,7 @@ export async function generateStaticParams() {
 
   return pages.map((page) => {
     const properties = getPageAttribute(page.value.properties, scheme);
-    return { slug: properties?.slug.value };
+    return { slug: Routes.Post(properties.slug.value || "") };
   });
 }
 
@@ -54,7 +55,7 @@ async function getNotionPage(slug: string) {
   };
 }
 
-async function ArticlePage({ params }: PageProps) {
+async function PostPage({ params }: PageProps) {
   const { page, properties } = await getNotionPage(params.slug);
 
   const title = properties?.title.value;
@@ -95,4 +96,4 @@ async function ArticlePage({ params }: PageProps) {
   );
 }
 
-export default ArticlePage;
+export default PostPage;

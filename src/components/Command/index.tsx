@@ -3,6 +3,7 @@ import { useParams } from "next/navigation";
 import { forwardRef, useEffect, useImperativeHandle, useState } from "react";
 import Command, { filterItems, getItemIndex } from "react-cmdk";
 
+import { Routes } from "@/constants";
 import { useNotionContext } from "@/contexts/NotionContext";
 
 import "react-cmdk/dist/cmdk.css";
@@ -50,20 +51,20 @@ export default forwardRef<CommandPaletteHandle>(
               id: "home",
               children: "홈",
               icon: "HomeIcon",
-              href: "/",
+              href: Routes.Home(),
             },
           ],
         },
         {
-          heading: "다른 글",
-          id: "articles",
+          heading: "다른 포스트",
+          id: "posts",
           items: pages
             .filter(({ attributes }) => attributes.slug.value !== params?.slug)
             .map(({ attributes }) => ({
               id: attributes.slug.value || "",
               icon: "DocumentIcon",
               children: attributes.title.value,
-              href: `/${attributes.slug.value}`,
+              href: Routes.Post(attributes.slug.value || ""),
             })),
         },
       ],
