@@ -1,18 +1,13 @@
+"use client";
 import { Card, Flex, Layout } from "@/components/Layouts";
 import { Tags } from "@/components/Tags";
 import { Date as DateText, Heading } from "@/components/Texts";
+import { useNotionContext } from "@/contexts/NotionContext";
 import { sprinkles } from "@/css/sprinkles.css";
-import { getPages } from "@/services/notion";
 
-async function getPageList() {
-  const { pages } = (await getPages()) || {};
-  if (!pages) return [];
-
-  return pages.map((page) => page.value);
-}
-
-async function Home() {
-  const pages = await getPageList();
+function Home() {
+  const { data } = useNotionContext();
+  const { pages } = data || {};
 
   return (
     <Layout
@@ -20,8 +15,8 @@ async function Home() {
         padding: "medium",
       })}
     >
-      {pages.map((page) => {
-        const { attributes } = page;
+      {(pages || []).map(({ value }) => {
+        const { attributes } = value;
 
         return (
           <a key={attributes.slug.value} href={`/${attributes.slug.value}`}>
