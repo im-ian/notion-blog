@@ -27,10 +27,10 @@ export function Header() {
               })}
             >
               <Box className={HeaderIconClassName}>
-                <Search />
+                <Search size={24} />
               </Box>
               <Box className={HeaderIconClassName}>
-                <Menu />
+                <Menu size={24} />
               </Box>
             </Box>
           </FlexItem>
