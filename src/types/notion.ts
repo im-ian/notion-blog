@@ -3,6 +3,7 @@ import {
   BlockType,
   CollectionPropertySchemaMap,
   Role,
+  SelectOption,
 } from "notion-types";
 
 export type PageAttribute = Record<
@@ -11,6 +12,7 @@ export type PageAttribute = Record<
     type: BlockType;
     id: string;
     value: string | undefined;
+    options?: SelectOption[];
   }
 >;
 

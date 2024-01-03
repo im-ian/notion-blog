@@ -4,9 +4,11 @@ import {
   CollectionPropertySchemaMap,
   Decoration,
   ExtendedRecordMap,
+  SelectOption,
 } from "notion-types";
 import { getDateValue, getTextContent } from "notion-utils";
 
+import { NotionColorMap } from "@/constants";
 import { PageAttribute } from "@/types/notion";
 
 function getFirstId(block: Record<string, unknown>) {
@@ -43,7 +45,7 @@ export function getPageAttribute(
   for (const data of Object.entries(scheme)) {
     if (!data) continue;
 
-    const [id, { name, type }] = data;
+    const [id, { name, type, ...options }] = data;
 
     const decoration = properties?.[id];
     let value: string | undefined;
@@ -55,8 +57,23 @@ export function getPageAttribute(
       value = getTextContent(decoration);
     }
 
-    result[name] = { type, id, value };
+    result[name] = { type, id, value, ...options };
   }
 
   return result;
+}
+
+export function getOptionColor({
+  value,
+  options,
+}: {
+  value: string | undefined;
+  options: SelectOption[] | undefined;
+}) {
+  if (!value || !options) return undefined;
+
+  const option = options.find((option) => option.value === value);
+  if (!option) return undefined;
+
+  return NotionColorMap[option.color];
 }

@@ -1,6 +1,10 @@
-import { style } from "@vanilla-extract/css";
+import { createVar, style } from "@vanilla-extract/css";
 
 import { sprinkles } from "@/css/sprinkles.css";
+import { vars } from "@/css/vars.css";
+
+export const TagFontColorVariants = createVar();
+export const TagBgColorVariants = createVar();
 
 export const TagClassName = style([
   sprinkles({
@@ -17,6 +21,12 @@ export const TagClassName = style([
     background: "gray-100",
   }),
   {
+    vars: {
+      [TagFontColorVariants]: vars.color["gray-400"],
+      [TagBgColorVariants]: vars.color["gray-100"],
+    },
+    color: TagFontColorVariants,
+    backgroundColor: TagBgColorVariants,
     ":first-child": {
       marginLeft: "unset",
     },

@@ -1,10 +1,24 @@
-import { TagClassName } from "./index.css";
+import { assignInlineVars } from "@vanilla-extract/dynamic";
+import { SelectOption } from "notion-types";
+
+import {
+  TagBgColorVariants,
+  TagClassName,
+  TagFontColorVariants,
+} from "./index.css";
 
 import { sprinkles } from "@/css/sprinkles.css";
-import { vars } from "@/css/vars.css";
+import { getFontColor } from "@/utils/color";
+import { getOptionColor } from "@/utils/notion";
 import { classNames } from "@/utils/string";
 
-export function Tags({ tags }: { tags: string }) {
+export function Tags({
+  options,
+  tags,
+}: {
+  options?: SelectOption[];
+  tags: string;
+}) {
   const tagList = tags.split(",");
 
   return (
@@ -13,25 +27,33 @@ export function Tags({ tags }: { tags: string }) {
         paddingY: "medium",
       })}
     >
-      {tagList?.map((tag) => <Tag key={tag} label={tag} />)}
+      {tagList?.map((tag) => (
+        <Tag
+          key={tag}
+          label={tag}
+          bgColor={getOptionColor({
+            options,
+            value: tag,
+          })}
+        />
+      ))}
     </div>
   );
 }
 
 interface TagProps {
   label: string;
-  bgColor?: keyof typeof vars.color;
+  bgColor?: string;
 }
 
 export function Tag({ label, bgColor }: TagProps) {
   return (
     <span
-      className={classNames([
-        TagClassName,
-        sprinkles({
-          background: bgColor,
-        }),
-      ])}
+      className={classNames([TagClassName])}
+      style={assignInlineVars({
+        [TagFontColorVariants]: bgColor ? getFontColor(bgColor) : "black",
+        [TagBgColorVariants]: bgColor,
+      })}
     >
       {label}
     </span>

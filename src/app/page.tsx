@@ -31,9 +31,17 @@ function Home() {
               <p>{attributes.summary.value}</p>
               <Flex>
                 {attributes.category.value && (
-                  <Tags tags={attributes.category.value} />
+                  <Tags
+                    options={attributes.category.options}
+                    tags={attributes.category.value}
+                  />
                 )}
-                {attributes.tags.value && <Tags tags={attributes.tags.value} />}
+                {attributes.tags.value && (
+                  <Tags
+                    options={attributes.tags.options}
+                    tags={attributes.tags.value}
+                  />
+                )}
               </Flex>
               {attributes.date.value && (
                 <DateText date={attributes.date.value} />
