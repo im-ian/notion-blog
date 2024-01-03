@@ -1,17 +1,58 @@
 import { NotionAPI } from "notion-client";
 import { ExtendedRecordMap } from "notion-types";
 
+import { Pages } from "@/types/notion";
 import { getSiteConfig } from "@/utils/config";
+import { getPageAttribute, getPageList, getSchema } from "@/utils/notion";
 
 const { pageId: PAGE_ID } = getSiteConfig("notion");
 const api = new NotionAPI();
 
-const cache: Map<string, ExtendedRecordMap> = new Map();
+const pageContentCache: Map<string, ExtendedRecordMap> = new Map();
 
 export async function getPageContent(pageId: string = PAGE_ID) {
-  if (!cache.has(pageId)) {
-    cache.set(pageId, await api.getPage(pageId, {}));
+  if (!pageContentCache.has(pageId)) {
+    pageContentCache.set(pageId, await api.getPage(pageId, {}));
   }
 
-  return cache.get(pageId);
+  return pageContentCache.get(pageId);
+}
+
+let pageCache: Pages | null = null;
+
+export async function getPages() {
+  if (pageCache) return pageCache;
+
+  const pageContent = await getPageContent();
+
+  if (!pageContent) {
+    pageCache = null;
+    return null;
+  }
+
+  const schema = getSchema(pageContent.collection);
+  const pageList = getPageList(pageContent.block);
+
+  const pages: Pages = {
+    schema,
+    pages: pageList.map((page) => ({
+      role: page.role,
+      value: {
+        ...page.value,
+        attributes: getPageAttribute(page.value.properties, schema),
+      },
+    })),
+  };
+
+  pages.pages
+    .map((page) => page.value)
+    .sort(
+      (a, b) =>
+        +new Date(b?.attributes.date.value || 0) -
+        +new Date(a?.attributes.date.value || 0),
+    );
+
+  pageCache = pages;
+
+  return pages;
 }

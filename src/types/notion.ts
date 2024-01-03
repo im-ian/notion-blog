@@ -1,6 +1,11 @@
-import { BlockType } from "notion-types";
+import {
+  Block,
+  BlockType,
+  CollectionPropertySchemaMap,
+  Role,
+} from "notion-types";
 
-export type PageProperties = Record<
+export type PageAttribute = Record<
   string,
   {
     type: BlockType;
@@ -8,3 +13,13 @@ export type PageProperties = Record<
     value: string | undefined;
   }
 >;
+
+export type Pages = {
+  schema: CollectionPropertySchemaMap;
+  pages: {
+    role: Role;
+    value: Block & {
+      attributes: PageAttribute;
+    };
+  }[];
+};

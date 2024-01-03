@@ -7,7 +7,7 @@ import {
 } from "notion-types";
 import { getDateValue, getTextContent } from "notion-utils";
 
-import { PageProperties } from "@/types/notion";
+import { PageAttribute } from "@/types/notion";
 
 function getFirstId(block: Record<string, unknown>) {
   return Object.keys(block)[0];
@@ -27,18 +27,18 @@ export function getSchema(collection: CollectionMap) {
   return Object.values(collection)[0]?.value?.schema;
 }
 
-export function getPages(block: BlockMap) {
+export function getPageList(block: BlockMap) {
   const blockIds = Object.keys(block);
   const blocks = blockIds.map((blockId) => block[blockId]);
 
   return blocks.filter((block) => block.value.type === "page");
 }
 
-export function getPageProperties(
+export function getPageAttribute(
   properties: Record<string, Decoration[]>,
   scheme: CollectionPropertySchemaMap,
-): PageProperties {
-  const result: PageProperties = {};
+): PageAttribute {
+  const result: PageAttribute = {};
 
   for (const data of Object.entries(scheme)) {
     if (!data) continue;

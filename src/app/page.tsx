@@ -2,25 +2,17 @@ import { Card, Flex, Layout } from "@/components/Layouts";
 import { Tags } from "@/components/Tags";
 import { Date as DateText, Heading } from "@/components/Texts";
 import { sprinkles } from "@/css/sprinkles.css";
-import { getPageContent } from "@/services/notion";
-import { getPageProperties, getPages, getSchema } from "@/utils/notion";
+import { getPages } from "@/services/notion";
 
-async function getArticleList() {
-  const pageData = await getPageContent();
-  if (!pageData) return [];
+async function getPageList() {
+  const { pages } = (await getPages()) || {};
+  if (!pages) return [];
 
-  const scheme = getSchema(pageData.collection);
-  const pages = getPages(pageData.block);
-
-  return pages
-    .map((page) => getPageProperties(page.value.properties, scheme))
-    .sort(
-      (a, b) => +new Date(b?.date.value || 0) - +new Date(a?.date.value || 0),
-    );
+  return pages.map((page) => page.value);
 }
 
 async function Home() {
-  const articles = await getArticleList();
+  const pages = await getPageList();
 
   return (
     <Layout
@@ -28,21 +20,25 @@ async function Home() {
         padding: "medium",
       })}
     >
-      {articles.map((article) => {
+      {pages.map((page) => {
+        const { attributes } = page;
+
         return (
-          <a key={article.slug.value} href={`/${article.slug.value}`}>
+          <a key={attributes.slug.value} href={`/${attributes.slug.value}`}>
             <Card>
               <Heading size={"2x"} tint>
-                {article.title.value}
+                {attributes.title.value}
               </Heading>
-              <p>{article.summary.value}</p>
+              <p>{attributes.summary.value}</p>
               <Flex>
-                {article.category.value && (
-                  <Tags tags={article.category.value} />
+                {attributes.category.value && (
+                  <Tags tags={attributes.category.value} />
                 )}
-                {article.tags.value && <Tags tags={article.tags.value} />}
+                {attributes.tags.value && <Tags tags={attributes.tags.value} />}
               </Flex>
-              {article.date.value && <DateText date={article.date.value} />}
+              {attributes.date.value && (
+                <DateText date={attributes.date.value} />
+              )}
             </Card>
           </a>
         );
