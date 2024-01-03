@@ -1,5 +1,7 @@
 import { globalStyle, globalFontFace } from "@vanilla-extract/css";
 
+const fontFamily = "Pretendard, ui-sans-serif, system-ui, -apple-system";
+
 globalFontFace("Pretendard", {
   src: 'url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css")',
 });
@@ -16,9 +18,13 @@ globalStyle("html, body, input, .notion-text", {
 });
 
 globalStyle("html, body, input, .notion-text", {
-  fontFamily: "Pretendard, sans-serif",
+  fontFamily,
   fontSize: "16px",
   lineHeight: "1.5",
+});
+
+globalStyle(".command-palette .command-palette-content", {
+  fontFamily: `${fontFamily} !important`,
 });
 
 globalStyle(".notion", {
