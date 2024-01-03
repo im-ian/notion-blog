@@ -44,7 +44,7 @@ export default forwardRef<CommandPaletteHandle>(
     const filteredItems = filterItems(
       [
         {
-          heading: "이동",
+          heading: "바로가기",
           id: "goto",
           items: [
             {
