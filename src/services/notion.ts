@@ -33,8 +33,6 @@ export async function getPages() {
   const schema = getSchema(pageContent.collection);
   const pageList = getPageList(pageContent.block);
 
-  console.log("#", schema);
-
   const pages: Pages = {
     schema,
     pages: pageList

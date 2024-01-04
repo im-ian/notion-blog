@@ -11,8 +11,8 @@ export function hexToRgb(hex: string): number[] {
 
 export const getFontColor = (color: string) => {
   const rgb = hexToRgb(color);
-  console.log(rgb);
   if (!rgb) return "black";
+
   const [r, g, b] = rgb;
   const brightness = (r * 299 + g * 587 + b * 114) / 1000;
   return brightness > 128 ? "black" : "white";
