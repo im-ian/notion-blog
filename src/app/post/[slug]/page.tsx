@@ -58,10 +58,9 @@ async function getNotionPage(slug: string) {
 async function PostPage({ params }: PageProps) {
   const { page, properties } = await getNotionPage(params.slug);
 
-  const title = properties?.title;
-  const category = properties?.category;
-  const tags = properties?.tags;
-  const date = properties?.date;
+  if (!properties) return null;
+
+  const { title, author, category, tags, date } = properties;
 
   return (
     <Layout
@@ -71,11 +70,10 @@ async function PostPage({ params }: PageProps) {
       })}
     >
       <Head>
-        <title>{title?.value}</title>
-
-        <meta property={"og:title"} content={title?.value} />
-        <meta name={"twitter:title"} content={title?.value} />
-        <meta name={"twitter:creator"} content={"@transitive_bs"} />
+        <title>{title.value}</title>
+        <meta property={"og:title"} content={title.value} />
+        <meta name={"twitter:title"} content={title.value} />
+        <meta name={"twitter:creator"} content={author.value} />
         <link rel={"icon"} href={"/favicon.ico"} />
       </Head>
       <div
@@ -84,12 +82,12 @@ async function PostPage({ params }: PageProps) {
           paddingX: "large",
         })}
       >
-        {title && <Heading tint>{title?.value}</Heading>}
+        {title && <Heading tint>{title.value}</Heading>}
         <Flex>
           {category && (
             <Tags options={category.options} tags={category.value || ""} />
           )}
-          {tags && <Tags options={tags.options} tags={tags?.value || ""} />}
+          {tags && <Tags options={tags.options} tags={tags.value || ""} />}
         </Flex>
         {date && <Date date={date.value || ""} />}
       </div>
