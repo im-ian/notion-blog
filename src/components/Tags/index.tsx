@@ -1,3 +1,4 @@
+"use client";
 import { assignInlineVars } from "@vanilla-extract/dynamic";
 import { SelectOption } from "notion-types";
 
@@ -50,10 +51,14 @@ export function Tag({ label, bgColor }: TagProps) {
   return (
     <span
       className={classNames([TagClassName])}
-      style={assignInlineVars({
-        [TagFontColorVariants]: bgColor ? getFontColor(bgColor) : "black",
-        [TagBgColorVariants]: bgColor,
-      })}
+      style={JSON.parse(
+        JSON.stringify(
+          assignInlineVars({
+            [TagFontColorVariants]: bgColor ? getFontColor(bgColor) : "black",
+            [TagBgColorVariants]: bgColor,
+          }),
+        ),
+      )}
     >
       {label}
     </span>
