@@ -1,4 +1,4 @@
-import Head from "next/head";
+import { Metadata } from "next";
 
 import { Flex, Layout } from "@/components/Layouts";
 import { NotionPage } from "@/components/NotionRenderer";
@@ -55,12 +55,22 @@ async function getNotionPage(slug: string) {
   };
 }
 
+export async function generateMetadata({ params }: PageProps) {
+  const { properties } = await getNotionPage(params.slug);
+
+  if (!properties) return null;
+
+  return {
+    title: properties.title.value,
+  } as Metadata;
+}
+
 async function PostPage({ params }: PageProps) {
   const { page, properties } = await getNotionPage(params.slug);
 
   if (!properties) return null;
 
-  const { title, author, category, tags, date } = properties;
+  const { title, category, tags, date } = properties;
 
   return (
     <Layout
@@ -69,13 +79,6 @@ async function PostPage({ params }: PageProps) {
         paddingX: "large",
       })}
     >
-      <Head>
-        <title>{title.value}</title>
-        <meta property={"og:title"} content={title.value} />
-        <meta name={"twitter:title"} content={title.value} />
-        <meta name={"twitter:creator"} content={author.value} />
-        <link rel={"icon"} href={"/favicon.ico"} />
-      </Head>
       <div
         className={sprinkles({
           paddingTop: "large",
