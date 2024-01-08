@@ -56,7 +56,7 @@ export default forwardRef<CommandPaletteHandle>(
           ],
         },
         {
-          heading: "다른 포스트",
+          heading: `다른 포스트 (${pages.length - 1})`,
           id: "posts",
           items: pages
             .filter(({ attributes }) => attributes.slug.value !== params?.slug)
