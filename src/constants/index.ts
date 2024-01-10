@@ -1,7 +1,8 @@
 export const Routes = {
   Home: () => "/",
   Post: (slug: string) => `/post/${slug}`,
-  Category: (category: string) => `/category/${category}`,
+  Category: (category?: string) =>
+    category ? `/category/${category}` : "/category",
 } as const;
 
 export const NotionColorMap = {
