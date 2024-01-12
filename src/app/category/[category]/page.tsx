@@ -17,8 +17,6 @@ async function CategoryPage({ params }: PageProps) {
   const { data } = useNotionContext();
   const { pages } = data || {};
 
-  console.log(data);
-
   return (
     <Layout
       className={sprinkles({
