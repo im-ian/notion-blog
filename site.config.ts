@@ -15,6 +15,11 @@ const CONFIG: Config = {
   },
   site: {
     title: "다람쥐 헌 쳇바퀴에 타고파",
+    postRevalidate: 60 * 5, // 5 minutes
+    domain: {
+      dev: process.env.DEV_URL || "",
+      prod: process.env.PROD_URL || "",
+    },
   },
 };
 

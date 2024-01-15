@@ -1,6 +1,4 @@
 import { Header } from "@/components/Pages";
-import NotionPageProvider from "@/contexts/NotionContext";
-import { getPages } from "@/services/notion";
 import { getSiteConfig } from "@/utils/config";
 
 import "../css/global.css";
@@ -14,8 +12,6 @@ export default async function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const pages = await getPages();
-
   return (
     <html lang={"en"}>
       <head>
@@ -33,12 +29,8 @@ export default async function RootLayout({
         />
       </head>
       <body>
-        <NotionPageProvider pages={pages}>
-          <>
-            <Header />
-            {children}
-          </>
-        </NotionPageProvider>
+        <Header />
+        {children}
       </body>
     </html>
   );

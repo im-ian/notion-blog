@@ -7,6 +7,11 @@ type NotionConfig = {
 
 type SiteConfig = {
   title: string;
+  postRevalidate: false | number;
+  domain: {
+    dev: string;
+    prod: string;
+  };
 };
 
 export type Config = {
