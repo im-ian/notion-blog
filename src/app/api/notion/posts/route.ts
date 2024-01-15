@@ -1,5 +1,6 @@
 import { NextRequest } from "next/server";
 
+import { Page } from "@/types/notion";
 import { getSiteConfig } from "@/utils/config";
 import { getPages } from "@/utils/notion";
 
@@ -22,7 +23,10 @@ export async function GET(request: NextRequest) {
     if (!filteredPages) return new Response(null, { status: 404 });
 
     return new Response(
-      JSON.stringify({ schema: pages.schema, page: filteredPages }),
+      JSON.stringify({
+        schema: pages.schema,
+        page: filteredPages,
+      } satisfies Page),
       {
         status: 200,
       },
