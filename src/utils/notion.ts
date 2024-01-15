@@ -73,11 +73,11 @@ export function getPageList(block: BlockMap) {
 
 export function getPageAttribute(
   properties: Record<string, Decoration[]>,
-  scheme: CollectionPropertySchemaMap,
+  schema: CollectionPropertySchemaMap,
 ): PageAttribute {
   const result: PageAttribute = {};
 
-  for (const data of Object.entries(scheme)) {
+  for (const data of Object.entries(schema)) {
     if (!data) continue;
 
     const [id, { name, type, ...options }] = data;
