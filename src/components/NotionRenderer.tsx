@@ -50,6 +50,7 @@ export const NotionPage = ({ recordMap }: { recordMap: ExtendedRecordMap }) => {
       fullPage={true}
       darkMode={false}
       components={{
+        Collection: () => null,
         nextLink: Link,
         Code,
         Equation,
