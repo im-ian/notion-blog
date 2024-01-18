@@ -10,7 +10,16 @@ export async function getPosts(): Promise<Pages> {
 
   return await request(apiPath, {
     next: { revalidate: postRevalidate },
-  }).then((res) => res.json());
+  })
+    .then((res) => res.json())
+    .catch((err) => {
+      console.log(err);
+
+      return {
+        schema: {},
+        pages: [],
+      } as Pages;
+    });
 }
 
 export async function getPost<T>(slug: T): Promise<Page> {
@@ -18,17 +27,41 @@ export async function getPost<T>(slug: T): Promise<Page> {
 
   return await request(apiPath, {
     next: { revalidate: postRevalidate },
-  }).then((res) => res.json());
+  })
+    .then((res) => res.json())
+    .catch((err) => {
+      console.log(err);
+
+      return {
+        schema: {},
+        page: {},
+      } as Page;
+    });
 }
 
 export async function getCategories(): Promise<PageCategory[]> {
   return await request(`/api/notion/posts/categories`, {
     next: { revalidate: postRevalidate },
-  }).then((res) => res.json());
+  })
+    .then((res) => res.json())
+    .catch((err) => {
+      console.log(err);
+
+      return [];
+    });
 }
 
 export async function getPostsByCategory(category: string): Promise<Pages> {
   return await request(`/api/notion/posts/category?category=${category}`, {
     next: { revalidate: postRevalidate },
-  }).then((res) => res.json());
+  })
+    .then((res) => res.json())
+    .catch((err) => {
+      console.log(err);
+
+      return {
+        schema: {},
+        pages: [],
+      } as Pages;
+    });
 }
