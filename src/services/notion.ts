@@ -1,57 +1,34 @@
-import { NotionAPI } from "notion-client";
-import { ExtendedRecordMap } from "notion-types";
+import { request } from ".";
 
-import { Pages } from "@/types/notion";
+import { Page, PageCategory, Pages } from "@/types/notion";
 import { getSiteConfig } from "@/utils/config";
-import { getPageAttribute, getPageList, getSchema } from "@/utils/notion";
 
-const { pageId: PAGE_ID } = getSiteConfig("notion");
-const api = new NotionAPI();
+const { postRevalidate } = getSiteConfig("site");
 
-const pageContentCache: Map<string, ExtendedRecordMap> = new Map();
+export async function getPosts(): Promise<Pages> {
+  const apiPath = `/api/notion/posts`;
 
-export async function getPageContent(pageId: string = PAGE_ID) {
-  if (!pageContentCache.has(pageId)) {
-    pageContentCache.set(pageId, await api.getPage(pageId, {}));
-  }
-
-  return pageContentCache.get(pageId);
+  return await request(apiPath, {
+    next: { revalidate: postRevalidate },
+  }).then((res) => res.json());
 }
 
-let pageCache: Pages | null = null;
+export async function getPost<T>(slug: T): Promise<Page> {
+  const apiPath = `/api/notion/posts/slug?slug=${slug}`;
 
-export async function getPages() {
-  if (pageCache) return pageCache;
+  return await request(apiPath, {
+    next: { revalidate: postRevalidate },
+  }).then((res) => res.json());
+}
 
-  const pageContent = await getPageContent();
+export async function getCategories(): Promise<PageCategory[]> {
+  return await request(`/api/notion/posts/categories`, {
+    next: { revalidate: postRevalidate },
+  }).then((res) => res.json());
+}
 
-  if (!pageContent) {
-    pageCache = null;
-    return null;
-  }
-
-  const schema = getSchema(pageContent.collection);
-  const pageList = getPageList(pageContent.block);
-
-  const pages: Pages = {
-    schema,
-    pages: pageList
-      .map((page) => ({
-        role: page.role,
-        value: {
-          ...page.value,
-          attributes: getPageAttribute(page.value.properties, schema),
-        },
-      }))
-      .sort((a, b) => {
-        const aDate = +new Date(a?.value?.attributes?.date?.value || 0);
-        const bDate = +new Date(b?.value?.attributes?.date?.value || 0);
-
-        return bDate - aDate;
-      }),
-  };
-
-  pageCache = pages;
-
-  return pages;
+export async function getPostsByCategory(category: string): Promise<Pages> {
+  return await request(`/api/notion/posts/category?category=${category}`, {
+    next: { revalidate: postRevalidate },
+  }).then((res) => res.json());
 }

@@ -9,9 +9,7 @@ import {
 } from "./index.css";
 
 import { sprinkles } from "@/css/sprinkles.css";
-import { getFontColor } from "@/utils/color";
-import { getOptionColor } from "@/utils/notion";
-import { classNames } from "@/utils/string";
+import { getFontColor, getOptionColor } from "@/utils/color";
 
 export function Tags({
   options,
@@ -50,15 +48,11 @@ interface TagProps {
 export function Tag({ label, bgColor }: TagProps) {
   return (
     <span
-      className={classNames([TagClassName])}
-      style={JSON.parse(
-        JSON.stringify(
-          assignInlineVars({
-            [TagFontColorVariants]: bgColor ? getFontColor(bgColor) : "black",
-            [TagBgColorVariants]: bgColor,
-          }),
-        ),
-      )}
+      className={TagClassName}
+      style={assignInlineVars({
+        [TagFontColorVariants]: bgColor ? getFontColor(bgColor) : "black",
+        [TagBgColorVariants]: bgColor,
+      })}
     >
       {label}
     </span>

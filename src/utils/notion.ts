@@ -1,15 +1,50 @@
+import { NotionAPI } from "notion-client";
 import {
   BlockMap,
   CollectionMap,
   CollectionPropertySchemaMap,
   Decoration,
   ExtendedRecordMap,
-  SelectOption,
 } from "notion-types";
 import { getDateValue, getTextContent } from "notion-utils";
 
-import { NotionColorMap } from "@/constants";
-import { PageAttribute } from "@/types/notion";
+import { PageAttribute, Pages } from "@/types/notion";
+
+const api = new NotionAPI();
+
+export async function getBlockById(blockId: string) {
+  return await api.getPage(blockId, {});
+}
+
+export async function getPages(pageId: string) {
+  const pageContent = await api.getPage(pageId, {});
+
+  if (!pageContent) return null;
+
+  const schema = getSchema(pageContent.collection);
+  const pageList = getPageList(pageContent.block);
+
+  const pages: Pages = {
+    schema,
+    pages: pageList
+      .map((page) => ({
+        role: page.role,
+        value: {
+          ...page.value,
+          attributes: getPageAttribute(page.value.properties, schema),
+        },
+      }))
+      .filter((page) => page.value.attributes.slug.value)
+      .sort((a, b) => {
+        const aDate = +new Date(a?.value?.attributes?.date?.value || 0);
+        const bDate = +new Date(b?.value?.attributes?.date?.value || 0);
+
+        return bDate - aDate;
+      }),
+  };
+
+  return pages;
+}
 
 function getFirstId(block: Record<string, unknown>) {
   return Object.keys(block)[0];
@@ -38,11 +73,11 @@ export function getPageList(block: BlockMap) {
 
 export function getPageAttribute(
   properties: Record<string, Decoration[]>,
-  scheme: CollectionPropertySchemaMap,
+  schema: CollectionPropertySchemaMap,
 ): PageAttribute {
   const result: PageAttribute = {};
 
-  for (const data of Object.entries(scheme)) {
+  for (const data of Object.entries(schema)) {
     if (!data) continue;
 
     const [id, { name, type, ...options }] = data;
@@ -61,19 +96,4 @@ export function getPageAttribute(
   }
 
   return result;
-}
-
-export function getOptionColor({
-  value,
-  options,
-}: {
-  value: string | undefined;
-  options: SelectOption[] | undefined;
-}) {
-  if (!value || !options) return undefined;
-
-  const option = options.find((option) => option.value === value);
-  if (!option) return undefined;
-
-  return NotionColorMap[option.color];
 }

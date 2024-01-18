@@ -3,10 +3,16 @@ import { Tags } from "@/components/Tags";
 import { Date as DateText, Heading } from "@/components/Texts";
 import { Routes } from "@/constants";
 import { sprinkles } from "@/css/sprinkles.css";
-import { getPosts } from "@/services/notion";
+import { getPostsByCategory } from "@/services/notion";
 
-async function Home() {
-  const { pages } = await getPosts();
+type PageProps = {
+  params: {
+    category: string;
+  };
+};
+
+async function CategoryPage({ params }: PageProps) {
+  const { pages } = await getPostsByCategory(params.category);
 
   return (
     <Layout
@@ -14,8 +20,8 @@ async function Home() {
         padding: "medium",
       })}
     >
-      {pages.map(({ value }) => {
-        const { attributes } = value;
+      {pages.map((page) => {
+        const { attributes } = page.value;
 
         return (
           <a
@@ -52,4 +58,4 @@ async function Home() {
   );
 }
 
-export default Home;
+export default CategoryPage;

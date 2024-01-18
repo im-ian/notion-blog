@@ -25,3 +25,19 @@ export type Pages = {
     };
   }[];
 };
+
+export type Page = {
+  schema: CollectionPropertySchemaMap;
+  page: {
+    role: Role;
+    value: Block & {
+      attributes: PageAttribute;
+    };
+  };
+};
+
+export type PageCategory = {
+  name: string;
+  postCount: number;
+  color?: string;
+};
