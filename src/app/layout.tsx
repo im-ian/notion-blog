@@ -34,11 +34,9 @@ export default async function RootLayout({
       </head>
       <body>
         <NotionPageProvider pages={pages}>
-          <>
-            <Header />
-            {children}
-          </>
+          <Header />
         </NotionPageProvider>
+        {children}
       </body>
     </html>
   );
