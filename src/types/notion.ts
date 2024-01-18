@@ -35,3 +35,9 @@ export type Page = {
     };
   };
 };
+
+export type PageCategory = {
+  name: string;
+  postCount: number;
+  color?: string;
+};

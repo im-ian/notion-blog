@@ -1,39 +1,15 @@
-import { NextRequest } from "next/server";
-
-import { Page } from "@/types/notion";
+import { Pages } from "@/types/notion";
 import { getSiteConfig } from "@/utils/config";
 import { getPages } from "@/utils/notion";
 
 const { pageId } = getSiteConfig("notion");
 
-export async function GET(request: NextRequest) {
-  const { searchParams } = new URL(request.url);
-  const slug = searchParams.get("slug");
-
+export async function GET() {
   const pages = await getPages(pageId);
 
   if (!pages) return new Response(null, { status: 404 });
 
-  if (slug) {
-    // if has slug, return single page
-    const filteredPages = pages.pages.find(
-      (page) => page.value.attributes.slug.value === slug,
-    );
-
-    if (!filteredPages) return new Response(null, { status: 404 });
-
-    return new Response(
-      JSON.stringify({
-        schema: pages.schema,
-        page: filteredPages,
-      } satisfies Page),
-      {
-        status: 200,
-      },
-    );
-  }
-
-  return new Response(JSON.stringify(pages), {
+  return new Response(JSON.stringify(pages satisfies Pages), {
     status: 200,
   });
 }

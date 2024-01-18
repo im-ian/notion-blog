@@ -5,7 +5,7 @@ import { NotionPage } from "@/components/NotionRenderer";
 import { Tags } from "@/components/Tags";
 import { Date, Heading } from "@/components/Texts";
 import { sprinkles } from "@/css/sprinkles.css";
-import { getPosts } from "@/services/notion";
+import { getPost, getPosts } from "@/services/notion";
 import { getBlockById, getPageAttribute } from "@/utils/notion";
 
 type PageProps = {
@@ -27,7 +27,7 @@ export async function generateStaticParams() {
 }
 
 export async function generateMetadata({ params }: PageProps) {
-  const { page } = await getPosts(params.slug);
+  const { page } = await getPost(params.slug);
   const { attributes } = page.value;
   return {
     title: attributes.title.value,
@@ -35,7 +35,7 @@ export async function generateMetadata({ params }: PageProps) {
 }
 
 async function PostPage({ params }: PageProps) {
-  const { page } = await getPosts(params.slug);
+  const { page } = await getPost(params.slug);
   const { attributes } = page.value;
 
   if (!attributes) return null;
