@@ -1,5 +1,3 @@
-"use client";
-
 import { Card, Flex, Layout } from "@/components/Layouts";
 import { Tags } from "@/components/Tags";
 import { Date as DateText, Heading } from "@/components/Texts";
