@@ -6,7 +6,7 @@ import { Tags } from "@/components/Tags";
 import { Date, Heading } from "@/components/Texts";
 import { sprinkles } from "@/css/sprinkles.css";
 import { getPost, getPosts } from "@/services/notion";
-import { getBlockById, getPageAttribute } from "@/utils/notion";
+import { getBlockById } from "@/utils/notion";
 
 type PageProps = {
   params: {
@@ -15,13 +15,12 @@ type PageProps = {
 };
 
 export async function generateStaticParams() {
-  const posts = await getPosts();
-  if (!posts.pages.length) return [];
+  const { pages } = await getPosts();
+  if (!pages.length) return [];
 
-  return posts.pages
+  return pages
     .map((page) => {
-      const properties = getPageAttribute(page.value.properties, posts.schema);
-      return { slug: properties.slug.value || "" };
+      return { slug: page.value.attributes.slug.value || "" };
     })
     .filter((page) => page.slug);
 }
