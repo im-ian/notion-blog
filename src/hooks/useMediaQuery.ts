@@ -1,6 +1,8 @@
 import { useState, useEffect } from "react";
 
 function getMediaQueryMatches(query: string) {
+  if (typeof window === "undefined") return false;
+
   const matches = window.matchMedia(query).matches;
   return matches;
 }
