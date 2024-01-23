@@ -16,3 +16,8 @@ export const NotionColorMap = {
   pink: "#f48fb1",
   red: "#ef9a9a",
 } as const;
+
+export const CacheKey = {
+  Posts: "posts",
+  Categories: "categories",
+};
