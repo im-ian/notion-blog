@@ -12,6 +12,7 @@ export const vars = createGlobalTheme(":root", {
   color: {
     white: "#fff",
     black: "#333",
+    darkgray: "#2f3437",
 
     "gray-50": "#f9fafb",
     "gray-100": "#f3f4f6",
