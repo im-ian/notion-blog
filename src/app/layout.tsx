@@ -1,5 +1,6 @@
 import { Header } from "@/components/Pages/Header";
 import NotionPageProvider from "@/contexts/NotionContext";
+import { themeBackground } from "@/css/theme.css";
 import { getPosts } from "@/services/notion";
 import { getSiteConfig } from "@/utils/config";
 
@@ -32,7 +33,7 @@ export default async function RootLayout({
           rel={"stylesheet"}
         />
       </head>
-      <body>
+      <body className={themeBackground}>
         <NotionPageProvider pages={pages}>
           <Header />
         </NotionPageProvider>
