@@ -1,4 +1,4 @@
-import { Header } from "@/components/Pages";
+import { Header } from "@/components/Pages/Header";
 import NotionPageProvider from "@/contexts/NotionContext";
 import { getPosts } from "@/services/notion";
 import { getSiteConfig } from "@/utils/config";

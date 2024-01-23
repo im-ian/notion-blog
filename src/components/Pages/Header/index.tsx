@@ -5,9 +5,9 @@ import {
   Search,
 } from "react-feather";
 
-import CommandPalette, { CommandPaletteHandle } from "../Command";
-import { Box, Flex, FlexItem, Layout } from "../Layouts";
-import { Heading } from "../Texts";
+import CommandPalette, { CommandPaletteHandle } from "../../Command";
+import { Box, Flex, FlexItem, Layout } from "../../Layouts";
+import { Heading } from "../../Texts";
 
 import { HeaderContainerClassName, HeaderIconClassName } from "./index.css";
 
