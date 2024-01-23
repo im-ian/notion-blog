@@ -17,7 +17,7 @@ export default async function RootLayout({
   const pages = await getPosts();
 
   return (
-    <html lang={"en"}>
+    <html lang={"ko"}>
       <head>
         <link rel={"preconnect"} href={"https://fonts.googleapis.com"} />
         <link
