@@ -1,4 +1,5 @@
 "use client";
+
 import Link from "next/link";
 import { ExtendedRecordMap } from "notion-types";
 import { NotionRenderer } from "react-notion-x";
@@ -39,7 +40,11 @@ import "prismjs/components/prism-swift.js";
 import "prismjs/components/prism-wasm.js";
 import "prismjs/components/prism-yaml.js";
 
+import useDarkMode from "@/hooks/useDarkMode";
+
 export const NotionPage = ({ recordMap }: { recordMap: ExtendedRecordMap }) => {
+  const darkMode = useDarkMode();
+
   if (!recordMap) return null;
 
   return (
@@ -48,7 +53,7 @@ export const NotionPage = ({ recordMap }: { recordMap: ExtendedRecordMap }) => {
       pageTitle={false}
       recordMap={recordMap}
       fullPage={true}
-      darkMode={false}
+      darkMode={darkMode}
       components={{
         Collection: () => null,
         nextLink: Link,

@@ -12,6 +12,7 @@ export const vars = createGlobalTheme(":root", {
   color: {
     white: "#fff",
     black: "#333",
+    darkgray: "#2f3437",
 
     "gray-50": "#f9fafb",
     "gray-100": "#f3f4f6",
@@ -22,14 +23,6 @@ export const vars = createGlobalTheme(":root", {
     "gray-600": "#4b5563",
     "gray-700": "#374151",
 
-    "brand-100": "#c4daff",
-    "brand-200": "#8abfff",
-    "brand-300": "#4f6fff",
-    "brand-400": "#2d55ff",
-    "brand-500": "#1e40ff",
-    "brand-600": "#1e3abf",
-    "brand-700": "#1e359f",
-
     "sub-100": "#e3f2fd",
     "sub-200": "#bbdefb",
     "sub-300": "#90caf9",
@@ -37,6 +30,14 @@ export const vars = createGlobalTheme(":root", {
     "sub-500": "#42a5f5",
     "sub-600": "#2196f3",
     "sub-700": "#1e88e5",
+
+    "brand-100": "#c4daff",
+    "brand-200": "#8abfff",
+    "brand-300": "#4f6fff",
+    "brand-400": "#038aff",
+    "brand-500": "#1e40ff",
+    "brand-600": "#1e3abf",
+    "brand-700": "#1e359f",
   },
   borderWidth: {
     none: "0",

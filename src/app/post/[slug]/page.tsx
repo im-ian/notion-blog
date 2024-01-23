@@ -55,7 +55,7 @@ async function PostPage({ params }: PageProps) {
           paddingX: "large",
         })}
       >
-        {title && <Heading tint>{title.value}</Heading>}
+        {title && <Heading>{title.value}</Heading>}
         <Flex>
           {category && (
             <Tags options={category.options} tags={category.value || ""} />

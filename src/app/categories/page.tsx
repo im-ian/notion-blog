@@ -2,7 +2,7 @@ import { Metadata } from "next";
 import Link from "next/link";
 
 import { Box, Layout } from "@/components/Layouts";
-import { Heading } from "@/components/Texts";
+import { Text } from "@/components/Texts";
 import { Routes } from "@/constants";
 import { sprinkles } from "@/css/sprinkles.css";
 import { getCategories } from "@/services/notion";
@@ -35,11 +35,14 @@ async function CategoriesPage() {
                   borderWidth: "none",
                   borderStyle: "solid",
                   borderBottomWidth: "thin",
-                  borderColor: "gray-200",
+                  borderColor: {
+                    lightMode: "gray-100",
+                    darkMode: "gray-600",
+                  },
                 }),
               ])}
             >
-              <Heading size={"2x"}>{`${name} (${postCount})`}</Heading>
+              <Text size={"2x"}>{`${name} (${postCount})`}</Text>
             </Box>
           </Link>
         );

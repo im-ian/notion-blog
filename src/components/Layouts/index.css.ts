@@ -38,7 +38,10 @@ export const CardClassName = style([
     marginY: "medium",
 
     borderWidth: "thin",
-    borderColor: "gray-100",
+    borderColor: {
+      lightMode: "gray-100",
+      darkMode: "gray-600",
+    },
     borderStyle: "solid",
     borderRadius: "medium",
 

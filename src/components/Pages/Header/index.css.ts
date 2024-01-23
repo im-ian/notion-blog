@@ -1,6 +1,7 @@
 import { style } from "@vanilla-extract/css";
 
 import { sprinkles } from "@/css/sprinkles.css";
+import { themeBackground } from "@/css/theme.css";
 
 export const HeaderContainerClassName = style([
   sprinkles({
@@ -14,7 +15,10 @@ export const HeaderContainerClassName = style([
     },
     marginBottom: "large",
 
-    borderColor: "gray-100",
+    borderColor: {
+      lightMode: "gray-100",
+      darkMode: "gray-600",
+    },
     borderTopWidth: "none",
     borderRightWidth: "none",
     borderBottomWidth: "thin",
@@ -24,14 +28,18 @@ export const HeaderContainerClassName = style([
   {
     top: 0,
     zIndex: 1,
-    backgroundColor: "white",
   },
+  themeBackground,
 ]);
 
 export const HeaderIconClassName = style([
   sprinkles({
     display: "inline-block",
     marginX: "medium",
+    color: {
+      lightMode: "black",
+      darkMode: "white",
+    },
 
     transitionProperty: "all",
     transitionDuration: "normal",
@@ -45,7 +53,7 @@ export const HeaderIconClassName = style([
       marginRight: 0,
     },
     ":hover": {
-      opacity: 0.5,
+      opacity: 0.7,
     },
   },
 ]);
