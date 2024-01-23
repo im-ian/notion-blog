@@ -27,6 +27,11 @@ module.exports = {
     sourceType: "module",
   },
   plugins: ["@typescript-eslint", "react", "prettier", "import"],
+  settings: {
+    react: {
+      version: "detect",
+    },
+  },
   rules: {
     "import/order": [
       "error",
