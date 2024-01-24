@@ -62,4 +62,9 @@ export const vars = createGlobalTheme(":root", {
     "3x": "24px",
     "4x": "32px",
   },
+  speed: {
+    fast: "0.1s",
+    normal: "0.25s",
+    slow: "0.5s",
+  },
 });

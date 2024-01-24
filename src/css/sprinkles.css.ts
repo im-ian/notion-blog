@@ -47,11 +47,7 @@ const responsiveProperties = defineProperties({
     textAlign: ["left", "center", "right"],
 
     transitionProperty: ["none", "all"],
-    transitionDuration: {
-      fast: "0.1s",
-      normal: "0.25s",
-      slow: "0.5s",
-    },
+    transitionDuration: vars.speed,
     transitionTimingFunction: ["ease", "ease-in", "ease-out", "ease-in-out"],
   },
   shorthands: {
