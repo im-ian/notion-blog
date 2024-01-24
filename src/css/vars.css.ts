@@ -6,7 +6,9 @@ export const vars = createGlobalTheme(":root", {
     small: "4px",
     medium: "8px",
     large: "16px",
-    extraLarge: "32px",
+    xlarge: "32px",
+    xxlarge: "64px",
+    xxxlarge: "128px",
     center: "0 auto",
   },
   color: {

@@ -34,7 +34,7 @@ export const flexItemClassName = style({
 
 export const CardClassName = style([
   sprinkles({
-    padding: "extraLarge",
+    padding: "xlarge",
     marginY: "medium",
 
     borderWidth: "thin",

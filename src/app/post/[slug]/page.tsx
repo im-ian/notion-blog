@@ -45,7 +45,10 @@ async function PostPage({ params }: PageProps) {
   return (
     <Layout
       className={sprinkles({
-        paddingTop: "large",
+        paddingTop: {
+          mobile: "small",
+          tablet: "xlarge",
+        },
       })}
     >
       <div
