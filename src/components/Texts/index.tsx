@@ -15,7 +15,7 @@ import {
 import { sprinkles } from "@/css/sprinkles.css";
 import { themeTextColor } from "@/css/theme.css";
 import { vars } from "@/css/vars.css";
-import { classNames, toDateFormat } from "@/utils/string";
+import { cx, toDateFormat } from "@/utils/string";
 
 export function Heading({
   color = "brand-400",
@@ -60,7 +60,7 @@ export function Text({ color, size = "1x", children }: TextProps) {
       style={assignInlineVars({
         [textFontSizeVariants]: vars.fontSize[size],
       })}
-      className={classNames([textClassName, colorSprinkles])}
+      className={cx([textClassName, colorSprinkles])}
     >
       {children}
     </p>

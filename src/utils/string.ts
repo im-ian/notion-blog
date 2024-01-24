@@ -1,4 +1,4 @@
-export const classNames = (classes: (string | undefined | null)[]) =>
+export const cx = (classes: (string | undefined | null)[]) =>
   classes
     .filter((cls) => Boolean(cls))
     .join(" ")

@@ -6,7 +6,7 @@ import { Text } from "@/components/Texts";
 import { Routes } from "@/constants";
 import { sprinkles } from "@/css/sprinkles.css";
 import { getCategories } from "@/services/notion";
-import { classNames } from "@/utils/string";
+import { cx } from "@/utils/string";
 
 export async function generateMetadata() {
   return {
@@ -28,7 +28,7 @@ async function CategoriesPage() {
         return (
           <Link key={index} href={Routes.Category(name)}>
             <Box
-              className={classNames([
+              className={cx([
                 sprinkles({
                   padding: "large",
 

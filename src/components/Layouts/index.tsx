@@ -13,7 +13,7 @@ import {
   flexVariant,
 } from "./index.css";
 
-import { classNames } from "@/utils/string";
+import { cx } from "@/utils/string";
 
 export function Box({ className, ...props }: HTMLAttributes<HTMLDivElement>) {
   return <div className={className} {...props} />;
@@ -23,9 +23,7 @@ export function Layout({
   className,
   ...props
 }: HTMLAttributes<HTMLDivElement>) {
-  return (
-    <Box className={classNames([LayoutClassName, className])} {...props} />
-  );
+  return <Box className={cx([LayoutClassName, className])} {...props} />;
 }
 
 interface FlexProps {
@@ -72,5 +70,5 @@ export function FlexItem({
 }
 
 export function Card({ className, ...props }: HTMLAttributes<HTMLDivElement>) {
-  return <Box className={classNames([CardClassName, className])} {...props} />;
+  return <Box className={cx([CardClassName, className])} {...props} />;
 }
