@@ -46,7 +46,6 @@ async function PostPage({ params }: PageProps) {
     <Layout
       className={sprinkles({
         paddingTop: "large",
-        paddingX: "large",
       })}
     >
       <div
@@ -64,7 +63,15 @@ async function PostPage({ params }: PageProps) {
         </Flex>
         {date && <Date date={date.value || ""} />}
       </div>
-      {page && <NotionPage recordMap={renderBlock} />}
+      {page && (
+        <div
+          className={sprinkles({
+            paddingTop: "large",
+          })}
+        >
+          <NotionPage recordMap={renderBlock} />
+        </div>
+      )}
     </Layout>
   );
 }
