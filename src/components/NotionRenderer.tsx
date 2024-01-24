@@ -52,7 +52,7 @@ export const NotionPage = ({ recordMap }: { recordMap: ExtendedRecordMap }) => {
       disableHeader
       pageTitle={false}
       recordMap={recordMap}
-      fullPage={true}
+      fullPage={false}
       darkMode={darkMode}
       components={{
         Collection: () => null,

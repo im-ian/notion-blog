@@ -1,14 +1,9 @@
+"use client";
+
 import { useState, useEffect } from "react";
 
-function getMediaQueryMatches(query: string) {
-  if (typeof window === "undefined") return false;
-
-  const matches = window.matchMedia(query).matches;
-  return matches;
-}
-
 function useMediaQuery(query: string) {
-  const [matches, setMatches] = useState(getMediaQueryMatches(query));
+  const [matches, setMatches] = useState<boolean | undefined>(undefined);
 
   useEffect(() => {
     const mediaQuery = window.matchMedia(query);
@@ -16,6 +11,8 @@ function useMediaQuery(query: string) {
     function handleMediaQueryChange() {
       setMatches(mediaQuery.matches);
     }
+
+    handleMediaQueryChange();
 
     mediaQuery.addEventListener("change", handleMediaQueryChange);
     return () =>
