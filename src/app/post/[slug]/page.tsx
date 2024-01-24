@@ -47,8 +47,9 @@ async function PostPage({ params }: PageProps) {
       className={sprinkles({
         paddingTop: {
           mobile: "small",
-          tablet: "xlarge",
+          tablet: "large",
         },
+        paddingBottom: "xxlarge",
       })}
     >
       <div
@@ -62,7 +63,11 @@ async function PostPage({ params }: PageProps) {
           {category && (
             <Tags options={category.options} tags={category.value || ""} />
           )}
-          {tags && <Tags options={tags.options} tags={tags.value || ""} />}
+          {tags && (
+            <div className={sprinkles({ marginLeft: "small" })}>
+              <Tags tags={tags.value || ""} />{" "}
+            </div>
+          )}
         </Flex>
         {date && <Date date={date.value || ""} />}
       </div>

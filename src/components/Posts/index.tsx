@@ -3,6 +3,7 @@ import { Tags } from "../Tags";
 import { Heading, Text, Date as DateText } from "../Texts";
 
 import { Routes } from "@/constants";
+import { sprinkles } from "@/css/sprinkles.css";
 import { Page } from "@/types/notion";
 
 interface PostCardProps {
@@ -28,10 +29,9 @@ export function PostCard({ page }: PostCardProps) {
             />
           )}
           {attributes.tags.value && (
-            <Tags
-              options={attributes.tags.options}
-              tags={attributes.tags.value}
-            />
+            <div className={sprinkles({ marginLeft: "small" })}>
+              <Tags tags={attributes.tags.value} />
+            </div>
           )}
         </Flex>
         {attributes.date.value && <DateText date={attributes.date.value} />}
