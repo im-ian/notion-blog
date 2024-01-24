@@ -1,10 +1,10 @@
 import { Card, Flex } from "../Layouts";
-import { Tags } from "../Tags";
+import { Tag, Tags } from "../Tags";
 import { Heading, Text, Date as DateText } from "../Texts";
 
 import { Routes } from "@/constants";
-import { sprinkles } from "@/css/sprinkles.css";
 import { Page } from "@/types/notion";
+import { getOptionColor } from "@/utils/color";
 
 interface PostCardProps {
   page: Page["page"];
@@ -23,16 +23,15 @@ export function PostCard({ page }: PostCardProps) {
         <Text>{attributes.summary.value}</Text>
         <Flex>
           {attributes.category.value && (
-            <Tags
-              options={attributes.category.options}
-              tags={attributes.category.value}
+            <Tag
+              bgColor={getOptionColor({
+                options: attributes.category.options,
+                value: attributes.category.value,
+              })}
+              label={attributes.category.value || ""}
             />
           )}
-          {attributes.tags.value && (
-            <div className={sprinkles({ marginLeft: "small" })}>
-              <Tags tags={attributes.tags.value} />
-            </div>
-          )}
+          {attributes.tags.value && <Tags tags={attributes.tags.value} />}
         </Flex>
         {attributes.date.value && <DateText date={attributes.date.value} />}
       </Card>

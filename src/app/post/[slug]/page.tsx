@@ -1,11 +1,14 @@
 import { Metadata } from "next";
+import Link from "next/link";
 
 import { Flex, Layout } from "@/components/Layouts";
 import { NotionPage } from "@/components/NotionRenderer";
-import { Tags } from "@/components/Tags";
+import { Tag, Tags } from "@/components/Tags";
 import { Date, Heading } from "@/components/Texts";
+import { Routes } from "@/constants";
 import { sprinkles } from "@/css/sprinkles.css";
 import { getPost, getPosts } from "@/services/notion";
+import { getOptionColor } from "@/utils/color";
 import { getBlockById } from "@/utils/notion";
 
 type PageProps = {
@@ -61,11 +64,23 @@ async function PostPage({ params }: PageProps) {
         {title && <Heading>{title.value}</Heading>}
         <Flex>
           {category && (
-            <Tags options={category.options} tags={category.value || ""} />
+            <Link href={Routes.Category(category.value)}>
+              <Tag
+                bgColor={getOptionColor({
+                  options: category.options,
+                  value: category.value,
+                })}
+                label={category.value || ""}
+              />
+            </Link>
           )}
           {tags && (
-            <div className={sprinkles({ marginLeft: "small" })}>
-              <Tags tags={tags.value || ""} />{" "}
+            <div
+              className={sprinkles({
+                marginLeft: "small",
+              })}
+            >
+              <Tags tags={tags.value || ""} />
             </div>
           )}
         </Flex>
