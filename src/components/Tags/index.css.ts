@@ -13,9 +13,9 @@ export const TagClassName = style([
     fontSize: "0x",
     color: "gray-400",
 
-    marginX: "small",
     paddingX: "medium",
     paddingY: "small",
+    marginRight: "small",
     borderRadius: "medium",
 
     background: "gray-100",
@@ -27,8 +27,9 @@ export const TagClassName = style([
     },
     color: TagFontColorVariants,
     backgroundColor: TagBgColorVariants,
-    ":first-child": {
-      marginLeft: "unset",
+
+    ":last-child": {
+      marginRight: "unset",
     },
   },
 ]);
