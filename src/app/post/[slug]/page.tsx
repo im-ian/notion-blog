@@ -7,7 +7,6 @@ import ScrollProgressBar from "@/components/Pages/ScrollProgressBar";
 import { Tag, Tags } from "@/components/Tags";
 import { Date, Heading } from "@/components/Texts";
 import { Routes } from "@/constants";
-import { sprinkles } from "@/css/sprinkles.css";
 import { getPost, getPosts } from "@/services/notion";
 import { getOptionColor } from "@/utils/color";
 import { getBlockById } from "@/utils/notion";

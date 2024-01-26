@@ -18,12 +18,7 @@ async function CategoriesPage() {
   const categories = await getCategories();
 
   return (
-    <Layout
-      className={sprinkles({
-        paddingTop: "large",
-        paddingX: "large",
-      })}
-    >
+    <Layout sprinkle={{ paddingTop: "large", paddingX: "large" }}>
       {categories.map(({ name, postCount }, index) => {
         return (
           <Link key={index} href={Routes.Category(name)}>
