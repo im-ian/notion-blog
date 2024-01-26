@@ -34,16 +34,18 @@ export const flexItemClassName = style({
 
 export const CardClassName = style([
   sprinkles({
-    padding: "xlarge",
-    marginY: "medium",
-
-    borderWidth: "thin",
-    borderColor: {
-      lightMode: "gray-100",
-      darkMode: "gray-600",
+    paddingTop: {
+      mobile: "none",
+      tablet: "medium",
     },
-    borderStyle: "solid",
-    borderRadius: "medium",
+    paddingX: {
+      mobile: "medium",
+      tablet: "medium",
+    },
+    marginBottom: {
+      mobile: "xlarge",
+      tablet: "xlarge",
+    },
 
     // transition: "transform .3s ease",
     transitionProperty: "all",

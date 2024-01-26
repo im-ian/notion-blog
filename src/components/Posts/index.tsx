@@ -1,4 +1,4 @@
-import { Card, Flex } from "../Layouts";
+import { Box, Card, Flex } from "../Layouts";
 import { Tag, Tags } from "../Tags";
 import { Heading, Text, Date as DateText } from "../Texts";
 
@@ -14,27 +14,35 @@ export function PostCard({ page }: PostCardProps) {
   const { attributes } = page.value;
 
   return (
-    <a
-      key={attributes.slug.value}
-      href={Routes.Post(attributes.slug.value || "")}
-    >
+    <article>
       <Card>
-        <Heading size={"2x"}>{attributes.title.value}</Heading>
-        <Text>{attributes.summary.value}</Text>
-        <Flex>
-          {attributes.category.value && (
-            <Tag
-              bgColor={getOptionColor({
-                options: attributes.category.options,
-                value: attributes.category.value,
-              })}
-              label={attributes.category.value || ""}
-            />
-          )}
-          {attributes.tags.value && <Tags tags={attributes.tags.value} />}
-        </Flex>
-        {attributes.date.value && <DateText date={attributes.date.value} />}
+        <a
+          key={attributes.slug.value}
+          href={Routes.Post(attributes.slug.value || "")}
+        >
+          <Heading size={"2x"}>{attributes.title.value}</Heading>
+          <Box sprinkle={{ marginY: "medium" }}>
+            <Text>{attributes.summary.value}</Text>
+          </Box>
+          <Box sprinkle={{ marginY: "medium" }}>
+            {attributes.date.value && <DateText date={attributes.date.value} />}
+          </Box>
+        </a>
+        <Box sprinkle={{ marginY: "medium" }}>
+          <Flex>
+            {attributes.category.value && (
+              <Tag
+                bgColor={getOptionColor({
+                  options: attributes.category.options,
+                  value: attributes.category.value,
+                })}
+                label={attributes.category.value || ""}
+              />
+            )}
+            {attributes.tags.value && <Tags tags={attributes.tags.value} />}
+          </Flex>
+        </Box>
       </Card>
-    </a>
+    </article>
   );
 }

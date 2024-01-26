@@ -13,17 +13,25 @@ import {
   flexVariant,
 } from "./index.css";
 
+import { sprinkles } from "@/css/sprinkles.css";
 import { cx } from "@/utils/string";
 
-export function Box({ className, ...props }: HTMLAttributes<HTMLDivElement>) {
-  return <div className={className} {...props} />;
+interface BoxProps extends HTMLAttributes<HTMLDivElement> {
+  className?: string;
+  sprinkle?: Parameters<typeof sprinkles>[0];
+}
+
+export function Box({ className, sprinkle, ...props }: BoxProps) {
+  const sprinklesStyle = sprinkle ? sprinkles(sprinkle) : undefined;
+
+  return <div className={cx([className, sprinklesStyle])} {...props} />;
 }
 
 export function Layout({
   className,
-  ...props
+  children,
 }: HTMLAttributes<HTMLDivElement>) {
-  return <Box className={cx([LayoutClassName, className])} {...props} />;
+  return <Box className={cx([LayoutClassName, className])}>{children}</Box>;
 }
 
 interface FlexProps {
@@ -69,6 +77,6 @@ export function FlexItem({
   );
 }
 
-export function Card({ className, ...props }: HTMLAttributes<HTMLDivElement>) {
-  return <Box className={cx([CardClassName, className])} {...props} />;
+export function Card({ className, children }: HTMLAttributes<HTMLDivElement>) {
+  return <Box className={cx([CardClassName, className])}>{children}</Box>;
 }
