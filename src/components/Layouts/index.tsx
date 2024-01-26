@@ -27,11 +27,12 @@ export function Box({ className, sprinkle, ...props }: BoxProps) {
   return <div className={cx([className, sprinklesStyle])} {...props} />;
 }
 
-export function Layout({
-  className,
-  children,
-}: HTMLAttributes<HTMLDivElement>) {
-  return <Box className={cx([LayoutClassName, className])}>{children}</Box>;
+export function Layout({ className, sprinkle, children }: BoxProps) {
+  return (
+    <Box className={cx([LayoutClassName, className])} sprinkle={sprinkle}>
+      {children}
+    </Box>
+  );
 }
 
 interface FlexProps {

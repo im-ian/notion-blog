@@ -1,7 +1,7 @@
 import { Metadata } from "next";
 import Link from "next/link";
 
-import { Flex, Layout } from "@/components/Layouts";
+import { Box, Flex, Layout } from "@/components/Layouts";
 import { NotionPage } from "@/components/NotionRenderer";
 import ScrollProgressBar from "@/components/Pages/ScrollProgressBar";
 import { Tag, Tags } from "@/components/Tags";
@@ -50,53 +50,51 @@ async function PostPage({ params }: PageProps) {
     <>
       <ScrollProgressBar />
       <Layout
-        className={sprinkles({
+        sprinkle={{
           paddingTop: {
             mobile: "small",
             tablet: "large",
           },
           paddingBottom: "xxlarge",
-        })}
+        }}
       >
-        <div
-          className={sprinkles({
+        <Box
+          sprinkle={{
             paddingTop: "large",
             paddingX: "large",
-          })}
+          }}
         >
           {title && <Heading>{title.value}</Heading>}
-          <Flex>
-            {category && (
-              <Link href={Routes.Category(category.value)}>
-                <Tag
-                  bgColor={getOptionColor({
-                    options: category.options,
-                    value: category.value,
-                  })}
-                  label={category.value || ""}
-                />
-              </Link>
+          <Box sprinkle={{ marginY: "medium" }}>
+            <Flex>
+              {category && (
+                <Link href={Routes.Category(category.value)}>
+                  <Tag
+                    bgColor={getOptionColor({
+                      options: category.options,
+                      value: category.value,
+                    })}
+                    label={category.value || ""}
+                  />
+                </Link>
+              )}
+              {tags && (
+                <Box sprinkle={{ marginLeft: "small" }}>
+                  <Tags tags={tags.value || ""} />
+                </Box>
+              )}
+            </Flex>
+            {date && (
+              <Box sprinkle={{ marginY: "medium" }}>
+                <Date date={date.value || ""} />
+              </Box>
             )}
-            {tags && (
-              <div
-                className={sprinkles({
-                  marginLeft: "small",
-                })}
-              >
-                <Tags tags={tags.value || ""} />
-              </div>
-            )}
-          </Flex>
-          {date && <Date date={date.value || ""} />}
-        </div>
+          </Box>
+        </Box>
         {page && (
-          <div
-            className={sprinkles({
-              paddingTop: "large",
-            })}
-          >
+          <Box sprinkle={{ paddingTop: "large" }}>
             <NotionPage recordMap={renderBlock} />
-          </div>
+          </Box>
         )}
       </Layout>
     </>
