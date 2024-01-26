@@ -1,5 +1,7 @@
-import { Box, Card, Flex } from "../Layouts";
-import { Tag, Tags } from "../Tags";
+import Link from "next/link";
+
+import { Box, Card } from "../Layouts";
+import { Tag } from "../Tags";
 import { Heading, Text, Date as DateText } from "../Texts";
 
 import { Routes } from "@/constants";
@@ -13,37 +15,34 @@ interface PostCardProps {
 export function PostCard({ page }: PostCardProps) {
   const { attributes } = page.value;
 
+  const { title, slug, summary, tags, date } = attributes;
+
+  const tagList = tags.value?.split(",") || [];
+
   return (
     <article>
       <Card>
-        <a
-          key={attributes.slug.value}
-          href={Routes.Post(attributes.slug.value || "")}
-        >
-          <Heading size={{ mobile: "2x", tablet: "3x" }}>
-            {attributes.title.value}
-          </Heading>
+        <a key={slug.value} href={Routes.Post(slug.value || "")}>
+          <Heading size={{ mobile: "2x", tablet: "3x" }}>{title.value}</Heading>
           <Box sprinkle={{ marginY: "medium" }}>
-            <Text>{attributes.summary.value}</Text>
+            <Text>{summary.value}</Text>
           </Box>
           <Box sprinkle={{ marginY: "medium" }}>
-            {attributes.date.value && <DateText date={attributes.date.value} />}
+            {date.value && <DateText date={date.value} />}
           </Box>
         </a>
         <Box sprinkle={{ marginY: "medium" }}>
-          <Flex>
-            {attributes.category.value && (
+          {tagList.map((tag) => (
+            <Link key={tag} href={Routes.Tag(tag)}>
               <Tag
                 bgColor={getOptionColor({
-                  options: attributes.category.options,
-                  value: attributes.category.value,
+                  options: tags.options,
+                  value: tag,
                 })}
-                label={attributes.category.value || ""}
-                clickable
+                label={tag}
               />
-            )}
-            {attributes.tags.value && <Tags tags={attributes.tags.value} />}
-          </Flex>
+            </Link>
+          ))}
         </Box>
       </Card>
     </article>

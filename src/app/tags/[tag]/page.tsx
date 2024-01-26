@@ -1,15 +1,15 @@
 import { Layout } from "@/components/Layouts";
 import { PostCard } from "@/components/Posts";
-import { getPostsByCategory } from "@/services/notion";
+import { getPostsByTag } from "@/services/notion";
 
 type PageProps = {
   params: {
-    category: string;
+    tag: string;
   };
 };
 
-async function CategoryPage({ params }: PageProps) {
-  const { pages } = await getPostsByCategory(params.category);
+async function TagPage({ params }: PageProps) {
+  const { pages } = await getPostsByTag(params.tag);
 
   return (
     <Layout sprinkle={{ padding: "medium" }}>
@@ -20,4 +20,4 @@ async function CategoryPage({ params }: PageProps) {
   );
 }
 
-export default CategoryPage;
+export default TagPage;

@@ -36,7 +36,7 @@ export type Page = {
   };
 };
 
-export type PageCategory = {
+export type PageTag = {
   name: string;
   postCount: number;
   color?: string;
