@@ -54,10 +54,10 @@ export default forwardRef<CommandPaletteHandle>(
               href: Routes.Home(),
             },
             {
-              id: "category",
-              children: "카테고리",
+              id: "tags",
+              children: "태그",
               icon: "TagIcon",
-              href: Routes.Category(),
+              href: Routes.Tag(),
             },
           ],
         },

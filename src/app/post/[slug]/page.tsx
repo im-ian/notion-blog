@@ -4,7 +4,7 @@ import Link from "next/link";
 import { Box, Flex, Layout } from "@/components/Layouts";
 import { NotionPage } from "@/components/NotionRenderer";
 import ScrollProgressBar from "@/components/Pages/ScrollProgressBar";
-import { Tag, Tags } from "@/components/Tags";
+import { Tag } from "@/components/Tags";
 import { Date, Heading } from "@/components/Texts";
 import { Routes } from "@/constants";
 import { getPost, getPosts } from "@/services/notion";
@@ -42,8 +42,10 @@ async function PostPage({ params }: PageProps) {
 
   if (!attributes) return null;
 
-  const { title, category, tags, date } = attributes;
+  const { title, tags, date } = attributes;
   const renderBlock = await getBlockById(page.value.id);
+
+  const tagList = tags.value?.split(",") || [];
 
   return (
     <>
@@ -66,22 +68,17 @@ async function PostPage({ params }: PageProps) {
           {title && <Heading>{title.value}</Heading>}
           <Box sprinkle={{ marginY: "medium" }}>
             <Flex>
-              {category && (
-                <Link href={Routes.Category(category.value)}>
+              {tagList.map((tag) => (
+                <Link key={tag} href={Routes.Tag(tag)}>
                   <Tag
                     bgColor={getOptionColor({
-                      options: category.options,
-                      value: category.value,
+                      options: tags.options,
+                      value: tag,
                     })}
-                    label={category.value || ""}
+                    label={tag}
                   />
                 </Link>
-              )}
-              {tags && (
-                <Box sprinkle={{ marginLeft: "small" }}>
-                  <Tags tags={tags.value || ""} />
-                </Box>
-              )}
+              ))}
             </Flex>
             {date && (
               <Box sprinkle={{ marginY: "medium" }}>

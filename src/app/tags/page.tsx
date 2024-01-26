@@ -5,23 +5,23 @@ import { Box, Layout } from "@/components/Layouts";
 import { Text } from "@/components/Texts";
 import { Routes } from "@/constants";
 import { sprinkles } from "@/css/sprinkles.css";
-import { getCategories } from "@/services/notion";
+import { getTags } from "@/services/notion";
 import { cx } from "@/utils/string";
 
 export async function generateMetadata() {
   return {
-    title: "카테고리",
+    title: "태그",
   } as Metadata;
 }
 
-async function CategoriesPage() {
-  const categories = await getCategories();
+async function TagsPage() {
+  const tags = await getTags();
 
   return (
     <Layout sprinkle={{ paddingTop: "large", paddingX: "large" }}>
-      {categories.map(({ name, postCount }, index) => {
+      {tags.map(({ name, postCount }, index) => {
         return (
-          <Link key={index} href={Routes.Category(name)}>
+          <Link key={index} href={Routes.Tag(name)}>
             <Box
               className={cx([
                 sprinkles({
@@ -46,4 +46,4 @@ async function CategoriesPage() {
   );
 }
 
-export default CategoriesPage;
+export default TagsPage;

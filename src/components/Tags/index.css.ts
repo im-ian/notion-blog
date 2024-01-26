@@ -27,9 +27,5 @@ export const TagClassName = style([
     },
     color: TagFontColorVariants,
     backgroundColor: TagBgColorVariants,
-
-    ":last-child": {
-      marginRight: "unset",
-    },
   },
 ]);

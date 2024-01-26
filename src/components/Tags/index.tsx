@@ -2,7 +2,6 @@
 
 import { assignInlineVars } from "@vanilla-extract/dynamic";
 import Link from "next/link";
-import { SelectOption } from "notion-types";
 
 import {
   TagBgColorVariants,
@@ -10,31 +9,7 @@ import {
   TagFontColorVariants,
 } from "./index.css";
 
-import { getFontColor, getOptionColor } from "@/utils/color";
-
-export function Tags({
-  options,
-  tags,
-  clickable,
-}: {
-  options?: SelectOption[];
-  tags: string;
-  clickable?: boolean;
-}) {
-  const tagList = tags.split(",");
-
-  return tagList?.map((tag) => (
-    <Tag
-      key={tag}
-      label={tag}
-      bgColor={getOptionColor({
-        options,
-        value: tag,
-      })}
-      clickable={clickable}
-    />
-  ));
-}
+import { getFontColor } from "@/utils/color";
 
 interface TagProps {
   label: string;

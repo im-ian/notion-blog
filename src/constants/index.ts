@@ -1,8 +1,7 @@
 export const Routes = {
   Home: () => "/",
   Post: (slug: string) => `/post/${slug}`,
-  Category: (category?: string) =>
-    category ? `/categories/${category}` : "/categories",
+  Tag: (tag?: string) => (tag ? `/tags/${tag}` : "/tags"),
 } as const;
 
 export const NotionColorMap = {
@@ -19,5 +18,5 @@ export const NotionColorMap = {
 
 export const CacheKey = {
   Posts: "posts",
-  Categories: "categories",
+  Tags: "tags",
 };
