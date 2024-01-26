@@ -23,7 +23,7 @@ export const TagClassName = style([
   {
     vars: {
       [TagFontColorVariants]: vars.color["gray-400"],
-      [TagBgColorVariants]: vars.color["gray-100"],
+      [TagBgColorVariants]: vars.color["gray-200"],
     },
     color: TagFontColorVariants,
     backgroundColor: TagBgColorVariants,

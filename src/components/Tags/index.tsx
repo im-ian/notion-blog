@@ -9,7 +9,6 @@ import {
   TagFontColorVariants,
 } from "./index.css";
 
-import { sprinkles } from "@/css/sprinkles.css";
 import { getFontColor, getOptionColor } from "@/utils/color";
 
 export function Tags({
@@ -21,24 +20,16 @@ export function Tags({
 }) {
   const tagList = tags.split(",");
 
-  return (
-    <div
-      className={sprinkles({
-        paddingY: "medium",
+  return tagList?.map((tag) => (
+    <Tag
+      key={tag}
+      label={tag}
+      bgColor={getOptionColor({
+        options,
+        value: tag,
       })}
-    >
-      {tagList?.map((tag) => (
-        <Tag
-          key={tag}
-          label={tag}
-          bgColor={getOptionColor({
-            options,
-            value: tag,
-          })}
-        />
-      ))}
-    </div>
-  );
+    />
+  ));
 }
 
 interface TagProps {
