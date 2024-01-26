@@ -20,7 +20,9 @@ export function PostCard({ page }: PostCardProps) {
           key={attributes.slug.value}
           href={Routes.Post(attributes.slug.value || "")}
         >
-          <Heading size={"2x"}>{attributes.title.value}</Heading>
+          <Heading size={{ mobile: "2x", tablet: "3x" }}>
+            {attributes.title.value}
+          </Heading>
           <Box sprinkle={{ marginY: "medium" }}>
             <Text>{attributes.summary.value}</Text>
           </Box>

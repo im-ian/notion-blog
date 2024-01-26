@@ -7,7 +7,6 @@ import {
   DateClassName,
   headingClassName,
   headingColorVariants,
-  headingFontSizeVariants,
   textClassName,
   textFontSizeVariants,
 } from "./index.css";
@@ -17,21 +16,39 @@ import { themeTextColor } from "@/css/theme.css";
 import { vars } from "@/css/vars.css";
 import { cx, toDateFormat } from "@/utils/string";
 
+interface HeadingProps {
+  color?: keyof typeof vars.color;
+  size?:
+    | keyof typeof vars.fontSize
+    | {
+        mobile: keyof typeof vars.fontSize;
+        tablet: keyof typeof vars.fontSize;
+      };
+}
+
 export function Heading({
   color = "brand-400",
   size = "4x",
   children,
-}: PropsWithChildren<{
-  color?: keyof typeof vars.color;
-  size?: keyof typeof vars.fontSize;
-}>) {
+}: PropsWithChildren<HeadingProps>) {
+  const headingFontSize =
+    typeof size === "string"
+      ? sprinkles({
+          fontSize: size,
+        })
+      : sprinkles({
+          fontSize: {
+            mobile: size.mobile,
+            tablet: size.tablet,
+          },
+        });
+
   return (
     <h1
       style={assignInlineVars({
         [headingColorVariants]: vars.color[color],
-        [headingFontSizeVariants]: vars.fontSize[size],
       })}
-      className={headingClassName}
+      className={cx([headingClassName, headingFontSize])}
     >
       {children}
     </h1>

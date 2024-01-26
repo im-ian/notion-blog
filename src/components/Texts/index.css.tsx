@@ -4,16 +4,13 @@ import { sprinkles } from "../../css/sprinkles.css";
 
 import { vars } from "@/css/vars.css";
 
-export const headingFontSizeVariants = createVar();
 export const headingColorVariants = createVar();
 
 export const headingClassName = style([
   {
     vars: {
       [headingColorVariants]: vars.color["brand-400"],
-      [headingFontSizeVariants]: vars.fontSize["4x"],
     },
-    fontSize: headingFontSizeVariants,
     color: headingColorVariants,
   },
 ]);
