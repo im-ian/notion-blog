@@ -1,6 +1,7 @@
 "use client";
 
 import { assignInlineVars } from "@vanilla-extract/dynamic";
+import Link from "next/link";
 import { SelectOption } from "notion-types";
 
 import {
@@ -14,9 +15,11 @@ import { getFontColor, getOptionColor } from "@/utils/color";
 export function Tags({
   options,
   tags,
+  clickable,
 }: {
   options?: SelectOption[];
   tags: string;
+  clickable?: boolean;
 }) {
   const tagList = tags.split(",");
 
@@ -28,6 +31,7 @@ export function Tags({
         options,
         value: tag,
       })}
+      clickable={clickable}
     />
   ));
 }
@@ -35,18 +39,23 @@ export function Tags({
 interface TagProps {
   label: string;
   bgColor?: string;
+  clickable?: boolean;
 }
 
-export function Tag({ label, bgColor }: TagProps) {
-  return (
-    <span
-      className={TagClassName}
-      style={assignInlineVars({
-        [TagFontColorVariants]: bgColor ? getFontColor(bgColor) : "black",
-        [TagBgColorVariants]: bgColor,
-      })}
-    >
+export function Tag({ label, bgColor, clickable }: TagProps) {
+  const props = {
+    className: TagClassName,
+    style: assignInlineVars({
+      [TagFontColorVariants]: bgColor ? getFontColor(bgColor) : "black",
+      [TagBgColorVariants]: bgColor,
+    }),
+  };
+
+  return clickable ? (
+    <Link href={label} {...props}>
       {label}
-    </span>
+    </Link>
+  ) : (
+    <span {...props}>{label}</span>
   );
 }

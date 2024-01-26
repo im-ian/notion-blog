@@ -39,6 +39,7 @@ export function PostCard({ page }: PostCardProps) {
                   value: attributes.category.value,
                 })}
                 label={attributes.category.value || ""}
+                clickable
               />
             )}
             {attributes.tags.value && <Tags tags={attributes.tags.value} />}
