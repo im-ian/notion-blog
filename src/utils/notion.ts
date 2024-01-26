@@ -34,7 +34,11 @@ export async function getPages(pageId: string) {
           attributes: getPageAttribute(page.value.properties, schema),
         },
       }))
-      .filter((page) => page.value.attributes.slug.value)
+      .filter(
+        (page) =>
+          page.value.attributes.slug.value &&
+          page.value.attributes.status.value === "Public",
+      )
       .sort((a, b) => {
         const aDate = +new Date(a?.value?.attributes?.date?.value || 0);
         const bDate = +new Date(b?.value?.attributes?.date?.value || 0);
