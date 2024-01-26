@@ -3,6 +3,7 @@ import { createGlobalTheme } from "@vanilla-extract/css";
 export const vars = createGlobalTheme(":root", {
   space: {
     none: "0",
+    xsmall: "2px",
     small: "4px",
     medium: "8px",
     large: "16px",
