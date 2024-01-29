@@ -1,9 +1,9 @@
 import { NotionAPI } from "notion-client";
 import {
+  Block,
   BlockMap,
   CollectionMap,
   CollectionPropertySchemaMap,
-  Decoration,
   ExtendedRecordMap,
 } from "notion-types";
 import { getDateValue, getTextContent } from "notion-utils";
@@ -31,7 +31,7 @@ export async function getPages(pageId: string) {
         role: page.role,
         value: {
           ...page.value,
-          attributes: getPageAttribute(page.value.properties, schema),
+          attributes: getPageAttribute(page.value, schema),
         },
       }))
       .filter(
@@ -76,7 +76,7 @@ export function getPageList(block: BlockMap) {
 }
 
 export function getPageAttribute(
-  properties: Record<string, Decoration[]>,
+  block: Block,
   schema: CollectionPropertySchemaMap,
 ): PageAttribute {
   const result: PageAttribute = {};
@@ -86,12 +86,20 @@ export function getPageAttribute(
 
     const [id, { name, type, ...options }] = data;
 
-    const decoration = properties?.[id];
+    const decoration = block.properties?.[id];
     let value: string | undefined;
 
     if (type === "date") {
       const date = getDateValue(decoration);
       value = date?.start_date;
+    } else if (type === "file") {
+      value = undefined;
+      if (decoration) {
+        const imageUrl = decoration[0][1]?.[0]?.[1];
+        value = getMapImageUrl(imageUrl, block) || undefined;
+      } else {
+        value = undefined;
+      }
     } else {
       value = getTextContent(decoration);
     }
@@ -100,4 +108,52 @@ export function getPageAttribute(
   }
 
   return result;
+}
+
+// code by react-notion-x
+// Imported from `react-notion-x/build/index.js` due to SSR issue
+export function getMapImageUrl(url: string, block: Block) {
+  if (!url) {
+    return null;
+  }
+  if (url.startsWith("data:")) {
+    return url;
+  }
+  if (url.startsWith("https://images.unsplash.com")) {
+    return url;
+  }
+  try {
+    const u = new URL(url);
+    if (
+      u.pathname.startsWith("/secure.notion-static.com") &&
+      u.hostname.endsWith(".amazonaws.com")
+    ) {
+      if (
+        u.searchParams.has("X-Amz-Credential") &&
+        u.searchParams.has("X-Amz-Signature") &&
+        u.searchParams.has("X-Amz-Algorithm")
+      ) {
+        return url;
+      }
+    }
+  } catch (e) {
+    console.log(e);
+  }
+
+  if (url.startsWith("/images")) {
+    url = `https://www.notion.so${url}`;
+  }
+  url = `https://www.notion.so${
+    url.startsWith("/image") ? url : `/image/${encodeURIComponent(url)}`
+  }`;
+  const notionImageUrlV2 = new URL(url);
+  let table = block.parent_table === "space" ? "block" : block.parent_table;
+  if (table === "collection" || table === "team") {
+    table = "block";
+  }
+  notionImageUrlV2.searchParams.set("table", table);
+  notionImageUrlV2.searchParams.set("id", block.id);
+  notionImageUrlV2.searchParams.set("cache", "v2");
+  url = notionImageUrlV2.toString();
+  return url;
 }
