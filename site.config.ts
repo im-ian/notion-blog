@@ -19,7 +19,9 @@ const CONFIG: Config = {
       dev: process.env.DEV_URL || "",
       prod: process.env.PROD_URL || "",
     },
+    // 포스트 캐시 갱신 시간
     postRevalidate: 60 * 60, // 1 hour
+    // 검색 단축키 사용 여부
     useSearchShortcut: true,
   },
 };
