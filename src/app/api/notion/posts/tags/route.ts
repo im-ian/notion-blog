@@ -12,7 +12,7 @@ export async function GET() {
   const result: PageTag[] = [];
 
   pages.forEach((page) => {
-    const properties = getPageAttribute(page.value.properties, schema);
+    const properties = getPageAttribute(page.value, schema);
 
     const tags = properties.tags?.value?.split(",") || [];
 
