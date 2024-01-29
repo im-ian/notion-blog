@@ -5,6 +5,7 @@ import Command, { filterItems, getItemIndex } from "react-cmdk";
 
 import { Routes } from "@/constants";
 import { useNotionContext } from "@/contexts/NotionContext";
+import { getSiteConfig } from "@/utils/config";
 
 import "react-cmdk/dist/cmdk.css";
 
@@ -29,6 +30,9 @@ export default forwardRef<CommandPaletteHandle>(
     }));
 
     useEffect(() => {
+      const { useSearchShortcut } = getSiteConfig("site");
+      if (!useSearchShortcut) return;
+
       function handleKeyDown(e: KeyboardEvent) {
         if (e.metaKey && e.key === "k") {
           e.preventDefault();

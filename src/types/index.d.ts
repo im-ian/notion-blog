@@ -7,11 +7,12 @@ type NotionConfig = {
 
 type SiteConfig = {
   title: string;
-  postRevalidate: false | number;
   domain: {
     dev: string;
     prod: string;
   };
+  postRevalidate: false | number;
+  useSearchShortcut: boolean;
 };
 
 export type Config = {
