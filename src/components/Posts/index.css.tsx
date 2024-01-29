@@ -5,6 +5,7 @@ import { sprinkles } from "@/css/sprinkles.css";
 export const PostCardThumbnailClassNames = style([
   sprinkles({
     borderRadius: "medium",
+    marginBottom: "medium",
   }),
   {
     overflow: "hidden",
