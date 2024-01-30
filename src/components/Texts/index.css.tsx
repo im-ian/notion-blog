@@ -12,6 +12,8 @@ export const headingClassName = style([
       [headingColorVariants]: vars.color["brand-400"],
     },
     color: headingColorVariants,
+    fontWeight: "600",
+    letterSpacing: "-0.03em",
   },
 ]);
 
