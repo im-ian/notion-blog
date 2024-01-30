@@ -30,7 +30,6 @@ export function PostCard({ page }: PostCardProps) {
             <div>
               <Image
                 className={PostCardThumbnailClassNames}
-                layout={"responsive"}
                 width={0}
                 height={0}
                 sizes={"100vw"}
