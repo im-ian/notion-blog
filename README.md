@@ -1,5 +1,5 @@
 # Notion Blog Project
-[![DEMO](https://img.shields.io/badge/BLOG%20DEMO-2d55ff)](https://chipmunk-blog-demo.vercel.app/)
+[![DEMO](https://img.shields.io/badge/BLOG%20DEMO-2d55ff)](https://chipmunk-blog.vercel.app/)
 
 ## Concept
   - ✏️ Write your posts using Notion
