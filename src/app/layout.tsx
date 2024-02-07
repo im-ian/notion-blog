@@ -1,3 +1,5 @@
+import Script from "next/script";
+
 import { Header } from "@/components/Pages/Header";
 import NotionPageProvider from "@/contexts/NotionContext";
 import { themeBackground } from "@/css/theme.css";
@@ -9,6 +11,7 @@ import "../css/prism-theme.css";
 import "react-notion-x/src/styles.css";
 
 export const metadata = getSiteConfig("meta");
+export const { ga } = getSiteConfig("site");
 
 export default async function RootLayout({
   children,
@@ -32,6 +35,21 @@ export default async function RootLayout({
           }
           rel={"stylesheet"}
         />
+        {ga && (
+          <>
+            <Script
+              async
+              src={`https://www.googletagmanager.com/gtag/js?id=${ga}`}
+            />
+            <Script>{`
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              gtag('js', new Date());
+
+              gtag('config', '${ga}');
+            `}</Script>
+          </>
+        )}
       </head>
       <body className={themeBackground}>
         <NotionPageProvider pages={pages}>

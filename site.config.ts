@@ -23,6 +23,8 @@ const CONFIG: Config = {
     postRevalidate: 60 * 60, // 1 hour
     // 검색 단축키 사용 여부
     useSearchShortcut: true,
+    // Google Analytics Tracking ID
+    ga: process.env.GA_ID,
   },
 };
 

@@ -13,6 +13,8 @@ type SiteConfig = {
   };
   postRevalidate: false | number;
   useSearchShortcut: boolean;
+
+  ga: string | undefined;
 };
 
 export type Config = {
