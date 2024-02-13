@@ -31,30 +31,3 @@ export const flexItemClassName = style({
   },
   flex: flexVariant,
 });
-
-export const CardClassName = style([
-  sprinkles({
-    paddingTop: {
-      mobile: "none",
-      tablet: "medium",
-    },
-    paddingX: {
-      mobile: "medium",
-      tablet: "medium",
-    },
-    marginBottom: {
-      mobile: "xlarge",
-      tablet: "xlarge",
-    },
-
-    // transition: "transform .3s ease",
-    transitionProperty: "all",
-    transitionDuration: "normal",
-    transitionTimingFunction: "ease",
-  }),
-  {
-    ":hover": {
-      transform: "scale(1.01)",
-    },
-  },
-]);

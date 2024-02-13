@@ -3,8 +3,9 @@
 import { assignInlineVars } from "@vanilla-extract/dynamic";
 import { HTMLAttributes, PropsWithChildren } from "react";
 
+import { PostCardClassName } from "../Posts/index.css";
+
 import {
-  CardClassName,
   FlexClassName,
   LayoutClassName,
   alignItemsVariant,
@@ -79,5 +80,5 @@ export function FlexItem({
 }
 
 export function Card({ className, children }: HTMLAttributes<HTMLDivElement>) {
-  return <Box className={cx([CardClassName, className])}>{children}</Box>;
+  return <Box className={cx([PostCardClassName, className])}>{children}</Box>;
 }
