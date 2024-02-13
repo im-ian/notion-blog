@@ -70,6 +70,11 @@ async function PostPage({ params }: PageProps) {
               {title.value}
             </Heading>
           )}
+          {date && (
+            <Box sprinkle={{ marginY: "medium" }}>
+              <Date date={date.value || ""} />
+            </Box>
+          )}
           <Box sprinkle={{ marginY: "medium" }}>
             <Flex>
               {tagList.map((tag) => (
@@ -84,11 +89,6 @@ async function PostPage({ params }: PageProps) {
                 </Link>
               ))}
             </Flex>
-            {date && (
-              <Box sprinkle={{ marginY: "medium" }}>
-                <Date date={date.value || ""} />
-              </Box>
-            )}
           </Box>
         </Box>
         {page && (
