@@ -89,6 +89,7 @@ export default forwardRef<CommandPaletteHandle>(
               id: attributes.slug.value || "",
               icon: () => DocumentIcon,
               children: attributes.title.value,
+              showType: false,
               href: Routes.Post(attributes.slug.value || ""),
             })),
         },
