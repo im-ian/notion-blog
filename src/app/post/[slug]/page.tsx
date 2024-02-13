@@ -65,7 +65,11 @@ async function PostPage({ params }: PageProps) {
             paddingX: "large",
           }}
         >
-          {title && <Heading>{title.value}</Heading>}
+          {title && (
+            <Heading size={{ mobile: "3x", tablet: "4x" }}>
+              {title.value}
+            </Heading>
+          )}
           <Box sprinkle={{ marginY: "medium" }}>
             <Flex>
               {tagList.map((tag) => (
