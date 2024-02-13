@@ -2,12 +2,21 @@
 import { useParams } from "next/navigation";
 import { forwardRef, useEffect, useImperativeHandle, useState } from "react";
 import Command, { filterItems, getItemIndex } from "react-cmdk";
+import { FileText, GitHub, Home, Tag } from "react-feather";
 
 import { Routes } from "@/constants";
 import { useNotionContext } from "@/contexts/NotionContext";
+import { vars } from "@/css/vars.css";
 import { getSiteConfig } from "@/utils/config";
 
 import "react-cmdk/dist/cmdk.css";
+
+const iconStyle = {
+  size: 20,
+  color: vars.color["gray-400"],
+};
+
+const DocumentIcon = <FileText {...iconStyle} />;
 
 export interface CommandPaletteHandle {
   open(): void;
@@ -54,13 +63,19 @@ export default forwardRef<CommandPaletteHandle>(
             {
               id: "home",
               children: "홈",
-              icon: "HomeIcon",
+              icon: () => <Home {...iconStyle} />,
+              href: Routes.Home(),
+            },
+            {
+              id: "github",
+              children: "Github",
+              icon: () => <GitHub {...iconStyle} />,
               href: Routes.Home(),
             },
             {
               id: "tags",
               children: "태그",
-              icon: "TagIcon",
+              icon: () => <Tag {...iconStyle} />,
               href: Routes.Tag(),
             },
           ],
@@ -72,7 +87,7 @@ export default forwardRef<CommandPaletteHandle>(
             .filter(({ attributes }) => attributes.slug.value !== params?.slug)
             .map(({ attributes }) => ({
               id: attributes.slug.value || "",
-              icon: "DocumentIcon",
+              icon: () => DocumentIcon,
               children: attributes.title.value,
               href: Routes.Post(attributes.slug.value || ""),
             })),
