@@ -6,7 +6,14 @@ async function Home() {
   const { pages } = await getPosts();
 
   return (
-    <Layout sprinkle={{ padding: "medium" }}>
+    <Layout
+      sprinkle={{
+        paddingX: {
+          mobile: "medium",
+          tablet: "none",
+        },
+      }}
+    >
       {pages.map((page) => {
         return <PostCard key={page.value.attributes.slug.value} page={page} />;
       })}

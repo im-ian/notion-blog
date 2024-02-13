@@ -12,7 +12,14 @@ async function TagPage({ params }: PageProps) {
   const { pages } = await getPostsByTag(params.tag);
 
   return (
-    <Layout sprinkle={{ padding: "medium" }}>
+    <Layout
+      sprinkle={{
+        paddingX: {
+          mobile: "medium",
+          tablet: "none",
+        },
+      }}
+    >
       {pages.map((page) => {
         return <PostCard key={page.value.attributes.slug.value} page={page} />;
       })}

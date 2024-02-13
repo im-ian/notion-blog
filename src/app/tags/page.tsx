@@ -18,7 +18,14 @@ async function TagsPage() {
   const tags = await getTags();
 
   return (
-    <Layout sprinkle={{ paddingTop: "large", paddingX: "large" }}>
+    <Layout
+      sprinkle={{
+        paddingX: {
+          mobile: "medium",
+          tablet: "none",
+        },
+      }}
+    >
       {tags.map(({ name, postCount }, index) => {
         return (
           <Link key={index} href={Routes.Tag(name)}>
