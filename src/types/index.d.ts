@@ -1,6 +1,7 @@
 import { Metadata } from "next";
 
 type Profile = {
+  repo: string | undefined;
   github: string | undefined;
 };
 

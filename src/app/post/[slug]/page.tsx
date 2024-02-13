@@ -1,6 +1,7 @@
 import { Metadata } from "next";
 import Link from "next/link";
 
+import Comment from "@/components/Comment";
 import { Box, Flex, Layout } from "@/components/Layouts";
 import { NotionPage } from "@/components/NotionRenderer";
 import ScrollProgressBar from "@/components/Pages/ScrollProgressBar";
@@ -96,6 +97,9 @@ async function PostPage({ params }: PageProps) {
             <NotionPage recordMap={renderBlock} />
           </Box>
         )}
+        <Box sprinkle={{ paddingTop: "xlarge" }}>
+          <Comment />
+        </Box>
       </Layout>
     </>
   );
