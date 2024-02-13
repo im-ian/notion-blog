@@ -23,7 +23,8 @@
     "react-cmdk": "^1.3.9",
     "react-dom": "^18",
     "react-feather": "^2.0.10",
-    "react-notion-x": "^6.16.0"
+    "react-notion-x": "^6.16.0",
+    "react-spinners": "^0.13.8"
   },
   "devDependencies": {
     "@types/node": "^20",
