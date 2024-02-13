@@ -39,7 +39,9 @@ export function PostCard({ page }: PostCardProps) {
               />
             </div>
           )}
-          <Heading size={{ mobile: "1x", tablet: "2x" }}>{title.value}</Heading>
+          <Heading size={{ mobile: "1.5x", tablet: "2x" }}>
+            {title.value}
+          </Heading>
           <Box sprinkle={{ marginY: "medium" }}>
             <Text>{summary.value}</Text>
           </Box>

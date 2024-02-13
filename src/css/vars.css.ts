@@ -60,7 +60,9 @@ export const vars = createGlobalTheme(":root", {
   },
   fontSize: {
     "0x": "12px",
+    "0.5x": "14px",
     "1x": "16px",
+    "1.5x": "18px",
     "2x": "20px",
     "3x": "24px",
     "4x": "32px",
