@@ -11,6 +11,8 @@ import { getPost, getPosts } from "@/services/notion";
 import { getOptionColor } from "@/utils/color";
 import { getBlockById } from "@/utils/notion";
 
+export const dynamic = "auto";
+
 type PageProps = {
   params: {
     slug: string;
