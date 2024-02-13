@@ -29,7 +29,12 @@ export function Header() {
         <Layout>
           <Flex>
             <FlexItem flex={"1"}>
-              <Heading size={"2x"}>
+              <Heading
+                size={{
+                  mobile: "1x",
+                  tablet: "2x",
+                }}
+              >
                 <a href={"/"}>{title}</a>
               </Heading>
             </FlexItem>
