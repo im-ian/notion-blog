@@ -1,10 +1,11 @@
 # Notion Blog Project
 [![DEMO](https://img.shields.io/badge/BLOG%20DEMO-2d55ff)](https://chipmunk-blog.vercel.app/)
 
-## Concept
   - ✏️ Write your posts using Notion
   - ⚙️ Easily configure site
   - 🎨 Easily customize theme (with [vanilla-extract](https://github.com/vanilla-extract-css/vanilla-extract))
+
+<br />
 
 ## Getting Start
   1. Clone this repository and customize your setting on `site.config.js`
@@ -16,4 +17,8 @@
   6. Add your `env` values in Vercel `Environment Variables`
      - ![image](https://github.com/im-ian/notion-blog/assets/38205068/b2d4959e-a6d4-4bd5-b56f-cce38ce3ccc4)
   7. Deploy your repository on [Vercel](https://vercel.com/)!
-     
+
+<br />
+
+## Known Issue
+  1. If you don't see your posts after the first build, please rebuild.
