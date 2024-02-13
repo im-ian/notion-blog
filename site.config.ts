@@ -26,6 +26,11 @@ const CONFIG: Config = {
     // Google Analytics Tracking ID
     ga: process.env.GA_ID,
   },
+  sentry: {
+    // Sentry Auth Token
+    authToken: process.env.SENTRY_AUTH_TOKEN,
+    dsn: process.env.SENTRY_DSN,
+  },
 };
 
 export default CONFIG;

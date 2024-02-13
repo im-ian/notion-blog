@@ -1,7 +1,6 @@
 /** @type {import('next').NextConfig} */
+const { withSentryConfig } = require("@sentry/nextjs");
 const { createVanillaExtractPlugin } = require("@vanilla-extract/next-plugin");
-
-const withVanillaExtract = createVanillaExtractPlugin();
 
 const nextConfig = {
   images: {
@@ -13,4 +12,29 @@ const nextConfig = {
   },
 };
 
-module.exports = withVanillaExtract(nextConfig);
+const withVanillaExtract = createVanillaExtractPlugin();
+
+const configs = [
+  // ve config
+  [withVanillaExtract],
+  // sentry config
+  [
+    withSentryConfig,
+    {
+      silent: true,
+    },
+    {
+      widenClientFileUpload: true,
+      transpileClientSDK: true,
+      tunnelRoute: "/monitoring",
+      hideSourceMaps: true,
+      disableLogger: true,
+      automaticVercelMonitors: true,
+    },
+  ],
+];
+
+module.exports = configs.reduce(
+  (acc, [fn, ...args]) => fn(acc, ...args),
+  nextConfig,
+);
