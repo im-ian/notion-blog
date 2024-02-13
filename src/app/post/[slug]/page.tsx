@@ -11,7 +11,7 @@ import { getPost, getPosts } from "@/services/notion";
 import { getOptionColor } from "@/utils/color";
 import { getBlockById } from "@/utils/notion";
 
-export const dynamic = "auto";
+export const dynamic = "force-static";
 
 type PageProps = {
   params: {
