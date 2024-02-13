@@ -1,7 +1,9 @@
 "use client";
 
+import Link from "next/link";
 import { useRef } from "react";
 import {
+  GitHub,
   // Menu,
   Search,
 } from "react-feather";
@@ -16,6 +18,7 @@ import { sprinkles } from "@/css/sprinkles.css";
 import { getSiteConfig } from "@/utils/config";
 
 const { title } = getSiteConfig("site");
+const { github } = getSiteConfig("profile");
 
 export function Header() {
   const commandRef = useRef<CommandPaletteHandle>(null);
@@ -36,6 +39,13 @@ export function Header() {
                   textAlign: "right",
                 })}
               >
+                {github && (
+                  <Box className={HeaderIconClassName}>
+                    <Link href={github} target={"_blank"}>
+                      <GitHub size={24} />
+                    </Link>
+                  </Box>
+                )}
                 <Box
                   className={HeaderIconClassName}
                   onClick={() => {

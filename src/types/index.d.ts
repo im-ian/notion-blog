@@ -1,5 +1,9 @@
 import { Metadata } from "next";
 
+type Profile = {
+  github: string | undefined;
+};
+
 type NotionConfig = {
   pageId: string;
   viewId: string;
@@ -23,6 +27,7 @@ type SentryConfig = {
 };
 
 export type Config = {
+  profile: Profile;
   notion: NotionConfig;
   meta: Metadata;
   site: SiteConfig;

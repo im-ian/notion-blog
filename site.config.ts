@@ -1,6 +1,11 @@
 import type { Config } from "@/types";
 
 const CONFIG: Config = {
+  // Profile
+  profile: {
+    github: "https://github.com/im-ian",
+  },
+  // Notion
   notion: {
     pageId: process.env.NOTION_PAGE_ID || "",
     viewId: process.env.NOTION_VIEW_ID || "",
