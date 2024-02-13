@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@sentry/nextjs": "^7.100.1",
     "@vanilla-extract/css": "^1.14.0",
     "@vanilla-extract/dynamic": "^2.1.0",
     "@vanilla-extract/next-plugin": "^2.3.2",

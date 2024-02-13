@@ -17,8 +17,14 @@ type SiteConfig = {
   ga: string | undefined;
 };
 
+type SentryConfig = {
+  dsn: string | undefined;
+  authToken: string | undefined;
+};
+
 export type Config = {
   notion: NotionConfig;
   meta: Metadata;
   site: SiteConfig;
+  sentry: SentryConfig;
 };
