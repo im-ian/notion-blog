@@ -1,5 +1,3 @@
-import { revalidateTag } from "next/cache";
-
 import { request } from ".";
 
 import { CacheKey } from "@/constants";
@@ -18,7 +16,6 @@ export async function getPosts(): Promise<Pages> {
     .catch((err) => {
       console.log(err);
 
-      revalidateTag(CacheKey.Posts);
       return {
         schema: {},
         pages: [],
@@ -36,7 +33,6 @@ export async function getPost<T>(slug: T): Promise<Page> {
     .catch((err) => {
       console.log(err);
 
-      revalidateTag(CacheKey.Posts);
       return {
         schema: {},
         page: {},
@@ -52,7 +48,6 @@ export async function getTags(): Promise<PageTag[]> {
     .catch((err) => {
       console.log(err);
 
-      revalidateTag(CacheKey.Tags);
       return [];
     });
 }
@@ -65,7 +60,6 @@ export async function getPostsByTag(tag: string): Promise<Pages> {
     .catch((err) => {
       console.log(err);
 
-      revalidateTag(CacheKey.Posts);
       return {
         schema: {},
         pages: [],
