@@ -10,7 +10,7 @@ const CONFIG: Config = {
   },
   // Notion
   notion: {
-    pageId: process.env.NOTION_PAGE_ID || "",
+    blogPageId: process.env.NOTION_BLOG_PAGE_ID || "",
     viewId: process.env.NOTION_VIEW_ID || "",
   },
   // Metadata

@@ -8,15 +8,15 @@ import { Heading, Text, Date as DateText } from "../Texts";
 import { PostCardThumbnailClassNames } from "./index.css";
 
 import { Routes } from "@/constants";
-import { Page } from "@/types/notion";
+import { Post } from "@/types/notion";
 import { getOptionColor } from "@/utils/color";
 
 interface PostCardProps {
-  page: Page["page"];
+  block: Post["block"];
 }
 
-export function PostCard({ page }: PostCardProps) {
-  const { attributes } = page.value;
+export function PostCard({ block }: PostCardProps) {
+  const { attributes } = block.value;
 
   const { thumbnail, title, slug, summary, tags, date } = attributes;
 

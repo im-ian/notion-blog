@@ -3,7 +3,7 @@ import { PostCard } from "@/components/Posts";
 import { getPosts } from "@/services/notion";
 
 async function Home() {
-  const { pages } = await getPosts();
+  const { blocks } = await getPosts();
 
   return (
     <Layout
@@ -14,8 +14,10 @@ async function Home() {
         },
       }}
     >
-      {pages.map((page) => {
-        return <PostCard key={page.value.attributes.slug.value} page={page} />;
+      {blocks.map((block) => {
+        return (
+          <PostCard key={block.value.attributes.slug.value} block={block} />
+        );
       })}
     </Layout>
   );

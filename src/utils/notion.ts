@@ -8,7 +8,7 @@ import {
 } from "notion-types";
 import { getDateValue, getTextContent } from "notion-utils";
 
-import { PageAttribute, Pages } from "@/types/notion";
+import { PostAttribute, Posts } from "@/types/notion";
 
 const api = new NotionAPI();
 
@@ -16,22 +16,22 @@ export async function getBlockById(blockId: string) {
   return await api.getPage(blockId, {});
 }
 
-export async function getPages(pageId: string) {
-  const pageContent = await api.getPage(pageId, {});
+export async function getPosts(postId: string) {
+  const pageContent = await api.getPage(postId, {});
 
   if (!pageContent) return null;
 
   const schema = getSchema(pageContent.collection);
-  const pageList = getPageList(pageContent.block);
+  const pageList = getPostList(pageContent.block);
 
-  const pages: Pages = {
+  const posts: Posts = {
     schema,
-    pages: pageList
+    blocks: pageList
       .map((page) => ({
         role: page.role,
         value: {
           ...page.value,
-          attributes: getPageAttribute(page.value, schema),
+          attributes: getPostAttribute(page.value, schema),
         },
       }))
       .filter(
@@ -47,14 +47,14 @@ export async function getPages(pageId: string) {
       }),
   };
 
-  return pages;
+  return posts;
 }
 
 function getFirstId(block: Record<string, unknown>) {
   return Object.keys(block)[0];
 }
 
-export function getPageIds({ collection_query }: ExtendedRecordMap) {
+export function getBlockIds({ collection_query }: ExtendedRecordMap) {
   const query = getFirstId(collection_query);
   if (!query) return [];
 
@@ -68,18 +68,18 @@ export function getSchema(collection: CollectionMap) {
   return Object.values(collection)[0]?.value?.schema;
 }
 
-export function getPageList(block: BlockMap) {
+export function getPostList(block: BlockMap) {
   const blockIds = Object.keys(block);
   const blocks = blockIds.map((blockId) => block[blockId]);
 
   return blocks.filter((block) => block.value.type === "page");
 }
 
-export function getPageAttribute(
+export function getPostAttribute(
   block: Block,
   schema: CollectionPropertySchemaMap,
-): PageAttribute {
-  const result: PageAttribute = {};
+): PostAttribute {
+  const result: PostAttribute = {};
 
   for (const data of Object.entries(schema)) {
     if (!data) continue;

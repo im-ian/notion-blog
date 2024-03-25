@@ -6,7 +6,7 @@ import {
   SelectOption,
 } from "notion-types";
 
-export type PageAttribute = Record<
+export type PostAttribute = Record<
   string,
   {
     type: BlockType;
@@ -16,27 +16,27 @@ export type PageAttribute = Record<
   }
 >;
 
-export type Pages = {
+export type Posts = {
   schema: CollectionPropertySchemaMap;
-  pages: {
+  blocks: {
     role: Role;
     value: Block & {
-      attributes: PageAttribute;
+      attributes: PostAttribute;
     };
   }[];
 };
 
-export type Page = {
+export type Post = {
   schema: CollectionPropertySchemaMap;
-  page: {
+  block: {
     role: Role;
     value: Block & {
-      attributes: PageAttribute;
+      attributes: PostAttribute;
     };
   };
 };
 
-export type PageTag = {
+export type PostTag = {
   name: string;
   postCount: number;
   color?: string;

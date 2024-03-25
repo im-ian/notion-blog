@@ -1,31 +1,31 @@
 import { NextRequest } from "next/server";
 
-import { Page } from "@/types/notion";
+import { Post } from "@/types/notion";
 import { getSiteConfig } from "@/utils/config";
-import { getPages } from "@/utils/notion";
+import { getPosts } from "@/utils/notion";
 
-const { pageId } = getSiteConfig("notion");
+const { blogPageId } = getSiteConfig("notion");
 
 export async function GET(request: NextRequest) {
   const { searchParams } = new URL(request.url);
   const slug = searchParams.get("slug");
 
-  const pages = await getPages(pageId);
+  const posts = await getPosts(blogPageId);
 
-  if (!pages) return new Response(null, { status: 404 });
+  if (!posts) return new Response(null, { status: 404 });
 
-  // if has slug, return single page
-  const filteredPages = pages.pages.find(
-    (page) => page.value.attributes.slug.value === slug,
+  // if has slug, return single post
+  const filteredPosts = posts.blocks.find(
+    (block) => block.value.attributes.slug.value === slug,
   );
 
-  if (!filteredPages) return new Response(null, { status: 404 });
+  if (!filteredPosts) return new Response(null, { status: 404 });
 
   return new Response(
     JSON.stringify({
-      schema: pages.schema,
-      page: filteredPages,
-    } satisfies Page),
+      schema: posts.schema,
+      block: filteredPosts,
+    } satisfies Post),
     {
       status: 200,
     },

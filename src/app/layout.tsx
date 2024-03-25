@@ -1,7 +1,7 @@
 import Script from "next/script";
 
 import { Header } from "@/components/Pages/Header";
-import NotionPageProvider from "@/contexts/NotionContext";
+import ArticleProvider from "@/contexts/Article";
 import { themeBackground } from "@/css/theme.css";
 import { getPosts } from "@/services/notion";
 import { getSiteConfig } from "@/utils/config";
@@ -18,7 +18,7 @@ export default async function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const pages = await getPosts();
+  const posts = await getPosts();
 
   return (
     <html lang={"ko"}>
@@ -52,9 +52,9 @@ export default async function RootLayout({
         )}
       </head>
       <body className={themeBackground}>
-        <NotionPageProvider pages={pages}>
+        <ArticleProvider posts={posts}>
           <Header />
-        </NotionPageProvider>
+        </ArticleProvider>
         {children}
       </body>
     </html>
