@@ -2,10 +2,10 @@ import { Posts } from "@/types/notion";
 import { getSiteConfig } from "@/utils/config";
 import { getPosts } from "@/utils/notion";
 
-const { pageId } = getSiteConfig("notion");
+const { blogPageId } = getSiteConfig("notion");
 
 export async function GET() {
-  const posts = await getPosts(pageId);
+  const posts = await getPosts(blogPageId);
 
   if (!posts) return new Response(null, { status: 404 });
 

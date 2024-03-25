@@ -4,19 +4,19 @@ import { Post } from "@/types/notion";
 import { getSiteConfig } from "@/utils/config";
 import { getPosts } from "@/utils/notion";
 
-const { pageId } = getSiteConfig("notion");
+const { blogPageId } = getSiteConfig("notion");
 
 export async function GET(request: NextRequest) {
   const { searchParams } = new URL(request.url);
   const slug = searchParams.get("slug");
 
-  const posts = await getPosts(pageId);
+  const posts = await getPosts(blogPageId);
 
   if (!posts) return new Response(null, { status: 404 });
 
-  // if has slug, return single page
+  // if has slug, return single post
   const filteredPosts = posts.blocks.find(
-    (page) => page.value.attributes.slug.value === slug,
+    (block) => block.value.attributes.slug.value === slug,
   );
 
   if (!filteredPosts) return new Response(null, { status: 404 });

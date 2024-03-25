@@ -4,13 +4,13 @@ import { Posts } from "@/types/notion";
 import { getSiteConfig } from "@/utils/config";
 import { getPosts } from "@/utils/notion";
 
-const { pageId } = getSiteConfig("notion");
+const { blogPageId } = getSiteConfig("notion");
 
 export async function GET(request: NextRequest) {
   const { searchParams } = new URL(request.url);
   const tag = searchParams.get("tag");
 
-  const posts = await getPosts(pageId);
+  const posts = await getPosts(blogPageId);
 
   if (!tag) return new Response(null, { status: 404 });
   if (!posts) return new Response(null, { status: 404 });

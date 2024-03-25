@@ -6,7 +6,7 @@ type Profile = {
 };
 
 type NotionConfig = {
-  pageId: string;
+  blogPageId: string;
   viewId: string;
 };
 
