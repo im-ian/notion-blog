@@ -1,7 +1,7 @@
 import Script from "next/script";
 
 import { Header } from "@/components/Pages/Header";
-import NotionPageProvider from "@/contexts/NotionContext";
+import ArticleProvider from "@/contexts/Article";
 import { themeBackground } from "@/css/theme.css";
 import { getPosts } from "@/services/notion";
 import { getSiteConfig } from "@/utils/config";
@@ -52,9 +52,9 @@ export default async function RootLayout({
         )}
       </head>
       <body className={themeBackground}>
-        <NotionPageProvider posts={posts}>
+        <ArticleProvider posts={posts}>
           <Header />
-        </NotionPageProvider>
+        </ArticleProvider>
         {children}
       </body>
     </html>
