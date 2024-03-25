@@ -29,17 +29,17 @@ export async function getPosts(pageId: string) {
   const posts: Posts = {
     schema,
     blocks: pageList
-      .map((page) => ({
-        role: page.role,
+      .map((block) => ({
+        role: block.role,
         value: {
-          ...page.value,
-          attributes: getPostAttribute(page.value, schema),
+          ...block.value,
+          attributes: getPostAttribute(block.value, schema),
         },
       }))
       .filter(
-        (page) =>
-          page.value.attributes.slug.value &&
-          page.value.attributes.status.value === "Public",
+        (block) =>
+          block.value.attributes.slug.value &&
+          block.value.attributes.status.value === "Public",
       )
       .sort((a, b) => {
         const aDate = +new Date(a?.value?.attributes?.date?.value || 0);
