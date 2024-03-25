@@ -16,8 +16,8 @@ export async function getBlockById(blockId: string) {
   return await api.getPage(blockId, {});
 }
 
-export async function getPosts(pageId: string) {
-  const pageContent = await api.getPage(pageId, {});
+export async function getPosts(postId: string) {
+  const pageContent = await api.getPage(postId, {});
 
   if (!pageContent) return null;
 

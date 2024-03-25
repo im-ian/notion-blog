@@ -15,8 +15,8 @@ export async function GET(request: NextRequest) {
   if (!tag) return new Response(null, { status: 404 });
   if (!posts) return new Response(null, { status: 404 });
 
-  const filteredPosts = posts.blocks.filter((page) => {
-    const tags = page.value.attributes.tags?.value?.split(",") || [];
+  const filteredPosts = posts.blocks.filter((block) => {
+    const tags = block.value.attributes.tags?.value?.split(",") || [];
     return tags.includes(tag);
   });
 
