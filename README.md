@@ -8,7 +8,7 @@
 <br />
 
 ## Getting Start
-  1. Clone this repository and customize your setting on `site.config.js`
+  1. Clone this repository and customize your setting on `site.config.ts`
   2. If you working development environment `.env.example` to `.env`
   3. Copy [this Notion template](https://imian.notion.site/7cdd2b347b734b7caeb754d8701a4b57?v=c9d11f25b61b4d249d45f3b4dde4c2f2&pvs=4)
   4. Input your `NOTION_BLOG_PAGE_ID` and `NOTION_VIEW_ID`
