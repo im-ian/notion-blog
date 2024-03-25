@@ -20,7 +20,7 @@ type PageProps = {
 
 export async function generateStaticParams() {
   const { blocks } = await getPosts();
-  if (!blocks.length) return [];
+  if (!blocks?.length) return [];
 
   return blocks
     .map((block) => {
