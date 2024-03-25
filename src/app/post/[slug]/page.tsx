@@ -10,7 +10,7 @@ import { Date, Heading } from "@/components/Texts";
 import { Routes } from "@/constants";
 import { getPost, getPosts } from "@/services/notion";
 import { getOptionColor } from "@/utils/color";
-import { getBlockById } from "@/utils/notion";
+import { getBlockByPageId } from "@/utils/notion";
 
 type PageProps = {
   params: {
@@ -44,7 +44,7 @@ async function PostPage({ params }: PageProps) {
   if (!attributes) return null;
 
   const { title, tags, date } = attributes;
-  const renderBlock = await getBlockById(block.value.id);
+  const renderBlock = await getBlockByPageId(block.value.id);
 
   const tagList = tags.value?.split(",") || [];
 

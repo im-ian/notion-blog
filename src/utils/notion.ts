@@ -12,17 +12,19 @@ import { PostAttribute, Posts } from "@/types/notion";
 
 const api = new NotionAPI();
 
-export async function getBlockById(blockId: string) {
-  return await api.getPage(blockId, {});
+export async function getBlockByPageId(pageId: string) {
+  return await api.getPage(pageId, {});
 }
 
-export async function getPosts(postId: string) {
-  const pageContent = await api.getPage(postId, {});
+export async function getPosts(pageId: string) {
+  const pageContent = await api.getPage(pageId, {});
 
   if (!pageContent) return null;
 
   const schema = getSchema(pageContent.collection);
   const pageList = getPostList(pageContent.block);
+
+  console.log(schema, pageList);
 
   const posts: Posts = {
     schema,
