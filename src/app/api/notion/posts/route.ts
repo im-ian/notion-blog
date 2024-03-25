@@ -1,15 +1,15 @@
-import { Pages } from "@/types/notion";
+import { Posts } from "@/types/notion";
 import { getSiteConfig } from "@/utils/config";
-import { getPages } from "@/utils/notion";
+import { getPosts } from "@/utils/notion";
 
 const { pageId } = getSiteConfig("notion");
 
 export async function GET() {
-  const pages = await getPages(pageId);
+  const posts = await getPosts(pageId);
 
-  if (!pages) return new Response(null, { status: 404 });
+  if (!posts) return new Response(null, { status: 404 });
 
-  return new Response(JSON.stringify(pages satisfies Pages), {
+  return new Response(JSON.stringify(posts satisfies Posts), {
     status: 200,
   });
 }

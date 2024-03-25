@@ -18,7 +18,7 @@ export default async function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const pages = await getPosts();
+  const posts = await getPosts();
 
   return (
     <html lang={"ko"}>
@@ -52,7 +52,7 @@ export default async function RootLayout({
         )}
       </head>
       <body className={themeBackground}>
-        <NotionPageProvider pages={pages}>
+        <NotionPageProvider posts={posts}>
           <Header />
         </NotionPageProvider>
         {children}

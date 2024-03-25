@@ -2,14 +2,14 @@
 
 import { PropsWithChildren, createContext, useContext } from "react";
 
-import { Pages } from "@/types/notion";
+import { Posts } from "@/types/notion";
 
 interface PageContextProviderProps {
-  pages: Pages | null;
+  posts: Posts | null;
 }
 
 interface PageContextProps {
-  data: Pages | null;
+  data: Posts | null;
 }
 
 const NotionContext = createContext<PageContextProps>({
@@ -26,10 +26,10 @@ export const useNotionContext = () => {
 
 export default function NotionProvider({
   children,
-  pages,
+  posts,
 }: PropsWithChildren<PageContextProviderProps>) {
   return (
-    <NotionContext.Provider value={{ data: pages }}>
+    <NotionContext.Provider value={{ data: posts }}>
       {children}
     </NotionContext.Provider>
   );

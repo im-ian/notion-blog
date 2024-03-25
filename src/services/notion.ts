@@ -3,12 +3,12 @@ import { revalidateTag } from "next/cache";
 import { request } from ".";
 
 import { CacheKey } from "@/constants";
-import { Page, PageTag, Pages } from "@/types/notion";
+import { Post, PostTag, Posts } from "@/types/notion";
 import { getSiteConfig } from "@/utils/config";
 
 const { postRevalidate } = getSiteConfig("site");
 
-export async function getPosts(): Promise<Pages> {
+export async function getPosts(): Promise<Posts> {
   const apiPath = `/api/notion/posts`;
 
   return await request(apiPath, {
@@ -21,12 +21,12 @@ export async function getPosts(): Promise<Pages> {
       revalidateTag(CacheKey.Posts);
       return {
         schema: {},
-        pages: [],
-      } as Pages;
+        blocks: [],
+      } as Posts;
     });
 }
 
-export async function getPost<T>(slug: T): Promise<Page> {
+export async function getPost<T>(slug: T): Promise<Post> {
   const apiPath = `/api/notion/posts/slug?slug=${slug}`;
 
   return await request(apiPath, {
@@ -39,12 +39,12 @@ export async function getPost<T>(slug: T): Promise<Page> {
       revalidateTag(CacheKey.Posts);
       return {
         schema: {},
-        page: {},
-      } as Page;
+        block: {},
+      } as Post;
     });
 }
 
-export async function getTags(): Promise<PageTag[]> {
+export async function getTags(): Promise<PostTag[]> {
   return await request(`/api/notion/posts/tags`, {
     next: { revalidate: postRevalidate, tags: [CacheKey.Tags] },
   })
@@ -57,7 +57,7 @@ export async function getTags(): Promise<PageTag[]> {
     });
 }
 
-export async function getPostsByTag(tag: string): Promise<Pages> {
+export async function getPostsByTag(tag: string): Promise<Posts> {
   return await request(`/api/notion/posts/tag?tag=${tag}`, {
     next: { revalidate: postRevalidate, tags: [CacheKey.Posts] },
   })
@@ -68,7 +68,7 @@ export async function getPostsByTag(tag: string): Promise<Pages> {
       revalidateTag(CacheKey.Posts);
       return {
         schema: {},
-        pages: [],
-      } as Pages;
+        blocks: [],
+      } as Posts;
     });
 }

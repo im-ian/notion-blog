@@ -9,7 +9,7 @@ type PageProps = {
 };
 
 async function TagPage({ params }: PageProps) {
-  const { pages } = await getPostsByTag(params.tag);
+  const { blocks } = await getPostsByTag(params.tag);
 
   return (
     <Layout
@@ -20,8 +20,10 @@ async function TagPage({ params }: PageProps) {
         },
       }}
     >
-      {pages.map((page) => {
-        return <PostCard key={page.value.attributes.slug.value} page={page} />;
+      {blocks.map((block) => {
+        return (
+          <PostCard key={block.value.attributes.slug.value} block={block} />
+        );
       })}
     </Layout>
   );

@@ -1,18 +1,18 @@
 import { getPosts } from "@/services/notion";
-import { PageTag } from "@/types/notion";
+import { PostTag } from "@/types/notion";
 import { getOptionColor } from "@/utils/color";
-import { getPageAttribute } from "@/utils/notion";
+import { getPostAttribute } from "@/utils/notion";
 
 export async function GET() {
-  const { schema, pages } = await getPosts();
+  const { schema, blocks } = await getPosts();
 
-  if (!pages) return new Response(null, { status: 404 });
+  if (!blocks) return new Response(null, { status: 404 });
 
   const tagSet = new Set<string>();
-  const result: PageTag[] = [];
+  const result: PostTag[] = [];
 
-  pages.forEach((page) => {
-    const properties = getPageAttribute(page.value, schema);
+  blocks.forEach((page) => {
+    const properties = getPostAttribute(page.value, schema);
 
     const tags = properties.tags?.value?.split(",") || [];
 

@@ -19,32 +19,32 @@ type PageProps = {
 };
 
 export async function generateStaticParams() {
-  const { pages } = await getPosts();
-  if (!pages.length) return [];
+  const { blocks } = await getPosts();
+  if (!blocks.length) return [];
 
-  return pages
-    .map((page) => {
-      return { slug: page.value.attributes.slug.value || "" };
+  return blocks
+    .map((block) => {
+      return { slug: block.value.attributes.slug.value || "" };
     })
-    .filter((page) => page.slug);
+    .filter((block) => block.slug);
 }
 
 export async function generateMetadata({ params }: PageProps) {
-  const { page } = await getPost(params.slug);
-  const { attributes } = page.value;
+  const { block } = await getPost(params.slug);
+  const { attributes } = block.value;
   return {
     title: attributes.title.value,
   } as Metadata;
 }
 
 async function PostPage({ params }: PageProps) {
-  const { page } = await getPost(params.slug);
-  const { attributes } = page.value;
+  const { block } = await getPost(params.slug);
+  const { attributes } = block.value;
 
   if (!attributes) return null;
 
   const { title, tags, date } = attributes;
-  const renderBlock = await getBlockById(page.value.id);
+  const renderBlock = await getBlockById(block.value.id);
 
   const tagList = tags.value?.split(",") || [];
 
@@ -92,7 +92,7 @@ async function PostPage({ params }: PageProps) {
             </Flex>
           </Box>
         </Box>
-        {page && (
+        {block && (
           <Box sprinkle={{ paddingTop: "large" }}>
             <NotionPage recordMap={renderBlock} />
           </Box>

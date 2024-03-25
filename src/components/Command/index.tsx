@@ -28,7 +28,7 @@ export default forwardRef<CommandPaletteHandle>(
     const params = useParams();
 
     const { data } = useNotionContext();
-    const pages = data?.pages.map((page) => page.value) || [];
+    const posts = data?.blocks.map((page) => page.value) || [];
 
     const [isCommandOpen, setIsCommandOpen] = useState(false);
     const [searchKeyword, setSearchKeyword] = useState("");
@@ -81,9 +81,9 @@ export default forwardRef<CommandPaletteHandle>(
           ],
         },
         {
-          heading: `다른 포스트 (${pages.length - 1})`,
+          heading: `다른 포스트 (${posts.length - 1})`,
           id: "posts",
-          items: pages
+          items: posts
             .filter(({ attributes }) => attributes.slug.value !== params?.slug)
             .map(({ attributes }) => ({
               id: attributes.slug.value || "",
