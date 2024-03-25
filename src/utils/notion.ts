@@ -24,8 +24,6 @@ export async function getPosts(pageId: string) {
   const schema = getSchema(pageContent.collection);
   const pageList = getPostList(pageContent.block);
 
-  console.log(schema, pageList);
-
   const posts: Posts = {
     schema,
     blocks: pageList
