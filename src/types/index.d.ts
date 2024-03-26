@@ -12,10 +12,6 @@ type NotionConfig = {
 
 type SiteConfig = {
   title: string;
-  domain: {
-    dev: string;
-    prod: string;
-  };
   postRevalidate: false | number;
   useSearchShortcut: boolean;
 

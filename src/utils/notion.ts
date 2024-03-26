@@ -8,7 +8,15 @@ import {
 } from "notion-types";
 import { getDateValue, getTextContent } from "notion-utils";
 
-import { PostAttribute, Posts } from "@/types/notion";
+import { getOptionColor } from "./color";
+import { getSiteConfig } from "./config";
+
+import { Post, PostAttribute, Posts, PostTag } from "@/types/notion";
+
+const { blogPageId } = getSiteConfig("notion");
+
+const POSTS_CACHE = new Map<string, Posts>();
+const TAGS_CACHE = new Set<PostTag>();
 
 const api = new NotionAPI();
 
@@ -16,15 +24,19 @@ export async function getBlockByPageId(pageId: string) {
   return await api.getPage(pageId, {});
 }
 
-export async function getPosts(pageId: string) {
+export async function getPosts(pageId: string = blogPageId) {
+  if (POSTS_CACHE.has(pageId)) return POSTS_CACHE.get(pageId) as Posts;
+
   const pageContent = await api.getPage(pageId, {});
 
-  if (!pageContent) return null;
+  if (!pageContent)
+    return {
+      schema: {},
+      blocks: [],
+    };
 
   const schema = getSchema(pageContent.collection);
   const pageList = getPostList(pageContent.block);
-
-  console.log(schema, pageList);
 
   const posts: Posts = {
     schema,
@@ -49,7 +61,88 @@ export async function getPosts(pageId: string) {
       }),
   };
 
+  POSTS_CACHE.set(pageId, posts);
+
   return posts;
+}
+
+export async function getPost(slug: string): Promise<Post> {
+  const posts = await getPosts();
+
+  const filteredPosts = posts.blocks.find(
+    (block) => block.value.attributes.slug.value === slug,
+  );
+
+  if (!filteredPosts) {
+    return {
+      schema: posts.schema,
+      block: {},
+    } as Post;
+  }
+
+  return {
+    schema: posts.schema,
+    block: filteredPosts,
+  };
+}
+
+export async function getTags() {
+  if (TAGS_CACHE.size) return Array.from(TAGS_CACHE);
+
+  const { schema, blocks } = await getPosts();
+
+  if (!blocks) return [];
+
+  const tagSet = new Set<string>();
+  const result: PostTag[] = [];
+
+  blocks.forEach((page) => {
+    const properties = getPostAttribute(page.value, schema);
+
+    const tags = properties.tags?.value?.split(",") || [];
+
+    tags.forEach((tag) => {
+      const color = getOptionColor({
+        value: tag,
+        options: properties.tags.options,
+      });
+
+      if (tags.length) {
+        if (tagSet.has(tag)) {
+          const targetTag = result.find((c) => c.name === tag);
+          if (targetTag) {
+            targetTag.postCount += 1;
+          }
+        } else {
+          result.push({
+            name: tag,
+            postCount: 1,
+            color,
+          });
+          tagSet.add(tag);
+        }
+      }
+    });
+  });
+
+  TAGS_CACHE.clear();
+  result.forEach((tag) => TAGS_CACHE.add(tag));
+
+  return result;
+}
+
+export async function getPostsByTag(tag: string) {
+  const posts = await getPosts();
+
+  const filteredPosts = posts.blocks.filter((block) => {
+    const tags = block.value.attributes.tags?.value?.split(",") || [];
+    return tags.includes(tag);
+  });
+
+  return {
+    schema: posts.schema,
+    blocks: filteredPosts,
+  };
 }
 
 function getFirstId(block: Record<string, unknown>) {

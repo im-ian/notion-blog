@@ -3,8 +3,8 @@ import Script from "next/script";
 import { Header } from "@/components/Pages/Header";
 import PostProvider from "@/contexts/Posts";
 import { themeBackground } from "@/css/theme.css";
-import { getPosts } from "@/services/notion";
 import { getSiteConfig } from "@/utils/config";
+import { getPosts } from "@/utils/notion";
 
 import "../css/global.css";
 import "../css/prism-theme.css";

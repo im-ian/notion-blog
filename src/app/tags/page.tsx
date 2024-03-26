@@ -5,7 +5,7 @@ import { Box, Layout } from "@/components/Layouts";
 import { Text } from "@/components/Texts";
 import { Routes } from "@/constants";
 import { sprinkles } from "@/css/sprinkles.css";
-import { getTags } from "@/services/notion";
+import { getTags } from "@/utils/notion";
 import { cx } from "@/utils/string";
 
 export async function generateMetadata() {
