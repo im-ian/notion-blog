@@ -16,7 +16,7 @@
      - ![#f03c15](https://placehold.co/13x13/f03c15/f03c15.png) `NOTION_BLOG_PAGE_ID`, ![#1589F0](https://placehold.co/13x13/1589F0/1589F0.png) `NOTION_VIEW_ID`
   5. If you want to edit color or size, edit file `sprinkles.css.ts`
   6. Add your `env` values in Vercel `Environment Variables`
-     - ![image](https://github.com/im-ian/notion-blog/assets/38205068/e9f24e4f-9fa1-4b28-a66f-9cf75ea9e71a)
+     - ![image](https://github.com/im-ian/notion-blog/assets/38205068/cd7046e4-c92c-4fc6-9891-a1c06c82fea2)
   7. Deploy your repository on [Vercel](https://vercel.com/)!
 
 <br />
