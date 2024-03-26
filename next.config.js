@@ -14,14 +14,22 @@ const nextConfig = {
 
 const withVanillaExtract = createVanillaExtractPlugin();
 
-const configs = [
-  // ve config
-  [withVanillaExtract],
+const configs = [[withVanillaExtract]];
+
+const useSentry =
+  process.env.SENTRY_ORG &&
+  process.env.SENTRY_PROJECT &&
+  process.env.SENTRY_AUTH_TOKEN &&
+  process.env.SENTRY_DSN;
+
+if (useSentry) {
   // sentry config
-  [
+  configs.push([
     withSentryConfig,
     {
       silent: true,
+      org: process.env.SENTRY_ORG,
+      project: process.env.SENTRY_PROJECT,
     },
     {
       widenClientFileUpload: true,
@@ -31,8 +39,8 @@ const configs = [
       disableLogger: true,
       automaticVercelMonitors: true,
     },
-  ],
-];
+  ]);
+}
 
 module.exports = configs.reduce(
   (acc, [fn, ...args]) => fn(acc, ...args),
