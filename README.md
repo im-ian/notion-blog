@@ -18,8 +18,3 @@
   6. Add your `env` values in Vercel `Environment Variables`
      - ![image](https://github.com/im-ian/notion-blog/assets/38205068/cd7046e4-c92c-4fc6-9891-a1c06c82fea2)
   7. Deploy your repository on [Vercel](https://vercel.com/)!
-
-<br />
-
-## Known Issue
-  1. If you don't see your posts after the first build, please rebuild.
