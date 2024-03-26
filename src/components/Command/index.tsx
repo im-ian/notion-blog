@@ -5,7 +5,7 @@ import Command, { filterItems, getItemIndex } from "react-cmdk";
 import { FileText, GitHub, Home, Tag } from "react-feather";
 
 import { Routes } from "@/constants";
-import { useNotionContext } from "@/contexts/Article";
+import { useNotionContext } from "@/contexts/Posts";
 import { vars } from "@/css/vars.css";
 import { getSiteConfig } from "@/utils/config";
 
