@@ -8,9 +8,8 @@ import ScrollProgressBar from "@/components/Pages/ScrollProgressBar";
 import { Tag } from "@/components/Tags";
 import { Date, Heading } from "@/components/Texts";
 import { Routes } from "@/constants";
-import { getPost, getPosts } from "@/services/notion";
 import { getOptionColor } from "@/utils/color";
-import { getBlockByPageId } from "@/utils/notion";
+import { getBlockByPageId, getPost, getPosts } from "@/utils/notion";
 
 type PageProps = {
   params: {
@@ -19,10 +18,10 @@ type PageProps = {
 };
 
 export async function generateStaticParams() {
-  const { blocks } = await getPosts();
-  if (!blocks?.length) return [];
+  const { blocks: posts } = await getPosts();
+  if (!posts?.length) return [];
 
-  return blocks
+  return posts
     .map((block) => {
       return { slug: block.value.attributes.slug.value || "" };
     })

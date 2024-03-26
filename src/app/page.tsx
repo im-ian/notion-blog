@@ -1,6 +1,6 @@
 import { Layout } from "@/components/Layouts";
 import { PostCard } from "@/components/Posts";
-import { getPosts } from "@/services/notion";
+import { getPosts } from "@/utils/notion";
 
 async function Home() {
   const { blocks } = await getPosts();

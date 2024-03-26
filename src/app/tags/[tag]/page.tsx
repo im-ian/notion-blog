@@ -1,6 +1,6 @@
 import { Layout } from "@/components/Layouts";
 import { PostCard } from "@/components/Posts";
-import { getPostsByTag } from "@/services/notion";
+import { getPostsByTag } from "@/utils/notion";
 
 type PageProps = {
   params: {
