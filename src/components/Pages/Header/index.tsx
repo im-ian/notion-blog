@@ -46,7 +46,10 @@ export function Header() {
               >
                 {github && (
                   <Box className={HeaderIconClassName}>
-                    <Link href={github} target={"_blank"}>
+                    <Link
+                      href={`https://github.com/${github}`}
+                      target={"_blank"}
+                    >
                       <GitHub size={24} />
                     </Link>
                   </Box>
