@@ -11,7 +11,7 @@ export const HeaderContainerClassName = style([
     paddingY: "large",
     paddingX: {
       mobile: "large",
-      tablet: "none",
+      tablet: "large",
     },
     marginBottom: "large",
 

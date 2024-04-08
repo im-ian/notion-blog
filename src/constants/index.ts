@@ -20,3 +20,9 @@ export const CacheKey = {
   Posts: "posts",
   Tags: "tags",
 };
+
+export const MediaSize = {
+  mobile: "screen and (min-width: 320px)",
+  tablet: "screen and (min-width: 768px)",
+  desktop: "screen and (min-width: 1024px)",
+};

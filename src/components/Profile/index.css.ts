@@ -1,8 +1,64 @@
 import { style } from "@vanilla-extract/css";
 
+import { MediaSize } from "@/constants";
 import { sprinkles } from "@/css/sprinkles.css";
+import { vars } from "@/css/vars.css";
 
-export const ProfileStyle = style([
+export const ProfileContainerStyle = sprinkles({
+  width: "100%",
+  maxWidth: {
+    desktop: "280px",
+    tablet: "100%",
+    mobile: "100%",
+  },
+  textAlign: {
+    mobile: "left",
+    tablet: "left",
+    desktop: "center",
+  },
+  paddingTop: {
+    desktop: "xlarge",
+    tablet: "none",
+    mobile: "none",
+  },
+  paddingX: {
+    desktop: "none",
+    tablet: "large",
+    mobile: "large",
+  },
+});
+
+export const ProfileInnerStyle = style([
+  sprinkles({
+    paddingY: {
+      tablet: "large",
+      mobile: "large",
+    },
+    paddingX: {
+      tablet: "large",
+      mobile: "large",
+    },
+    borderRadius: {
+      tablet: "large",
+      mobile: "large",
+    },
+  }),
+  {
+    "@media": {
+      [MediaSize.mobile]: {
+        background: vars.color["gray-700"],
+      },
+      [MediaSize.tablet]: {
+        background: vars.color["gray-700"],
+      },
+      [MediaSize.desktop]: {
+        background: vars.color["transparent"],
+      },
+    },
+  },
+]);
+
+export const ProfileImageStyle = style([
   sprinkles({
     display: "inline-block",
     maxWidth: {
@@ -16,10 +72,10 @@ export const ProfileStyle = style([
     overflow: "hidden",
     width: 80,
     "@media": {
-      "screen and (min-width: 768px)": {
+      [MediaSize.tablet]: {
         width: 120,
       },
-      "screen and (min-width: 1024px)": {
+      [MediaSize.desktop]: {
         width: "60%",
       },
     },
