@@ -1,5 +1,4 @@
-import { Layout } from "@/components/Layouts";
-import { PostCard } from "@/components/Posts";
+import ProfileWithPostList from "@/components/Pages/ProfileWIthPostList";
 import { getPostsByTag } from "@/utils/notion";
 
 type PageProps = {
@@ -9,27 +8,9 @@ type PageProps = {
 };
 
 async function TagPage({ params }: PageProps) {
-  const { blocks } = await getPostsByTag(decodeURIComponent(params.tag));
+  const posts = await getPostsByTag(decodeURIComponent(params.tag));
 
-  return (
-    <Layout
-      sprinkle={{
-        width: {
-          desktop: "720px",
-        },
-        paddingX: {
-          mobile: "medium",
-          tablet: "none",
-        },
-      }}
-    >
-      {blocks.map((block) => {
-        return (
-          <PostCard key={block.value.attributes.slug.value} block={block} />
-        );
-      })}
-    </Layout>
-  );
+  return <ProfileWithPostList posts={posts} />;
 }
 
 export default TagPage;
