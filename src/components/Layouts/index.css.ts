@@ -6,7 +6,7 @@ export const LayoutClassName = style([
   sprinkles({
     maxWidth: {
       desktop: "1000px",
-      tablet: "720px",
+      tablet: "100%",
       mobile: "100%",
     },
     width: "100%",

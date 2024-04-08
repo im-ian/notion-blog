@@ -9,11 +9,14 @@ type PageProps = {
 };
 
 async function TagPage({ params }: PageProps) {
-  const { blocks } = await getPostsByTag(params.tag);
+  const { blocks } = await getPostsByTag(decodeURIComponent(params.tag));
 
   return (
     <Layout
       sprinkle={{
+        width: {
+          desktop: "720px",
+        },
         paddingX: {
           mobile: "medium",
           tablet: "none",

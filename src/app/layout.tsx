@@ -1,8 +1,7 @@
 import Script from "next/script";
 
-import { Box, Flex } from "@/components/Layouts";
+import { Box } from "@/components/Layouts";
 import { Header } from "@/components/Pages/Header";
-import ProfilePage from "@/components/Profile";
 import PostProvider from "@/contexts/Posts";
 import { themeBackground } from "@/css/theme.css";
 import { getSiteConfig } from "@/utils/config";
@@ -67,21 +66,7 @@ export default async function RootLayout({
             margin: "center",
           }}
         >
-          <Flex
-            flexDirection={{
-              mobile: "column",
-              tablet: "column",
-              desktop: "row",
-            }}
-            alignItems={{
-              mobile: "center",
-              tablet: "center",
-              desktop: "flex-start",
-            }}
-          >
-            <ProfilePage />
-            {children}
-          </Flex>
+          {children}
         </Box>
       </body>
     </html>

@@ -20,6 +20,9 @@ async function TagsPage() {
   return (
     <Layout
       sprinkle={{
+        width: {
+          desktop: "720px",
+        },
         paddingX: {
           mobile: "medium",
           tablet: "none",
