@@ -2,16 +2,18 @@ import { defineProperties, createSprinkles } from "@vanilla-extract/sprinkles";
 
 import { vars } from "./vars.css";
 
+import { MediaSize } from "@/constants";
+
 const responsiveProperties = defineProperties({
   conditions: {
     mobile: {},
-    tablet: { "@media": "screen and (min-width: 768px)" },
-    desktop: { "@media": "screen and (min-width: 1024px)" },
+    tablet: { "@media": MediaSize.tablet },
+    desktop: { "@media": MediaSize.desktop },
   },
   defaultCondition: "mobile",
   properties: {
     position: ["relative", "absolute", "fixed", "sticky"],
-    maxWidth: ["100%", "720px", "100vw"],
+    maxWidth: ["280px", "720px", "1000px", "100%", "100vw"],
     width: ["100%", "720px", "100vw"],
     height: ["100vh", "2.5rem"],
 

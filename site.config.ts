@@ -5,8 +5,12 @@ const CONFIG: Config = {
   profile: {
     // 댓글 기능을 위한 레포명, 입력하지 않으면 댓글 기능이 비활성화됩니다.
     repo: "im-ian/notion-blog",
-    // 페이지 상단 Github 아이콘 링크
-    github: "https://github.com/im-ian",
+    // Github 유저 네임
+    github: "im-ian",
+    // linkedin 주소
+    linkedin: "https://www.linkedin.com/in/daeho-im-36375b24a/",
+    // instagram 주소
+    instagram: "https://www.instagram.com/daeh0_o/",
   },
   // Notion
   notion: {

@@ -52,6 +52,9 @@ async function PostPage({ params }: PageProps) {
       <ScrollProgressBar />
       <Layout
         sprinkle={{
+          width: {
+            desktop: "720px",
+          },
           paddingTop: {
             mobile: "small",
             tablet: "large",

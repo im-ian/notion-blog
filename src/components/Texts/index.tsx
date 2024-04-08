@@ -6,21 +6,12 @@ import { DateClassName, headingClassName } from "./index.css";
 
 import { sprinkles } from "@/css/sprinkles.css";
 import { vars } from "@/css/vars.css";
+import { DeviceWithStyle, ThemeWithStyle } from "@/types/style";
 import { cx, toDateFormat } from "@/utils/string";
 
 interface TextProps {
-  color?:
-    | keyof typeof vars.color
-    | {
-        darkMode: keyof typeof vars.color;
-        lightMode: keyof typeof vars.color;
-      };
-  size?:
-    | keyof typeof vars.fontSize
-    | {
-        mobile: keyof typeof vars.fontSize;
-        tablet: keyof typeof vars.fontSize;
-      };
+  color?: ThemeWithStyle<keyof typeof vars.color>;
+  size?: DeviceWithStyle<keyof typeof vars.fontSize>;
 }
 
 export function Heading({

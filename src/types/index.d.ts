@@ -3,6 +3,8 @@ import { Metadata } from "next";
 type Profile = {
   repo: string | undefined;
   github: string | undefined;
+  linkedin: string | undefined;
+  instagram: string | undefined;
 };
 
 type NotionConfig = {

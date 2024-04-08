@@ -2,7 +2,7 @@
 import { useParams } from "next/navigation";
 import { forwardRef, useEffect, useImperativeHandle, useState } from "react";
 import Command, { filterItems, getItemIndex } from "react-cmdk";
-import { FileText, GitHub, Home, Tag } from "react-feather";
+import { FileText, Home, Tag } from "react-feather";
 
 import { Routes } from "@/constants";
 import { useNotionContext } from "@/contexts/Posts";
@@ -64,12 +64,6 @@ export default forwardRef<CommandPaletteHandle>(
               id: "home",
               children: "홈",
               icon: () => <Home {...iconStyle} />,
-              href: Routes.Home(),
-            },
-            {
-              id: "github",
-              children: "Github",
-              icon: () => <GitHub {...iconStyle} />,
               href: Routes.Home(),
             },
             {

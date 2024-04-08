@@ -4,23 +4,18 @@ import { sprinkles } from "../../css/sprinkles.css";
 
 export const LayoutClassName = style([
   sprinkles({
-    maxWidth: "720px",
+    maxWidth: {
+      desktop: "1000px",
+      tablet: "100%",
+      mobile: "100%",
+    },
     width: "100%",
     margin: "center",
   }),
 ]);
 
-export const flexDirectionVariant = createVar();
-export const alignItemsVariant = createVar();
-
 export const FlexClassName = style({
-  vars: {
-    [flexDirectionVariant]: "column",
-    [alignItemsVariant]: "center",
-  },
   display: "flex",
-  flexDirection: flexDirectionVariant,
-  alignItems: alignItemsVariant,
 });
 
 export const flexVariant = createVar();
