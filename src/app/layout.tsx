@@ -1,6 +1,6 @@
 import Script from "next/script";
 
-import { Flex } from "@/components/Layouts";
+import { Box, Flex } from "@/components/Layouts";
 import { Header } from "@/components/Pages/Header";
 import ProfilePage from "@/components/Profile";
 import PostProvider from "@/contexts/Posts";
@@ -57,19 +57,30 @@ export default async function RootLayout({
         <PostProvider posts={posts}>
           <Header />
         </PostProvider>
-        <Flex
-          flexDirection={{
-            mobile: "column",
-            tablet: "row",
-          }}
-          alignItems={{
-            mobile: "center",
-            tablet: "flex-start",
+        <Box
+          sprinkle={{
+            maxWidth: {
+              desktop: "1000px",
+              tablet: "720px",
+              mobile: "100%",
+            },
+            margin: "center",
           }}
         >
-          <ProfilePage />
-          {children}
-        </Flex>
+          <Flex
+            flexDirection={{
+              mobile: "column",
+              tablet: "row",
+            }}
+            alignItems={{
+              mobile: "center",
+              tablet: "flex-start",
+            }}
+          >
+            <ProfilePage />
+            {children}
+          </Flex>
+        </Box>
       </body>
     </html>
   );

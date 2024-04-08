@@ -54,6 +54,7 @@ export const vars = createGlobalTheme(":root", {
     medium: "8px",
     large: "16px",
     full: "99999px",
+    circle: "50%",
   },
   fontFamily: {
     body: "Pretendard, -apple-system, Arial, sans-serif",

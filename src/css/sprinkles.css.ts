@@ -11,7 +11,7 @@ const responsiveProperties = defineProperties({
   defaultCondition: "mobile",
   properties: {
     position: ["relative", "absolute", "fixed", "sticky"],
-    maxWidth: ["100%", "720px", "100vw"],
+    maxWidth: ["280px", "720px", "1000px", "100%", "100vw"],
     width: ["100%", "720px", "100vw"],
     height: ["100vh", "2.5rem"],
 

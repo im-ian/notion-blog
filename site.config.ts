@@ -7,6 +7,10 @@ const CONFIG: Config = {
     repo: "im-ian/notion-blog",
     // Github 유저 네임
     github: "im-ian",
+    // linkedin 주소
+    linkedin: "https://www.linkedin.com/in/daeho-im-36375b24a/",
+    // instagram 주소
+    instagram: "https://www.instagram.com/daeh0_o/",
   },
   // Notion
   notion: {
