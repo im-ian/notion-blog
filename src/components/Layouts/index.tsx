@@ -8,13 +8,12 @@ import { PostCardClassName } from "../Posts/index.css";
 import {
   FlexClassName,
   LayoutClassName,
-  alignItemsVariant,
-  flexDirectionVariant,
   flexItemClassName,
   flexVariant,
 } from "./index.css";
 
 import { sprinkles } from "@/css/sprinkles.css";
+import { DeviceWithStyle } from "@/types/style";
 import { cx } from "@/utils/string";
 
 interface BoxProps extends HTMLAttributes<HTMLDivElement> {
@@ -37,8 +36,8 @@ export function Layout({ className, sprinkle, children }: BoxProps) {
 }
 
 interface FlexProps {
-  flexDirection?: "row" | "column";
-  alignItems?: "center" | "flex-start" | "flex-end";
+  flexDirection?: DeviceWithStyle<"row" | "column">;
+  alignItems?: DeviceWithStyle<"center" | "flex-start" | "flex-end">;
 }
 
 export function Flex({
@@ -46,17 +45,12 @@ export function Flex({
   alignItems = "center",
   children,
 }: PropsWithChildren<FlexProps>) {
-  return (
-    <Box
-      className={FlexClassName}
-      style={assignInlineVars({
-        [flexDirectionVariant]: flexDirection,
-        [alignItemsVariant]: alignItems,
-      })}
-    >
-      {children}
-    </Box>
-  );
+  const flexStyle = sprinkles({
+    flexDirection,
+    alignItems,
+  });
+
+  return <Box className={cx([FlexClassName, flexStyle])}>{children}</Box>;
 }
 
 interface FlexItemProps {

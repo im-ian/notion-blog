@@ -10,17 +10,8 @@ export const LayoutClassName = style([
   }),
 ]);
 
-export const flexDirectionVariant = createVar();
-export const alignItemsVariant = createVar();
-
 export const FlexClassName = style({
-  vars: {
-    [flexDirectionVariant]: "column",
-    [alignItemsVariant]: "center",
-  },
   display: "flex",
-  flexDirection: flexDirectionVariant,
-  alignItems: alignItemsVariant,
 });
 
 export const flexVariant = createVar();

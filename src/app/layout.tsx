@@ -1,6 +1,8 @@
 import Script from "next/script";
 
+import { Flex } from "@/components/Layouts";
 import { Header } from "@/components/Pages/Header";
+import ProfilePage from "@/components/Profile";
 import PostProvider from "@/contexts/Posts";
 import { themeBackground } from "@/css/theme.css";
 import { getSiteConfig } from "@/utils/config";
@@ -55,7 +57,19 @@ export default async function RootLayout({
         <PostProvider posts={posts}>
           <Header />
         </PostProvider>
-        {children}
+        <Flex
+          flexDirection={{
+            mobile: "column",
+            tablet: "row",
+          }}
+          alignItems={{
+            mobile: "center",
+            tablet: "flex-start",
+          }}
+        >
+          <ProfilePage />
+          {children}
+        </Flex>
       </body>
     </html>
   );
