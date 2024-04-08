@@ -4,7 +4,11 @@ import { sprinkles } from "../../css/sprinkles.css";
 
 export const LayoutClassName = style([
   sprinkles({
-    maxWidth: "1000px",
+    maxWidth: {
+      desktop: "1000px",
+      tablet: "720px",
+      mobile: "100%",
+    },
     width: "100%",
     margin: "center",
   }),

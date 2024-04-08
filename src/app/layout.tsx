@@ -62,7 +62,7 @@ export default async function RootLayout({
             maxWidth: {
               desktop: "1000px",
               tablet: "720px",
-              mobile: "100%",
+              mobile: "720px",
             },
             margin: "center",
           }}
@@ -70,11 +70,13 @@ export default async function RootLayout({
           <Flex
             flexDirection={{
               mobile: "column",
-              tablet: "row",
+              tablet: "column",
+              desktop: "row",
             }}
             alignItems={{
               mobile: "center",
-              tablet: "flex-start",
+              tablet: "center",
+              desktop: "flex-start",
             }}
           >
             <ProfilePage />
