@@ -1,7 +1,7 @@
 "use client";
 
 import { useRef } from "react";
-import { Menu } from "react-feather";
+import { Search } from "react-feather";
 
 import CommandPalette, { CommandPaletteHandle } from "../../Command";
 import { Box, Flex, FlexItem, Layout } from "../../Layouts";
@@ -38,7 +38,7 @@ export function Header() {
                   commandRef.current?.open();
                 }}
               >
-                <Menu size={24} />
+                <Search size={24} />
               </Box>
             </FlexItem>
           </Flex>
