@@ -2,7 +2,6 @@ import { style } from "@vanilla-extract/css";
 
 import { MediaSize } from "@/constants";
 import { sprinkles } from "@/css/sprinkles.css";
-import { vars } from "@/css/vars.css";
 
 export const ProfileContainerStyle = sprinkles({
   width: "100%",
