@@ -34,6 +34,7 @@ export async function generateMetadata({ params }: PageProps) {
   const { attributes } = block.value;
   return {
     title: attributes.title.value,
+    description: attributes.summary.value,
   } as Metadata;
 }
 
