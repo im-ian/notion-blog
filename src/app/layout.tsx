@@ -13,6 +13,8 @@ import "react-notion-x/src/styles.css";
 
 export const metadata = getSiteConfig("meta");
 export const { ga } = getSiteConfig("site");
+export const { siteVerification: naverSiteVerification } =
+  getSiteConfig("naver");
 
 export default async function RootLayout({
   children,
@@ -50,6 +52,12 @@ export default async function RootLayout({
               gtag('config', '${ga}');
             `}</Script>
           </>
+        )}
+        {naverSiteVerification && (
+          <meta
+            name={"naver-site-verification"}
+            content={naverSiteVerification}
+          />
         )}
       </head>
       <body className={themeBackground}>

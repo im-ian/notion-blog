@@ -38,6 +38,9 @@ const CONFIG: Config = {
     authToken: process.env.SENTRY_AUTH_TOKEN,
     dsn: process.env.SENTRY_DSN,
   },
+  naver: {
+    siteVerification: process.env.NAVER_SITE_VERIFICATION,
+  },
 };
 
 export default CONFIG;

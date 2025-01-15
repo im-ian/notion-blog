@@ -25,10 +25,15 @@ type SentryConfig = {
   authToken: string | undefined;
 };
 
+type NaverSearchAdvisorConfig = {
+  siteVerification: string | undefined;
+};
+
 export type Config = {
   profile: Profile;
   notion: NotionConfig;
   meta: Metadata;
   site: SiteConfig;
   sentry: SentryConfig;
+  naver: NaverSearchAdvisorConfig;
 };
