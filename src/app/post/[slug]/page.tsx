@@ -12,9 +12,9 @@ import { getOptionColor } from "@/utils/color";
 import { getBlockByPageId, getPost, getPosts } from "@/utils/notion";
 
 type PageProps = {
-  params: {
+  params: Promise<{
     slug: string;
-  };
+  }>;
 };
 
 export async function generateStaticParams() {
@@ -29,7 +29,8 @@ export async function generateStaticParams() {
 }
 
 export async function generateMetadata({ params }: PageProps) {
-  const { block } = await getPost(params.slug);
+  const { slug } = await params;
+  const { block } = await getPost(slug);
   const { attributes } = block.value;
   return {
     title: attributes.title.value,
@@ -37,7 +38,8 @@ export async function generateMetadata({ params }: PageProps) {
 }
 
 async function PostPage({ params }: PageProps) {
-  const { block } = await getPost(params.slug);
+  const { slug } = await params;
+  const { block } = await getPost(slug);
   const { attributes } = block.value;
 
   if (!attributes) return null;

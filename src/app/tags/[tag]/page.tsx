@@ -2,13 +2,14 @@ import ProfileWithPostList from "@/components/Pages/ProfileWIthPostList";
 import { getPostsByTag } from "@/utils/notion";
 
 type PageProps = {
-  params: {
+  params: Promise<{
     tag: string;
-  };
+  }>;
 };
 
 async function TagPage({ params }: PageProps) {
-  const posts = await getPostsByTag(decodeURIComponent(params.tag));
+  const { tag } = await params;
+  const posts = await getPostsByTag(decodeURIComponent(tag));
 
   return <ProfileWithPostList posts={posts} />;
 }
