@@ -77,7 +77,7 @@ async function Profile() {
                   target={"_blank"}
                   rel={"noreferrer"}
                 >
-                  <GitHub size={"20px"} color={"white"} />
+                  <GitHub size={"20px"} style={{ color: "inherit" }} />
                 </a>
               )}
               {linkedin && (
@@ -87,7 +87,7 @@ async function Profile() {
                   target={"_blank"}
                   rel={"noreferrer"}
                 >
-                  <Linkedin size={"20px"} color={"white"} />
+                  <Linkedin size={"20px"} style={{ color: "inherit" }} />
                 </a>
               )}
               {instagram && (
@@ -97,7 +97,7 @@ async function Profile() {
                   target={"_blank"}
                   rel={"noreferrer"}
                 >
-                  <Instagram size={"20px"} color={"white"} />
+                  <Instagram size={"20px"} style={{ color: "inherit" }} />
                 </a>
               )}
             </Box>
