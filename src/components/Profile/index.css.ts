@@ -43,19 +43,6 @@ export const ProfileInnerStyle = style([
       mobile: "large",
     },
   }),
-  {
-    "@media": {
-      [MediaSize.mobile]: {
-        background: vars.color["gray-700"],
-      },
-      [MediaSize.tablet]: {
-        background: vars.color["gray-700"],
-      },
-      [MediaSize.desktop]: {
-        background: vars.color["transparent"],
-      },
-    },
-  },
 ]);
 
 export const ProfileImageStyle = style([
