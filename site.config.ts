@@ -46,7 +46,7 @@ const CONFIG: Config = {
   },
   naver: {
     naverSearchAdvisor: {
-      siteVerification: process.env.NAVER_SITE_VERIFICATION,
+      siteVerification: process.env.NAVER_SEARCH_ADVISOR_VERIFICATION,
     },
   },
 };
