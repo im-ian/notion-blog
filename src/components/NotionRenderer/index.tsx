@@ -40,15 +40,18 @@ import "prismjs/components/prism-swift.js";
 import "prismjs/components/prism-wasm.js";
 import "prismjs/components/prism-yaml.js";
 
+import "@/css/notion.css";
 import { useTheme } from "@/hooks/useTheme";
+import { Skeleton } from "@/components/Skeleton";
 
 export const NotionPage = ({ recordMap }: { recordMap: ExtendedRecordMap }) => {
-  const { theme } = useTheme();
+  const { theme, mounted } = useTheme();
 
-  if (!recordMap) return null;
+  if (!recordMap || !mounted) return <Skeleton />;
 
   return (
     <NotionRenderer
+      key={theme}
       disableHeader
       pageTitle={false}
       recordMap={recordMap}

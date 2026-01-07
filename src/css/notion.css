@@ -1,0 +1,13 @@
+/**
+ * 테마 변경 시 텍스트 색상이 변경되지 않는 문제를 수정하기 위해 임시로 작성
+ */
+
+.notion {
+  color: rgb(55, 53, 47);
+  caret-color: rgb(55, 53, 47);
+}
+
+.dark-mode .notion {
+  color: rgb(255, 255, 255, 0.9);
+  caret-color: rgb(255, 255, 255, 0.9);
+}
