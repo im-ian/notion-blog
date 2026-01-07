@@ -4,13 +4,13 @@ import { useEffect, useRef, useState } from "react";
 import BounceLoader from "react-spinners/BounceLoader";
 
 import { vars } from "@/css/vars.css";
-import useDarkMode from "@/hooks/useDarkMode";
+import { useTheme } from "@/hooks/useTheme";
 import { getSiteConfig } from "@/utils/config";
 
 function Comment() {
   const commentRef = useRef<HTMLDivElement>(null);
 
-  const isDarkMode = useDarkMode();
+  const { theme } = useTheme();
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
@@ -31,17 +31,20 @@ function Comment() {
   }, []);
 
   useEffect(() => {
-    if (isDarkMode === undefined) return;
+    if (!theme) return;
 
     const $comment = document.getElementsByClassName(
-      "utterances-frame"
+      "utterances-frame",
     )[0] as HTMLIFrameElement;
 
     $comment?.contentWindow?.postMessage(
-      { type: "set-theme", theme: isDarkMode ? "github-dark" : "github-light" },
-      "https://utteranc.es"
+      {
+        type: "set-theme",
+        theme: theme === "dark" ? "github-dark" : "github-light",
+      },
+      "https://utteranc.es",
     );
-  }, [isDarkMode]);
+  }, [theme]);
 
   return (
     <div ref={commentRef}>

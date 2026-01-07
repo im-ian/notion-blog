@@ -2,6 +2,7 @@
 
 import { assignInlineVars } from "@vanilla-extract/dynamic";
 import type { HTMLAttributes, PropsWithChildren } from "react";
+
 import { sprinkles } from "@/css/sprinkles.css";
 import type { DeviceWithStyle } from "@/types/style";
 import { cx } from "@/utils/string";

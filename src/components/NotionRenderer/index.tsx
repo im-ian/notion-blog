@@ -40,10 +40,10 @@ import "prismjs/components/prism-swift.js";
 import "prismjs/components/prism-wasm.js";
 import "prismjs/components/prism-yaml.js";
 
-import useDarkMode from "@/hooks/useDarkMode";
+import { useTheme } from "@/hooks/useTheme";
 
 export const NotionPage = ({ recordMap }: { recordMap: ExtendedRecordMap }) => {
-  const darkMode = useDarkMode();
+  const { theme } = useTheme();
 
   if (!recordMap) return null;
 
@@ -53,7 +53,7 @@ export const NotionPage = ({ recordMap }: { recordMap: ExtendedRecordMap }) => {
       pageTitle={false}
       recordMap={recordMap}
       fullPage={false}
-      darkMode={darkMode}
+      darkMode={theme === "dark"}
       components={{
         Collection: () => null,
         nextLink: Link,

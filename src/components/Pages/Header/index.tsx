@@ -1,7 +1,9 @@
 "use client";
 
 import { useRef } from "react";
-import { Search } from "react-feather";
+import { Moon, Search, Sun } from "react-feather";
+
+import { useTheme } from "@/hooks/useTheme";
 import { getSiteConfig } from "@/utils/config";
 import CommandPalette, { type CommandPaletteHandle } from "../../Command";
 import { Box, Flex, FlexItem, Layout } from "../../Layouts";
@@ -11,6 +13,7 @@ import { HeaderContainerClassName, HeaderIconClassName } from "./index.css";
 const { title } = getSiteConfig("site");
 
 export function Header() {
+  const { theme, toggleTheme, mounted } = useTheme();
   const commandRef = useRef<CommandPaletteHandle>(null);
 
   return (
@@ -29,6 +32,11 @@ export function Header() {
               </Heading>
             </FlexItem>
             <FlexItem flex={"none"}>
+              {mounted && (
+                <Box className={HeaderIconClassName} onClick={toggleTheme}>
+                  {theme === "light" ? <Moon size={24} /> : <Sun size={24} />}
+                </Box>
+              )}
               <Box
                 className={HeaderIconClassName}
                 onClick={() => {

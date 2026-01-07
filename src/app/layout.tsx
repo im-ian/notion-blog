@@ -67,6 +67,21 @@ export default async function RootLayout({
         )}
       </head>
       <body className={themeBackground}>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              (function() {
+                var theme = localStorage.getItem("theme");
+                var systemDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+                if (theme === "dark" || (!theme && systemDark)) {
+                  document.documentElement.classList.add("dark-mode");
+                } else {
+                  document.documentElement.classList.remove("dark-mode");
+                }
+              })();
+            `,
+          }}
+        />
         <PostProvider posts={posts}>
           <Header />
         </PostProvider>

@@ -1,4 +1,5 @@
 import { createSprinkles, defineProperties } from "@vanilla-extract/sprinkles";
+
 import { MediaSize } from "@/constants";
 import { vars } from "./vars.css";
 
@@ -69,7 +70,7 @@ const responsiveProperties = defineProperties({
 const colorProperties = defineProperties({
   conditions: {
     lightMode: {},
-    darkMode: { "@media": "(prefers-color-scheme: dark)" },
+    darkMode: { selector: ".dark-mode &" },
   },
   defaultCondition: "lightMode",
   properties: {
