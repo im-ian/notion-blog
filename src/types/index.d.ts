@@ -25,8 +25,16 @@ type SentryConfig = {
   authToken: string | undefined;
 };
 
-type NaverSearchAdvisorConfig = {
-  siteVerification: string | undefined;
+type GoogleConfig = {
+  googleSearchConsole: {
+    siteVerification: string | undefined;
+  };
+};
+
+type NaverConfig = {
+  naverSearchAdvisor: {
+    siteVerification: string | undefined;
+  };
 };
 
 export type Config = {
@@ -35,5 +43,6 @@ export type Config = {
   meta: Metadata;
   site: SiteConfig;
   sentry: SentryConfig;
-  naver: NaverSearchAdvisorConfig;
+  google: GoogleConfig;
+  naver: NaverConfig;
 };

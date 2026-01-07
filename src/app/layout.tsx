@@ -13,7 +13,9 @@ import "react-notion-x/src/styles.css";
 
 export const metadata = getSiteConfig("meta");
 export const { ga } = getSiteConfig("site");
-export const { siteVerification: naverSiteVerification } =
+export const { googleSearchConsole } =
+  getSiteConfig("google");
+export const { naverSearchAdvisor } =
   getSiteConfig("naver");
 
 export default async function RootLayout({
@@ -53,10 +55,16 @@ export default async function RootLayout({
             `}</Script>
           </>
         )}
-        {naverSiteVerification && (
+        {googleSearchConsole.siteVerification && (
+          <meta
+            name={"google-site-verification"}
+            content={googleSearchConsole.siteVerification}
+          />
+        )}
+        {naverSearchAdvisor.siteVerification && (
           <meta
             name={"naver-site-verification"}
-            content={naverSiteVerification}
+            content={naverSearchAdvisor.siteVerification}
           />
         )}
       </head>

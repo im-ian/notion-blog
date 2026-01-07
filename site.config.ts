@@ -38,8 +38,15 @@ const CONFIG: Config = {
     authToken: process.env.SENTRY_AUTH_TOKEN,
     dsn: process.env.SENTRY_DSN,
   },
+  google: {
+    googleSearchConsole: {
+      siteVerification: process.env.GOOGLE_SEARCH_CONSOLE_VERIFICATION,
+    },
+  },
   naver: {
-    siteVerification: process.env.NAVER_SITE_VERIFICATION,
+    naverSearchAdvisor: {
+      siteVerification: process.env.NAVER_SITE_VERIFICATION,
+    },
   },
 };
 
