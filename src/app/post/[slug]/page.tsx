@@ -26,7 +26,7 @@ export async function generateStaticParams() {
   });
 }
 
-export const revalidate = 3600;
+export const revalidate = 600; // 10 minutes
 
 export async function generateMetadata({ params }: PageProps) {
   const { slug } = await params;
