@@ -23,7 +23,7 @@ const CONFIG: Config = {
       default: "다람쥐 헌 쳇바퀴에 타고파",
       template: "%s",
     },
-    description: "My Blog Description",
+    description: "Solving problems through code.",
   },
   site: {
     lang: "ko",
