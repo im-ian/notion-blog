@@ -10,6 +10,9 @@ import { Date, Heading } from "@/components/Texts";
 import { Routes } from "@/constants";
 import { getOptionColor } from "@/utils/color";
 import { getBlockByPageId, getPost, getPosts } from "@/utils/notion";
+import { getSiteConfig } from "@/utils/config";
+
+const { postRevalidate } = getSiteConfig("site");
 
 type PageProps = {
   params: Promise<{
@@ -24,9 +27,10 @@ export async function generateStaticParams() {
   return posts
     .map((block) => {
       return { slug: block.value.attributes.slug.value || "" };
-    })
-    .filter((block) => block.slug);
+    });
 }
+
+export const revalidate = postRevalidate;
 
 export async function generateMetadata({ params }: PageProps) {
   const { slug } = await params;
