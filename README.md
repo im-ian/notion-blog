@@ -1,5 +1,5 @@
 # Notion Blog Project
-[![DEMO](https://img.shields.io/badge/BLOG%20DEMO-2d55ff)](https://chipmunk-blog.vercel.app/)
+[![DEMO](https://img.shields.io/badge/BLOG%20DEMO-2d55ff)](https://www.chipmunk-world.com/)
 
   - ✏️ Write your posts using Notion
   - ⚙️ Easily configure site
