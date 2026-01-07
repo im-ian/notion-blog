@@ -12,11 +12,9 @@ import "../css/prism-theme.css";
 import "react-notion-x/src/styles.css";
 
 export const metadata = getSiteConfig("meta");
-export const { ga } = getSiteConfig("site");
-export const { googleSearchConsole } =
-  getSiteConfig("google");
-export const { naverSearchAdvisor } =
-  getSiteConfig("naver");
+export const { lang } = getSiteConfig("site");
+export const { googleSearchConsole, ga } = getSiteConfig("google");
+export const { naverSearchAdvisor } = getSiteConfig("naver");
 
 export default async function RootLayout({
   children,
@@ -26,7 +24,7 @@ export default async function RootLayout({
   const posts = await getPosts();
 
   return (
-    <html lang={"ko"}>
+    <html lang={lang}>
       <head>
         <link rel={"preconnect"} href={"https://fonts.googleapis.com"} />
         <link
@@ -40,18 +38,18 @@ export default async function RootLayout({
           }
           rel={"stylesheet"}
         />
-        {ga && (
+        {ga.id && (
           <>
             <Script
               async
-              src={`https://www.googletagmanager.com/gtag/js?id=${ga}`}
+              src={`https://www.googletagmanager.com/gtag/js?id=${ga.id}`}
             />
             <Script>{`
               window.dataLayer = window.dataLayer || [];
               function gtag(){dataLayer.push(arguments);}
               gtag('js', new Date());
 
-              gtag('config', '${ga}');
+              gtag('config', '${ga.id}');
             `}</Script>
           </>
         )}

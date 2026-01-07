@@ -3,6 +3,9 @@
 import * as Sentry from "@sentry/nextjs";
 import NextError from "next/error";
 import { useEffect } from "react";
+import { getSiteConfig } from "@/utils/config";
+
+const { lang } = getSiteConfig("site");
 
 function GlobalError({ error }: { error: Error }) {
   useEffect(() => {
@@ -10,7 +13,7 @@ function GlobalError({ error }: { error: Error }) {
   }, [error]);
 
   return (
-    <html>
+    <html lang={lang}>
       <body>
         <NextError statusCode={500} />
       </body>

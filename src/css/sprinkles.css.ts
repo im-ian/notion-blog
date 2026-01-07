@@ -1,8 +1,6 @@
-import { defineProperties, createSprinkles } from "@vanilla-extract/sprinkles";
-
-import { vars } from "./vars.css";
-
+import { createSprinkles, defineProperties } from "@vanilla-extract/sprinkles";
 import { MediaSize } from "@/constants";
+import { vars } from "./vars.css";
 
 const responsiveProperties = defineProperties({
   conditions: {

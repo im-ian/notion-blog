@@ -2,14 +2,11 @@
 
 import { useRef } from "react";
 import { Search } from "react-feather";
-
-import CommandPalette, { CommandPaletteHandle } from "../../Command";
+import { getSiteConfig } from "@/utils/config";
+import CommandPalette, { type CommandPaletteHandle } from "../../Command";
 import { Box, Flex, FlexItem, Layout } from "../../Layouts";
 import { Heading } from "../../Texts";
-
 import { HeaderContainerClassName, HeaderIconClassName } from "./index.css";
-
-import { getSiteConfig } from "@/utils/config";
 
 const { title } = getSiteConfig("site");
 

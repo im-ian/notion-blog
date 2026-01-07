@@ -1,16 +1,14 @@
 import { GitHub, Instagram, Linkedin } from "react-feather";
-
+import { Box, Flex } from "@/components/Layouts";
+import { Heading, Text } from "@/components/Texts";
+import { getUserGithub } from "@/services/github";
+import { getSiteConfig } from "@/utils/config";
 import {
   ProfileContainerStyle,
   ProfileIconStyle,
   ProfileImageStyle,
   ProfileInnerStyle,
 } from "./index.css";
-
-import { Box, Flex } from "@/components/Layouts";
-import { Heading, Text } from "@/components/Texts";
-import { getUserGithub } from "@/services/github";
-import { getSiteConfig } from "@/utils/config";
 
 async function Profile() {
   const { github, linkedin, instagram } = getSiteConfig("profile");
@@ -43,6 +41,7 @@ async function Profile() {
                 objectFit: "cover",
               }}
               src={profile.avatar_url}
+              alt="profile"
             />
           </Box>
           <Box

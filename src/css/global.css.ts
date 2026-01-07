@@ -1,4 +1,4 @@
-import { globalStyle, globalFontFace } from "@vanilla-extract/css";
+import { globalFontFace, globalStyle } from "@vanilla-extract/css";
 
 const fontFamily = "Pretendard, ui-sans-serif, system-ui, -apple-system";
 

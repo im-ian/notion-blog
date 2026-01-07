@@ -1,8 +1,8 @@
 "use client";
 
-import { PropsWithChildren, createContext, useContext } from "react";
+import { createContext, type PropsWithChildren, useContext } from "react";
 
-import { Posts } from "@/types/notion";
+import type { Posts } from "@/types/notion";
 
 interface PageContextProviderProps {
   posts: Posts | null;

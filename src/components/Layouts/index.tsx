@@ -1,20 +1,17 @@
 "use client";
 
 import { assignInlineVars } from "@vanilla-extract/dynamic";
-import { HTMLAttributes, PropsWithChildren } from "react";
-
+import type { HTMLAttributes, PropsWithChildren } from "react";
+import { sprinkles } from "@/css/sprinkles.css";
+import type { DeviceWithStyle } from "@/types/style";
+import { cx } from "@/utils/string";
 import { PostCardClassName } from "../Posts/index.css";
-
 import {
   FlexClassName,
-  LayoutClassName,
   flexItemClassName,
   flexVariant,
+  LayoutClassName,
 } from "./index.css";
-
-import { sprinkles } from "@/css/sprinkles.css";
-import { DeviceWithStyle } from "@/types/style";
-import { cx } from "@/utils/string";
 
 interface BoxProps extends HTMLAttributes<HTMLDivElement> {
   className?: string;

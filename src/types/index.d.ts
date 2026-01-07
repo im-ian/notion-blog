@@ -1,4 +1,4 @@
-import { Metadata } from "next";
+import type { Metadata } from "next";
 
 type Profile = {
   repo: string | undefined;
@@ -13,11 +13,9 @@ type NotionConfig = {
 };
 
 type SiteConfig = {
+  lang: string;
   title: string;
-  postRevalidate: false | number;
   useSearchShortcut: boolean;
-
-  ga: string | undefined;
 };
 
 type SentryConfig = {
@@ -28,6 +26,9 @@ type SentryConfig = {
 type GoogleConfig = {
   googleSearchConsole: {
     siteVerification: string | undefined;
+  };
+  ga: {
+    id: string | undefined;
   };
 };
 

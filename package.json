@@ -6,7 +6,9 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "biome lint .",
+    "format": "biome format . --write",
+    "check": "biome check ."
   },
   "dependencies": {
     "@sentry/nextjs": "^7.100.1",
@@ -27,20 +29,12 @@
     "react-spinners": "^0.15.0"
   },
   "devDependencies": {
+    "@biomejs/biome": "^2.3.11",
     "@types/node": "^20",
     "@types/prismjs": "^1.26.5",
     "@types/react": "^19.0.7",
     "@types/react-dom": "^19.0.3",
-    "@typescript-eslint/eslint-plugin": "^8.20.0",
-    "@typescript-eslint/parser": "^8.20.0",
-    "eslint": "^9.18.0",
-    "eslint-config-next": "^15.1.4",
-    "eslint-config-prettier": "^10.0.1",
-    "eslint-plugin-import": "^2.31.0",
-    "eslint-plugin-prettier": "^5.2.2",
-    "eslint-plugin-react": "^7.37.4",
     "notion-types": "^7.1.6",
-    "prettier": "^3.4.2",
     "typescript": "^5.7.3"
   }
 }

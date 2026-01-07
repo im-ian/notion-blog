@@ -1,5 +1,5 @@
 import { NotionAPI } from "notion-client";
-import {
+import type {
   Block,
   BlockMap,
   CollectionMap,
@@ -8,10 +8,9 @@ import {
 } from "notion-types";
 import { getDateValue, getTextContent } from "notion-utils";
 
+import type { Post, PostAttribute, Posts, PostTag } from "@/types/notion";
 import { getOptionColor } from "./color";
 import { getSiteConfig } from "./config";
-
-import { Post, PostAttribute, Posts, PostTag } from "@/types/notion";
 
 const { blogPageId } = getSiteConfig("notion");
 
@@ -51,7 +50,7 @@ export async function getPosts(pageId: string = blogPageId) {
       .filter(
         (page) =>
           page.value.attributes.slug.value &&
-          page.value.attributes.status.value === "Public",
+          page.value.attributes.status.value === "Public"
       )
       .sort((a, b) => {
         const aDate = +new Date(a?.value?.attributes?.date?.value || 0);
@@ -70,7 +69,7 @@ export async function getPost(slug: string): Promise<Post> {
   const posts = await getPosts();
 
   const filteredPosts = posts.blocks.find(
-    (block) => block.value.attributes.slug.value === slug,
+    (block) => block.value.attributes.slug.value === slug
   );
 
   if (!filteredPosts) {
@@ -126,7 +125,9 @@ export async function getTags() {
   });
 
   TAGS_CACHE.clear();
-  result.forEach((tag) => TAGS_CACHE.add(tag));
+  result.forEach((tag) => {
+    TAGS_CACHE.add(tag);
+  });
 
   return result;
 }
@@ -172,7 +173,7 @@ export function getPostList(block: BlockMap) {
 
 export function getPostAttribute(
   block: Block,
-  schema: CollectionPropertySchemaMap,
+  schema: CollectionPropertySchemaMap
 ): PostAttribute {
   const result: PostAttribute = {};
 

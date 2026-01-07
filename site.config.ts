@@ -26,13 +26,11 @@ const CONFIG: Config = {
     description: "My Blog Description",
   },
   site: {
+    lang: "ko",
     title: "다람쥐 헌 쳇바퀴에 타고파",
-    // 포스트 캐시 갱신 시간
-    postRevalidate: 60 * 60, // 1 hour
     // 검색 단축키 사용 여부
     useSearchShortcut: true,
     // Google Analytics Tracking ID
-    ga: process.env.GA_ID,
   },
   sentry: {
     authToken: process.env.SENTRY_AUTH_TOKEN,
@@ -41,6 +39,9 @@ const CONFIG: Config = {
   google: {
     googleSearchConsole: {
       siteVerification: process.env.GOOGLE_SEARCH_CONSOLE_VERIFICATION,
+    },
+    ga: {
+      id: process.env.GA_ID,
     },
   },
   naver: {

@@ -1,4 +1,4 @@
-import { SelectOption } from "notion-types";
+import type { SelectOption } from "notion-types";
 
 import { NotionColorMap } from "@/constants";
 

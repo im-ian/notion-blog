@@ -1,4 +1,4 @@
-import { Metadata } from "next";
+import type { Metadata } from "next";
 import Link from "next/link";
 
 import { Box, Layout } from "@/components/Layouts";
@@ -29,9 +29,9 @@ async function TagsPage() {
         },
       }}
     >
-      {tags.map(({ name, postCount }, index) => {
+      {tags.map(({ name, postCount }) => {
         return (
-          <Link key={index} href={Routes.Tag(name)}>
+          <Link key={name} href={Routes.Tag(name)}>
             <Box
               className={cx([
                 sprinkles({

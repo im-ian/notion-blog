@@ -3,16 +3,13 @@
 import { assignInlineVars } from "@vanilla-extract/dynamic";
 import Link from "next/link";
 import { Tag as TagIcon } from "react-feather";
-
+import { getFontColor } from "@/utils/color";
 import { Box, Flex } from "../Layouts";
-
 import {
   TagBgColorVariants,
   TagClassName,
   TagFontColorVariants,
 } from "./index.css";
-
-import { getFontColor } from "@/utils/color";
 
 interface TagProps {
   label: string;

@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { ExtendedRecordMap } from "notion-types";
+import type { ExtendedRecordMap } from "notion-types";
 import { NotionRenderer } from "react-notion-x";
 import { Code } from "react-notion-x/build/third-party/code";
 import { Equation } from "react-notion-x/build/third-party/equation";

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 
 import { vars } from "@/css/vars.css";
 import { throttle } from "@/utils/throttle";

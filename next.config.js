@@ -44,5 +44,5 @@ if (useSentry) {
 
 module.exports = configs.reduce(
   (acc, [fn, ...args]) => fn(acc, ...args),
-  nextConfig,
+  nextConfig
 );

@@ -1,13 +1,11 @@
 "use client";
 
-import { PropsWithChildren } from "react";
-
-import { DateClassName, headingClassName } from "./index.css";
-
+import type { PropsWithChildren } from "react";
 import { sprinkles } from "@/css/sprinkles.css";
-import { vars } from "@/css/vars.css";
-import { DeviceWithStyle, ThemeWithStyle } from "@/types/style";
+import type { vars } from "@/css/vars.css";
+import type { DeviceWithStyle, ThemeWithStyle } from "@/types/style";
 import { cx, toDateFormat } from "@/utils/string";
+import { DateClassName, headingClassName } from "./index.css";
 
 interface TextProps {
   color?: ThemeWithStyle<keyof typeof vars.color>;
@@ -40,11 +38,11 @@ export function Heading({
   );
 }
 
-interface DateProps {
+interface FormattedDateProps {
   date: string;
 }
 
-export function Date({ date }: DateProps) {
+export function FormattedDate({ date }: FormattedDateProps) {
   return <span className={DateClassName}>{toDateFormat(date)}</span>;
 }
 

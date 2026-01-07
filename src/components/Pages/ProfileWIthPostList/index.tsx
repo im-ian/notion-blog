@@ -1,7 +1,7 @@
 import { Flex, Layout } from "@/components/Layouts";
 import { PostCard } from "@/components/Posts";
 import ProfilePage from "@/components/Profile";
-import { Posts } from "@/types/notion";
+import type { Posts } from "@/types/notion";
 
 function ProfileWithPostList({ posts }: { posts: Posts }) {
   return (

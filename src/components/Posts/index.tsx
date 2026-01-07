@@ -1,15 +1,12 @@
 import Image from "next/image";
 import Link from "next/link";
-
+import { Routes } from "@/constants";
+import type { Post } from "@/types/notion";
+import { getOptionColor } from "@/utils/color";
 import { Box, Card } from "../Layouts";
 import { Tag } from "../Tags";
-import { Heading, Text, Date as DateText } from "../Texts";
-
+import { FormattedDate, Heading, Text } from "../Texts";
 import { PostCardThumbnailClassNames } from "./index.css";
-
-import { Routes } from "@/constants";
-import { Post } from "@/types/notion";
-import { getOptionColor } from "@/utils/color";
 
 interface PostCardProps {
   block: Post["block"];
@@ -46,7 +43,7 @@ export function PostCard({ block }: PostCardProps) {
             <Text>{summary.value}</Text>
           </Box>
           <Box sprinkle={{ marginY: "medium" }}>
-            {date.value && <DateText date={date.value} />}
+            {date.value && <FormattedDate date={date.value} />}
           </Box>
         </a>
         <Box sprinkle={{ marginY: "medium" }}>

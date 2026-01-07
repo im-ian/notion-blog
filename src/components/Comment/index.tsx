@@ -34,12 +34,12 @@ function Comment() {
     if (isDarkMode === undefined) return;
 
     const $comment = document.getElementsByClassName(
-      "utterances-frame",
+      "utterances-frame"
     )[0] as HTMLIFrameElement;
 
     $comment?.contentWindow?.postMessage(
       { type: "set-theme", theme: isDarkMode ? "github-dark" : "github-light" },
-      "https://utteranc.es",
+      "https://utteranc.es"
     );
   }, [isDarkMode]);
 
@@ -47,7 +47,7 @@ function Comment() {
     <div ref={commentRef}>
       {isLoading && (
         <BounceLoader
-          cssOverride={{ margin: vars.space["center"] }}
+          cssOverride={{ margin: vars.space.center }}
           color={vars.color["brand-400"]}
         />
       )}

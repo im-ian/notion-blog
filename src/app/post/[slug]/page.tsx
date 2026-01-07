@@ -1,4 +1,4 @@
-import { Metadata } from "next";
+import type { Metadata } from "next";
 import Link from "next/link";
 
 import Comment from "@/components/Comment";
@@ -6,13 +6,10 @@ import { Box, Flex, Layout } from "@/components/Layouts";
 import { NotionPage } from "@/components/NotionRenderer";
 import ScrollProgressBar from "@/components/Pages/ScrollProgressBar";
 import { Tag } from "@/components/Tags";
-import { Date, Heading } from "@/components/Texts";
+import { FormattedDate, Heading } from "@/components/Texts";
 import { Routes } from "@/constants";
 import { getOptionColor } from "@/utils/color";
 import { getBlockByPageId, getPost, getPosts } from "@/utils/notion";
-import { getSiteConfig } from "@/utils/config";
-
-const { postRevalidate } = getSiteConfig("site");
 
 type PageProps = {
   params: Promise<{
@@ -24,13 +21,12 @@ export async function generateStaticParams() {
   const { blocks: posts } = await getPosts();
   if (!posts?.length) return [];
 
-  return posts
-    .map((block) => {
-      return { slug: block.value.attributes.slug.value || "" };
-    });
+  return posts.map((block) => {
+    return { slug: block.value.attributes.slug.value || "" };
+  });
 }
 
-export const revalidate = postRevalidate;
+export const revalidate = 3600;
 
 export async function generateMetadata({ params }: PageProps) {
   const { slug } = await params;
@@ -82,7 +78,7 @@ async function PostPage({ params }: PageProps) {
           )}
           {date && (
             <Box sprinkle={{ marginY: "medium" }}>
-              <Date date={date.value || ""} />
+              <FormattedDate date={date.value || ""} />
             </Box>
           )}
           <Box sprinkle={{ marginY: "medium" }}>
