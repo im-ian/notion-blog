@@ -1,4 +1,5 @@
 import { GitHub, Instagram, Linkedin } from "react-feather";
+
 import { Box, Flex } from "@/components/Layouts";
 import { Heading, Text } from "@/components/Texts";
 import { getUserGithub } from "@/services/github";

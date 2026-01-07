@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+
 import { Routes } from "@/constants";
 import type { Post } from "@/types/notion";
 import { getOptionColor } from "@/utils/color";

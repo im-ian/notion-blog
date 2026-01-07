@@ -1,6 +1,7 @@
 "use client";
 
 import type { PropsWithChildren } from "react";
+
 import { sprinkles } from "@/css/sprinkles.css";
 import type { vars } from "@/css/vars.css";
 import type { DeviceWithStyle, ThemeWithStyle } from "@/types/style";

@@ -88,7 +88,7 @@ export default forwardRef<CommandPaletteHandle>(
             })),
         },
       ],
-      searchKeyword
+      searchKeyword,
     );
 
     return (
@@ -118,5 +118,5 @@ export default forwardRef<CommandPaletteHandle>(
         </Command.Page>
       </Command>
     );
-  }
+  },
 );
