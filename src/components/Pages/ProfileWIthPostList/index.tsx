@@ -25,6 +25,10 @@ function ProfileWithPostList({ posts }: { posts: Posts }) {
             mobile: "medium",
             tablet: "none",
           },
+          paddingTop: {
+            mobile: "xlarge",
+            tablet: "large",
+          },
         }}
       >
         <Box sprinkle={{ paddingX: "medium" }}>

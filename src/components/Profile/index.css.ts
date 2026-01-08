@@ -16,14 +16,14 @@ export const ProfileContainerStyle = sprinkles({
     desktop: "center",
   },
   paddingTop: {
-    desktop: "xlarge",
+    desktop: "large",
     tablet: "none",
     mobile: "none",
   },
   paddingX: {
     desktop: "none",
     tablet: "large",
-    mobile: "large",
+    mobile: "none",
   },
 });
 
