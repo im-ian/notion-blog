@@ -1,6 +1,7 @@
-import { Flex, Layout } from "@/components/Layouts";
+import { Box, Flex, Layout } from "@/components/Layouts";
 import { PostCard } from "@/components/Posts";
 import ProfilePage from "@/components/Profile";
+import { Heading } from "@/components/Texts";
 import type { Posts } from "@/types/notion";
 
 function ProfileWithPostList({ posts }: { posts: Posts }) {
@@ -26,6 +27,9 @@ function ProfileWithPostList({ posts }: { posts: Posts }) {
           },
         }}
       >
+        <Box sprinkle={{ paddingX: "medium" }}>
+          <Heading size={"3x"}>{`Posts(${posts.blocks.length})`}</Heading>
+        </Box>
         {posts.blocks.map((block) => {
           return (
             <PostCard key={block.value.attributes.slug.value} block={block} />
