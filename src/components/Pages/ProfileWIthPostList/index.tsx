@@ -1,6 +1,6 @@
 import { Box, Flex, Layout } from "@/components/Layouts";
 import { PostCard } from "@/components/Posts";
-import ProfilePage from "@/components/Profile";
+import { ResponsiveProfile } from "@/components/Profile";
 import { Heading } from "@/components/Texts";
 import type { Posts } from "@/types/notion";
 
@@ -18,7 +18,7 @@ function ProfileWithPostList({ posts }: { posts: Posts }) {
         desktop: "flex-start",
       }}
     >
-      <ProfilePage />
+      <ResponsiveProfile />
       <Layout
         sprinkle={{
           paddingX: {

@@ -11,7 +11,7 @@ import {
   ProfileInnerStyle,
 } from "./index.css";
 
-async function Profile() {
+export async function ResponsiveProfile() {
   const { github, linkedin, instagram } = getSiteConfig("profile");
   const { profile } = await getUserGithub();
 
@@ -107,5 +107,3 @@ async function Profile() {
     </Box>
   );
 }
-
-export default Profile;
