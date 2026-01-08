@@ -11,3 +11,7 @@
   color: rgb(255, 255, 255, 0.9);
   caret-color: rgb(255, 255, 255, 0.9);
 }
+
+.notion .notion-quote {
+  font-size: unset;
+}
