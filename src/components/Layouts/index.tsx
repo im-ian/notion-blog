@@ -4,6 +4,7 @@ import { assignInlineVars } from "@vanilla-extract/dynamic";
 import type { HTMLAttributes, PropsWithChildren } from "react";
 
 import { sprinkles } from "@/css/sprinkles.css";
+import type { vars } from "@/css/vars.css";
 import type { DeviceWithStyle } from "@/types/style";
 import { cx } from "@/utils/string";
 import { PostCardClassName } from "../Posts/index.css";
@@ -35,17 +36,21 @@ export function Layout({ className, sprinkle, children }: BoxProps) {
 
 interface FlexProps {
   flexDirection?: DeviceWithStyle<"row" | "column">;
+  justifyContent?: DeviceWithStyle<"center" | "flex-start" | "flex-end">;
   alignItems?: DeviceWithStyle<"center" | "flex-start" | "flex-end">;
+  gap?: DeviceWithStyle<keyof typeof vars.space>;
 }
 
 export function Flex({
   flexDirection = "row",
   alignItems = "center",
+  gap = "none",
   children,
 }: PropsWithChildren<FlexProps>) {
   const flexStyle = sprinkles({
     flexDirection,
     alignItems,
+    gap,
   });
 
   return <Box className={cx([FlexClassName, flexStyle])}>{children}</Box>;

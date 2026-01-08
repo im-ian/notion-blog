@@ -1,6 +1,9 @@
 import type { Metadata } from "next";
 
 type Profile = {
+  name: string;
+  profileImage: string | undefined;
+  bio: string | undefined;
   repo: string | undefined;
   github: string | undefined;
   linkedin: string | undefined;

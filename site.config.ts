@@ -3,6 +3,9 @@ import type { Config } from "@/types";
 const CONFIG: Config = {
   // Profile
   profile: {
+    name: "임대호(ian, daeho im)",
+    profileImage: "https://avatars.githubusercontent.com/u/38205068?v=4",
+    bio: "Solving problems through code.",
     // 댓글 기능을 위한 레포명, 입력하지 않으면 댓글 기능이 비활성화됩니다.
     repo: "im-ian/notion-blog",
     // Github 유저 네임

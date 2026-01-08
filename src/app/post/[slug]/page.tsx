@@ -5,6 +5,7 @@ import Comment from "@/components/Comment";
 import { Box, Flex, Layout } from "@/components/Layouts";
 import { NotionPage } from "@/components/NotionRenderer";
 import ScrollProgressBar from "@/components/Pages/ScrollProgressBar";
+import { HorizontalProfile } from "@/components/Profile";
 import { Tag } from "@/components/Tags";
 import { FormattedDate, Heading } from "@/components/Texts";
 import { Routes } from "@/constants";
@@ -98,11 +99,14 @@ async function PostPage({ params }: PageProps) {
           </Box>
         </Box>
         {block && (
-          <Box sprinkle={{ paddingTop: "large" }}>
+          <Box sprinkle={{ paddingTop: "xlarge" }}>
             <NotionPage recordMap={renderBlock} />
           </Box>
         )}
-        <Box sprinkle={{ paddingTop: "xlarge" }}>
+        <Box sprinkle={{ marginTop: "xlarge" }}>
+          <HorizontalProfile />
+        </Box>
+        <Box sprinkle={{ marginTop: "large" }}>
           <Comment />
         </Box>
       </Layout>

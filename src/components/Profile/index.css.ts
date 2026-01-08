@@ -3,7 +3,7 @@ import { style } from "@vanilla-extract/css";
 import { MediaSize } from "@/constants";
 import { sprinkles } from "@/css/sprinkles.css";
 
-export const ProfileContainerStyle = sprinkles({
+export const ResponsiveProfileContainerStyle = sprinkles({
   width: "100%",
   maxWidth: {
     desktop: "280px",
@@ -27,24 +27,22 @@ export const ProfileContainerStyle = sprinkles({
   },
 });
 
-export const ProfileInnerStyle = style([
-  sprinkles({
-    paddingY: {
-      tablet: "large",
-      mobile: "large",
-    },
-    paddingX: {
-      tablet: "large",
-      mobile: "large",
-    },
-    borderRadius: {
-      tablet: "large",
-      mobile: "large",
-    },
-  }),
-]);
+export const ResponsiveProfileInnerStyle = sprinkles({
+  paddingY: {
+    tablet: "large",
+    mobile: "large",
+  },
+  paddingX: {
+    tablet: "large",
+    mobile: "large",
+  },
+  borderRadius: {
+    tablet: "large",
+    mobile: "large",
+  },
+});
 
-export const ProfileImageStyle = style([
+export const ResponsiveProfileImageStyle = style([
   sprinkles({
     display: "inline-block",
     maxWidth: {
@@ -52,11 +50,12 @@ export const ProfileImageStyle = style([
       tablet: "100%",
       mobile: "100%",
     },
+    borderRadius: "circle",
   }),
   {
     aspectRatio: "1 / 1",
     overflow: "hidden",
-    width: 80,
+    width: 90,
     "@media": {
       [MediaSize.tablet]: {
         width: 120,
@@ -77,3 +76,9 @@ export const ProfileIconStyle = style([
     marginX: "small",
   }),
 ]);
+
+export const HorizontalProfileContainerStyle = sprinkles({
+  width: "100%",
+  paddingX: "large",
+  paddingY: "large",
+});

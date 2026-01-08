@@ -8,6 +8,7 @@ const nextConfig = {
       "www.notion.so",
       "s3-us-west-2.amazonaws.com",
       "prod-files-secure.s3.us-west-2.amazonaws.com",
+      "avatars.githubusercontent.com",
     ],
   },
 };
@@ -44,5 +45,5 @@ if (useSentry) {
 
 module.exports = configs.reduce(
   (acc, [fn, ...args]) => fn(acc, ...args),
-  nextConfig
+  nextConfig,
 );
