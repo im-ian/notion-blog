@@ -50,7 +50,9 @@ export async function getPosts(pageId: string = blogPageId) {
       .filter(
         (page) =>
           page.value.attributes.slug.value &&
-          page.value.attributes.status.value === "Public"
+          (page.value.attributes.status.value === "Public" ||
+            (process.env.NODE_ENV === "development" &&
+              page.value.attributes.status.value === "Editing")),
       )
       .sort((a, b) => {
         const aDate = +new Date(a?.value?.attributes?.date?.value || 0);
@@ -69,7 +71,7 @@ export async function getPost(slug: string): Promise<Post> {
   const posts = await getPosts();
 
   const filteredPosts = posts.blocks.find(
-    (block) => block.value.attributes.slug.value === slug
+    (block) => block.value.attributes.slug.value === slug,
   );
 
   if (!filteredPosts) {
@@ -173,7 +175,7 @@ export function getPostList(block: BlockMap) {
 
 export function getPostAttribute(
   block: Block,
-  schema: CollectionPropertySchemaMap
+  schema: CollectionPropertySchemaMap,
 ): PostAttribute {
   const result: PostAttribute = {};
 
