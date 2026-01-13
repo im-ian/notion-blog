@@ -15,3 +15,7 @@
 .notion .notion-quote {
   font-size: unset;
 }
+
+.notion-asset-wrapper-video > div {
+  height: auto !important;
+}
