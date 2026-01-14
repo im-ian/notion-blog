@@ -12,9 +12,9 @@ import "../css/prism-theme.css";
 import "react-notion-x/src/styles.css";
 
 export const metadata = getSiteConfig("meta");
-export const { lang } = getSiteConfig("site");
-export const { googleSearchConsole, ga } = getSiteConfig("google");
-export const { naverSearchAdvisor } = getSiteConfig("naver");
+const { lang } = getSiteConfig("site");
+const { googleSearchConsole, ga } = getSiteConfig("google");
+const { naverSearchAdvisor } = getSiteConfig("naver");
 
 export default async function RootLayout({
   children,
