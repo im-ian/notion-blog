@@ -33,9 +33,25 @@ export async function generateMetadata({ params }: PageProps) {
   const { slug } = await params;
   const { block } = await getPost(slug);
   const { attributes } = block.value;
+
+  const title = attributes.title.value;
+  const description = attributes.summary.value;
+  const image = attributes.thumbnail.value;
+
   return {
-    title: attributes.title.value,
-    description: attributes.summary.value,
+    title,
+    description,
+    openGraph: {
+      title,
+      description,
+      ...(image && {
+        images: [
+          {
+            url: image,
+          },
+        ],
+      }),
+    },
   } as Metadata;
 }
 
