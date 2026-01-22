@@ -2,6 +2,8 @@ import type { MetadataRoute } from "next";
 
 import { getPosts } from "@/utils/notion";
 
+export const revalidate = 600;
+
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const posts = await getPosts();
   const baseUrl = process.env.SITE_URL || "http://localhost:3000";
