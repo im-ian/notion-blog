@@ -1,3 +1,4 @@
+import { unstable_cache } from "next/cache";
 import { NotionAPI } from "notion-client";
 import type {
   Block,
@@ -14,19 +15,24 @@ import { getSiteConfig } from "./config";
 
 const { blogPageId } = getSiteConfig("notion");
 
-const POSTS_CACHE = new Map<string, Posts>();
 const TAGS_CACHE = new Set<PostTag>();
 
 const api = new NotionAPI();
 
+export const getPage = unstable_cache(
+  async (pageId: string) => {
+    return await api.getPage(pageId, {});
+  },
+  ["notion-page"],
+  { revalidate: 300 }, // 5 minutes
+);
+
 export async function getBlockByPageId(pageId: string) {
-  return await api.getPage(pageId, {});
+  return await getPage(pageId);
 }
 
 export async function getPosts(pageId: string = blogPageId) {
-  if (POSTS_CACHE.has(pageId)) return POSTS_CACHE.get(pageId) as Posts;
-
-  const pageContent = await api.getPage(pageId, {});
+  const pageContent = await getPage(pageId);
 
   if (!pageContent)
     return {
@@ -61,8 +67,6 @@ export async function getPosts(pageId: string = blogPageId) {
         return bDate - aDate;
       }),
   };
-
-  POSTS_CACHE.set(pageId, posts);
 
   return posts;
 }
