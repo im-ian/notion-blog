@@ -24,7 +24,7 @@ export const getPage = unstable_cache(
     return await api.getPage(pageId, {});
   },
   ["notion-page"],
-  { revalidate: 300 }, // 5 minutes
+  { revalidate: 600 }, // 10 minutes
 );
 
 export async function getBlockByPageId(pageId: string) {
