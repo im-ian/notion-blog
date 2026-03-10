@@ -28,7 +28,7 @@ export default forwardRef<CommandPaletteHandle>(
     const params = useParams();
 
     const { data } = useNotionContext();
-    const posts = data?.blocks.map((page) => page.value) || [];
+    const posts = data?.blocks || [];
 
     const [isCommandOpen, setIsCommandOpen] = useState(false);
     const [searchKeyword, setSearchKeyword] = useState("");

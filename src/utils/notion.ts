@@ -6,6 +6,7 @@ import type {
   CollectionMap,
   CollectionPropertySchemaMap,
   ExtendedRecordMap,
+  NotionMapBox,
 } from "notion-types";
 import { getDateValue, getTextContent } from "notion-utils";
 
@@ -21,7 +22,7 @@ const api = new NotionAPI();
 
 export const getPage = unstable_cache(
   async (pageId: string) => {
-    return await api.getPage(pageId, {});
+    return await api.getPage(pageId);
   },
   ["notion-page"],
   { revalidate: 600 }, // 10 minutes
@@ -44,25 +45,22 @@ export async function getPosts(pageId: string = blogPageId) {
   const pageList = getPostList(pageContent.block);
 
   const posts: Posts = {
-    schema,
+    schema: schema || {},
     blocks: pageList
       .map((page) => ({
-        role: page.role,
-        value: {
-          ...page.value,
-          attributes: getPostAttribute(page.value, schema),
-        },
+        ...page,
+        attributes: getPostAttribute(page, schema || {}),
       }))
       .filter(
         (page) =>
-          page.value.attributes.slug.value &&
-          (page.value.attributes.status.value === "Public" ||
+          page.attributes.slug.value &&
+          (page.attributes.status.value === "Public" ||
             (process.env.NODE_ENV === "development" &&
-              page.value.attributes.status.value === "Editing")),
+              page.attributes.status.value === "Editing")),
       )
       .sort((a, b) => {
-        const aDate = +new Date(a?.value?.attributes?.date?.value || 0);
-        const bDate = +new Date(b?.value?.attributes?.date?.value || 0);
+        const aDate = +new Date(a?.attributes?.date?.value || 0);
+        const bDate = +new Date(b?.attributes?.date?.value || 0);
 
         return bDate - aDate;
       }),
@@ -75,7 +73,7 @@ export async function getPost(slug: string): Promise<Post> {
   const posts = await getPosts();
 
   const filteredPosts = posts.blocks.find(
-    (block) => block.value.attributes.slug.value === slug,
+    (block) => block.attributes.slug.value === slug,
   );
 
   if (!filteredPosts) {
@@ -102,7 +100,7 @@ export async function getTags() {
   const result: PostTag[] = [];
 
   blocks.forEach((page) => {
-    const properties = getPostAttribute(page.value, schema);
+    const properties = getPostAttribute(page, schema);
 
     const tags = properties.tags?.value?.split(",") || [];
 
@@ -142,7 +140,7 @@ export async function getPostsByTag(tag: string) {
   const posts = await getPosts();
 
   const filteredPosts = posts.blocks.filter((block) => {
-    const tags = block.value.attributes.tags?.value?.split(",") || [];
+    const tags = block.attributes.tags?.value?.split(",") || [];
     return tags.includes(tag);
   });
 
@@ -157,24 +155,39 @@ function getFirstId(block: Record<string, unknown>) {
 }
 
 export function getBlockIds({ collection_query }: ExtendedRecordMap) {
-  const query = getFirstId(collection_query);
+  const query = getFirstId(collection_query || {});
   if (!query) return [];
 
-  const block = getFirstId(collection_query[query]);
-  if (!block) return [];
+  const blockBox = collection_query?.[query];
+  if (!blockBox) return [];
 
-  return collection_query[query][block].collection_group_results?.blockIds;
+  const blockId = getFirstId(blockBox);
+  if (!blockId) return [];
+
+  const result = blockBox[blockId];
+  return result?.collection_group_results?.blockIds;
 }
 
 export function getSchema(collection: CollectionMap) {
-  return Object.values(collection)[0]?.value?.schema;
+  const firstCollection = Object.values(collection || {})[0];
+  return unwrapRecord(firstCollection)?.schema;
 }
 
 export function getPostList(block: BlockMap) {
-  const blockIds = Object.keys(block);
-  const blocks = blockIds.map((blockId) => block[blockId]);
+  const blocks = Object.values(block || {})
+    .map((b) => unwrapRecord(b))
+    .filter((b): b is Block => !!b);
 
-  return blocks.filter((block) => block.value.type === "page");
+  return blocks.filter((b) => b.type === "page");
+}
+
+function unwrapRecord<T>(box: NotionMapBox<T> | undefined): T | undefined {
+  if (!box) return undefined;
+  const value = box.value;
+  if (value && typeof value === "object" && "value" in value && "role" in value) {
+    return (value as any).value;
+  }
+  return value as T;
 }
 
 export function getPostAttribute(

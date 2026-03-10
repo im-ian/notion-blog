@@ -14,7 +14,7 @@ interface PostCardProps {
 }
 
 export function PostCard({ block }: PostCardProps) {
-  const { attributes } = block.value;
+  const { attributes } = block;
 
   const { thumbnail, title, slug, summary, tags, date } = attributes;
 

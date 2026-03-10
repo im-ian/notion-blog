@@ -36,7 +36,7 @@ function ProfileWithPostList({ posts }: { posts: Posts }) {
         </Box>
         {posts.blocks.map((block) => {
           return (
-            <PostCard key={block.value.attributes.slug.value} block={block} />
+            <PostCard key={block.attributes.slug.value} block={block} />
           );
         })}
       </Layout>

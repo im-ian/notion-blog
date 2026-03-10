@@ -54,7 +54,7 @@ export const NotionPage = ({ recordMap }: { recordMap: ExtendedRecordMap }) => {
       key={theme}
       disableHeader
       pageTitle={false}
-      recordMap={recordMap}
+      recordMap={recordMap as any}
       fullPage={false}
       darkMode={theme === "dark"}
       components={{

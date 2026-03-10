@@ -16,24 +16,18 @@ export type PostAttribute = Record<
   }
 >;
 
+export type PostBlock = Block & {
+  attributes: PostAttribute;
+};
+
 export type Posts = {
   schema: CollectionPropertySchemaMap;
-  blocks: {
-    role: Role;
-    value: Block & {
-      attributes: PostAttribute;
-    };
-  }[];
+  blocks: PostBlock[];
 };
 
 export type Post = {
   schema: CollectionPropertySchemaMap;
-  block: {
-    role: Role;
-    value: Block & {
-      attributes: PostAttribute;
-    };
-  };
+  block: PostBlock;
 };
 
 export type PostTag = {

@@ -11,12 +11,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const postEntries = posts.blocks
     .filter(
       (post) =>
-        post.value.attributes.slug.value &&
-        post.value.attributes.status.value === "Public",
+        post.attributes.slug.value &&
+        post.attributes.status.value === "Public",
     )
     .map((post) => ({
-      url: `${baseUrl}/post/${post.value.attributes.slug.value}`,
-      lastModified: new Date(post.value.attributes.date.value || Date.now()),
+      url: `${baseUrl}/post/${post.attributes.slug.value}`,
+      lastModified: new Date(post.attributes.date.value || Date.now()),
       changeFrequency: "daily" as const,
       priority: 0.7,
     }));

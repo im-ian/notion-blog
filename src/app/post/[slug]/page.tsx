@@ -23,7 +23,7 @@ export async function generateStaticParams() {
   if (!posts?.length) return [];
 
   return posts.map((block) => {
-    return { slug: block.value.attributes.slug.value || "" };
+    return { slug: block.attributes.slug.value || "" };
   });
 }
 
@@ -32,7 +32,7 @@ export const revalidate = 600; // 10 minutes
 export async function generateMetadata({ params }: PageProps) {
   const { slug } = await params;
   const { block } = await getPost(slug);
-  const { attributes } = block.value;
+  const { attributes } = block;
 
   const title = attributes.title.value;
   const description = attributes.summary.value;
@@ -58,12 +58,12 @@ export async function generateMetadata({ params }: PageProps) {
 async function PostPage({ params }: PageProps) {
   const { slug } = await params;
   const { block } = await getPost(slug);
-  const { attributes } = block.value;
+  const { attributes } = block;
 
   if (!attributes) return null;
 
   const { title, tags, date } = attributes;
-  const renderBlock = await getBlockByPageId(block.value.id);
+  const renderBlock = await getBlockByPageId(block.id);
 
   const tagList = tags.value?.split(",") || [];
 
