@@ -1733,10 +1733,10 @@ json5@^2.1.2, json5@^2.2.3:
   resolved "https://registry.yarnpkg.com/json5/-/json5-2.2.3.tgz#78cd6f1a19bdc12b73db5ad0c61efd66c1e29283"
   integrity sha512-XmOWe7eyHYH14cLdVPoyg+GOH3rYX++KpzrylJwSW98t3Nk+U8XOl8FWKOgwtzdb8lXGf6zYwDUzeHMWfxasyg==
 
-katex@^0.16.21:
-  version "0.16.27"
-  resolved "https://registry.yarnpkg.com/katex/-/katex-0.16.27.tgz#4ecf6f620e0ca1c1a5de722e85fcdcec49086a48"
-  integrity sha512-aeQoDkuRWSqQN6nSvVCEFvfXdqo1OQiCmmW1kc9xSdjutPv7BGO7pqY9sQRJpMOGrEdfDgF2TfRXe5eUAD2Waw==
+katex@0.16.21:
+  version "0.16.21"
+  resolved "https://registry.yarnpkg.com/katex/-/katex-0.16.21.tgz#8f63c659e931b210139691f2cc7bb35166b792a3"
+  integrity sha512-XvqR7FgOHtWupfMiigNzmh+MgUVmDGU2kXZm899ZkPfcuoPuFxyHmXsgATDpFZDAXCI8tvinaVcDo8PIIJSo4A==
   dependencies:
     commander "^8.3.0"
 
@@ -1984,17 +1984,6 @@ notion-types@7.8.3, notion-types@^7.8.3:
   resolved "https://registry.yarnpkg.com/notion-types/-/notion-types-7.8.3.tgz#85c736af748c2926c23cea66411bc0547f8c94c9"
   integrity sha512-4czeSnkoYAkxcujhyTRmiImYzFV7sqUbrIC/5UZ9gK22rpBO65X9Fz/swaK2wOxpaBzJ2GQssUpiWnmLLfEhfA==
 
-notion-utils@7.7.3, notion-utils@^7.7.3:
-  version "7.7.3"
-  resolved "https://registry.yarnpkg.com/notion-utils/-/notion-utils-7.7.3.tgz#95641c8aa313e8a1e703622b30b4f743edc7e03a"
-  integrity sha512-MpOsUWdJJXKKc01zIYv90cxZZf7zL4dDSTssdqRFlDJsgGFFrD9uoKr0giOrMPiIoGwLka4TNeTORRDMYRZmoQ==
-  dependencies:
-    is-url-superb "^6.1.0"
-    memoize "^10.1.0"
-    normalize-url "^8.0.1"
-    notion-types "7.7.3"
-    p-queue "^8.1.0"
-
 notion-utils@7.8.3:
   version "7.8.3"
   resolved "https://registry.yarnpkg.com/notion-utils/-/notion-utils-7.8.3.tgz#2c00a998a0077f7c718d18b2c148cd737ad10cee"
@@ -2004,6 +1993,17 @@ notion-utils@7.8.3:
     memoize "^10.1.0"
     normalize-url "^8.0.1"
     notion-types "7.8.3"
+    p-queue "^8.1.0"
+
+notion-utils@^7.7.3:
+  version "7.7.3"
+  resolved "https://registry.yarnpkg.com/notion-utils/-/notion-utils-7.7.3.tgz#95641c8aa313e8a1e703622b30b4f743edc7e03a"
+  integrity sha512-MpOsUWdJJXKKc01zIYv90cxZZf7zL4dDSTssdqRFlDJsgGFFrD9uoKr0giOrMPiIoGwLka4TNeTORRDMYRZmoQ==
+  dependencies:
+    is-url-superb "^6.1.0"
+    memoize "^10.1.0"
+    normalize-url "^8.0.1"
+    notion-types "7.7.3"
     p-queue "^8.1.0"
 
 nth-check@^2.0.1:
@@ -2288,16 +2288,16 @@ react-modal@^3.16.3:
     react-lifecycles-compat "^3.0.0"
     warning "^4.0.3"
 
-react-notion-x@^7.7.3:
-  version "7.7.3"
-  resolved "https://registry.yarnpkg.com/react-notion-x/-/react-notion-x-7.7.3.tgz#9e01057ba4f9befe4913dbceda16c727eff85d8e"
-  integrity sha512-3VmReYPXaB4X3LYfo4oBQab/2MJ4GjhY1cExwLDq3MKjInmNdp4CtIONzZkXE4/JYqIujKN+nM1uF25xE5MJMw==
+react-notion-x@^7.8.3:
+  version "7.8.3"
+  resolved "https://registry.yarnpkg.com/react-notion-x/-/react-notion-x-7.8.3.tgz#ca654a38f856fae4f31de09d4b781f0ec41b1c09"
+  integrity sha512-Es/5dOG3jGWkpJCrY5GWzh3zUbpzFyj2bQw6bDEjvKKvMo1oWbeyQdIXm1Im8y7E0shf5qww4jJEr5/D1NNdLA==
   dependencies:
     "@fisch0920/medium-zoom" "^1.0.7"
     "@matejmazur/react-katex" "^3.1.3"
-    katex "^0.16.21"
-    notion-types "7.7.3"
-    notion-utils "7.7.3"
+    katex "0.16.21"
+    notion-types "7.8.3"
+    notion-utils "7.8.3"
     prismjs "^1.30.0"
     react-fast-compare "^3.2.0"
     react-hotkeys-hook "^4.5.1"
