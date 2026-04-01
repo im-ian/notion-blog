@@ -20,9 +20,46 @@ const TAGS_CACHE = new Set<PostTag>();
 
 const api = new NotionAPI();
 
+const inflight = new Map<string, Promise<ExtendedRecordMap>>();
+
+async function fetchPageWithRetry(
+  pageId: string,
+  maxRetries = 3,
+): Promise<ExtendedRecordMap> {
+  for (let attempt = 0; attempt <= maxRetries; attempt++) {
+    try {
+      return await api.getPage(pageId);
+    } catch (error: any) {
+      const is429 =
+        error?.message?.includes("429") ||
+        error?.statusCode === 429 ||
+        error?.code === 429;
+
+      if (is429 && attempt < maxRetries) {
+        const delay = Math.pow(2, attempt) * 1000 + Math.random() * 500;
+        await new Promise((resolve) => setTimeout(resolve, delay));
+        continue;
+      }
+      throw error;
+    }
+  }
+  throw new Error(`Failed to fetch page ${pageId} after ${maxRetries} retries`);
+}
+
+function deduplicatedFetch(pageId: string): Promise<ExtendedRecordMap> {
+  const existing = inflight.get(pageId);
+  if (existing) return existing;
+
+  const promise = fetchPageWithRetry(pageId).finally(() => {
+    inflight.delete(pageId);
+  });
+  inflight.set(pageId, promise);
+  return promise;
+}
+
 export const getPage = unstable_cache(
   async (pageId: string) => {
-    return await api.getPage(pageId);
+    return await deduplicatedFetch(pageId);
   },
   ["notion-page"],
   { revalidate: 600 }, // 10 minutes
