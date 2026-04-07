@@ -11,6 +11,9 @@ const nextConfig = {
       "avatars.githubusercontent.com",
     ],
   },
+  experimental: {
+    cpus: 1,
+  },
 };
 
 const withVanillaExtract = createVanillaExtractPlugin();
