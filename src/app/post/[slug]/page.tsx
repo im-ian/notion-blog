@@ -10,7 +10,7 @@ import { Tag } from "@/components/Tags";
 import { FormattedDate, Heading } from "@/components/Texts";
 import { Routes } from "@/constants";
 import { getOptionColor } from "@/utils/color";
-import { getBlockByPageId, getPost, getPosts } from "@/utils/notion";
+import { getBlockByPageId, getPost } from "@/utils/notion";
 
 type PageProps = {
   params: Promise<{
@@ -19,15 +19,12 @@ type PageProps = {
 };
 
 export async function generateStaticParams() {
-  const { blocks: posts } = await getPosts();
-  if (!posts?.length) return [];
-
-  return posts.map((block) => {
-    return { slug: block.attributes.slug.value || "" };
-  });
+  // 빌드 시 Notion API 호출을 피하기 위해 빈 배열 반환.
+  // 포스트는 첫 요청 시 on-demand로 렌더링되고 ISR로 캐시된다.
+  return [];
 }
 
-export const revalidate = 600; // 10 minutes
+export const revalidate = 3600; // 1 hour
 
 export async function generateMetadata({ params }: PageProps) {
   const { slug } = await params;
