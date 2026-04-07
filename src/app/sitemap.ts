@@ -6,6 +6,13 @@ export const revalidate = 600;
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const posts = await getPosts();
+
+  if (process.env.NODE_ENV === "production" && !process.env.SITE_URL) {
+    throw new Error(
+      "SITE_URL environment variable is required for sitemap generation in production",
+    );
+  }
+
   const baseUrl = process.env.SITE_URL || "http://localhost:3000";
 
   const postEntries = posts.blocks
