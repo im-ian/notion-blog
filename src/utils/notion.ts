@@ -288,8 +288,8 @@ export function getMapImageUrl(url: string, block: Block) {
         return url;
       }
     }
-  } catch (e) {
-    console.log(e);
+  } catch {
+    // URL 파싱 실패 시 아래 fallback 로직으로 진행
   }
 
   if (url.startsWith("/images")) {
