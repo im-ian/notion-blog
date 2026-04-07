@@ -65,8 +65,6 @@ export default async function RootLayout({
             content={naverSearchAdvisor.siteVerification}
           />
         )}
-      </head>
-      <body className={themeBackground}>
         <script
           dangerouslySetInnerHTML={{
             __html: `
@@ -82,6 +80,8 @@ export default async function RootLayout({
             `,
           }}
         />
+      </head>
+      <body className={themeBackground}>
         <PostProvider posts={posts}>
           <Header />
         </PostProvider>
