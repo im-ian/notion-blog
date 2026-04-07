@@ -17,7 +17,7 @@ function ProfileSnsIcons() {
 
   return (
     <Flex gap={"small"}>
-      {linkedin && (
+      {github && (
         <a
           className={ProfileIconStyle}
           href={`https://github.com/${github}`}
