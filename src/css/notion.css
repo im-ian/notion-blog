@@ -21,12 +21,23 @@
 }
 
 /**
- * react-notion-x가 Notion의 table full-width(fit-page-width) 옵션을 지원하지 않아
- * 전역으로 테이블이 페이지 너비에 맞춰지도록 강제한다.
+ * react-notion-x가 Notion의 table full-width(fit-page-width) 옵션을 지원하지 않고
+ * 각 td에 width: 120px 인라인 스타일을 강제로 넣어, 테이블이 항상 좁게 표시된다.
+ *
+ * table을 display: block으로 바꿔 가로 스크롤 가능한 박스로 만들고,
+ * tbody에 display: table + min-width: 100%을 주어 내부는 정상적인 테이블 레이아웃을
+ * 유지하면서 콘텐츠가 길어지면 좌우로 스크롤되도록 한다.
  */
 .notion-simple-table {
-  width: 100%;
-  table-layout: fixed;
+  display: block;
+  max-width: 100%;
+  overflow-x: auto;
+}
+
+.notion-simple-table > tbody {
+  display: table;
+  width: auto;
+  min-width: 100%;
 }
 
 .notion-simple-table td {
