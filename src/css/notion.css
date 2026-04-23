@@ -19,3 +19,16 @@
 .notion-asset-wrapper-video > div {
   height: auto !important;
 }
+
+/**
+ * react-notion-x가 Notion의 table full-width(fit-page-width) 옵션을 지원하지 않아
+ * 전역으로 테이블이 페이지 너비에 맞춰지도록 강제한다.
+ */
+.notion-simple-table {
+  width: 100%;
+  table-layout: fixed;
+}
+
+.notion-simple-table td {
+  width: auto !important;
+}
