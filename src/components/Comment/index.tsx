@@ -16,6 +16,8 @@ function Comment() {
   useEffect(() => {
     const { repo } = getSiteConfig("profile");
     if (!repo) return;
+    const container = commentRef.current;
+    if (!container) return;
 
     const script = document.createElement("script");
     script.src = "https://utteranc.es/client.js";
@@ -27,7 +29,15 @@ function Comment() {
     script.setAttribute("crossorigin", "anonymous");
     script.onload = () => setIsLoading(false);
 
-    commentRef.current?.appendChild(script);
+    container.appendChild(script);
+
+    return () => {
+      container
+        .querySelectorAll(
+          "script[src*='utteranc.es'], .utterances, .utterances-frame",
+        )
+        .forEach((node) => node.remove());
+    };
   }, []);
 
   useEffect(() => {
