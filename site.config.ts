@@ -55,6 +55,10 @@ const CONFIG: Config = {
     // true: 피드 노출 (기본값, SITE_URL 환경변수 필요)
     // false: 404 응답
     useRssFeed: true,
+    // 헤더의 다크모드 토글 버튼 노출 여부
+    // true: 노출 (기본값)
+    // false: 숨김 (defaultTheme을 강제하고 싶을 때 유용)
+    showThemeToggle: true,
     // Google Analytics Tracking ID
   },
   sentry: {

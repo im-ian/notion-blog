@@ -10,7 +10,7 @@ import { Box, Flex, FlexItem, Layout } from "../../Layouts";
 import { Heading } from "../../Texts";
 import { HeaderContainerClassName, HeaderIconClassName } from "./index.css";
 
-const { title } = getSiteConfig("site");
+const { title, showThemeToggle } = getSiteConfig("site");
 
 export function Header() {
   const { theme, toggleTheme, mounted } = useTheme();
@@ -32,7 +32,7 @@ export function Header() {
               </Heading>
             </FlexItem>
             <FlexItem flex={"none"}>
-              {mounted && (
+              {showThemeToggle && mounted && (
                 <Box className={HeaderIconClassName} onClick={toggleTheme}>
                   {theme === "light" ? <Moon size={24} /> : <Sun size={24} />}
                 </Box>

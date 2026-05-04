@@ -24,6 +24,7 @@ type SiteConfig = {
   defaultTheme: "auto" | "light" | "dark";
   useComments: boolean;
   useRssFeed: boolean;
+  showThemeToggle: boolean;
 };
 
 type SentryConfig = {
