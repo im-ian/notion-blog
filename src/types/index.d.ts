@@ -23,6 +23,7 @@ type SiteConfig = {
   useStickyProfile: boolean;
   defaultTheme: "auto" | "light" | "dark";
   useComments: boolean;
+  useRssFeed: boolean;
 };
 
 type SentryConfig = {

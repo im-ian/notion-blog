@@ -51,6 +51,10 @@ const CONFIG: Config = {
     // true: 댓글 영역 노출 (기본값)
     // false: 댓글 영역 비활성
     useComments: true,
+    // RSS 피드 활성화 여부 (/rss.xml)
+    // true: 피드 노출 (기본값, SITE_URL 환경변수 필요)
+    // false: 404 응답
+    useRssFeed: true,
     // Google Analytics Tracking ID
   },
   sentry: {
