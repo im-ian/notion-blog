@@ -1,7 +1,7 @@
 "use client";
 import { useParams } from "next/navigation";
 import { forwardRef, useEffect, useImperativeHandle, useState } from "react";
-import Command, { filterItems, getItemIndex } from "react-cmdk";
+import Command, { getItemIndex } from "react-cmdk";
 import { FileText, Home, Tag } from "react-feather";
 
 import { Routes } from "@/constants";
@@ -54,42 +54,63 @@ export default forwardRef<CommandPaletteHandle>(
       return () => document.removeEventListener("keydown", handleKeyDown);
     }, []);
 
-    const filteredItems = filterItems(
-      [
-        {
-          heading: "바로가기",
-          id: "goto",
-          items: [
+    const { scope } = getSiteConfig("search");
+    const keyword = searchKeyword.trim().toLowerCase();
+
+    const matchPost = (post: (typeof posts)[number]) => {
+      if (!keyword) return true;
+      const title = (post.attributes.title?.value || "").toLowerCase();
+      if (title.includes(keyword)) return true;
+      if (scope === "title") return false;
+      const summary = (post.attributes.summary?.value || "").toLowerCase();
+      if (summary.includes(keyword)) return true;
+      if (scope === "title+summary") return false;
+      const tags = (post.attributes.tags?.value || "").toLowerCase();
+      return tags.includes(keyword);
+    };
+
+    const matchLabel = (label: string) =>
+      !keyword || label.toLowerCase().includes(keyword);
+
+    const matchedPosts = posts
+      .filter(({ attributes }) => attributes.slug.value !== params?.slug)
+      .filter(matchPost);
+
+    const shortcuts = [
+      {
+        id: "home",
+        children: "홈",
+        icon: () => <Home {...iconStyle} />,
+        href: Routes.Home(),
+      },
+      {
+        id: "tags",
+        children: "태그",
+        icon: () => <Tag {...iconStyle} />,
+        href: Routes.Tag(),
+      },
+    ].filter((item) => matchLabel(item.children));
+
+    const filteredItems = [
+      ...(shortcuts.length
+        ? [{ heading: "바로가기", id: "goto", items: shortcuts }]
+        : []),
+      ...(matchedPosts.length
+        ? [
             {
-              id: "home",
-              children: "홈",
-              icon: () => <Home {...iconStyle} />,
-              href: Routes.Home(),
+              heading: `다른 포스트 (${matchedPosts.length})`,
+              id: "posts",
+              items: matchedPosts.map(({ attributes }) => ({
+                id: attributes.slug.value || "",
+                icon: () => DocumentIcon,
+                children: attributes.title.value,
+                showType: false,
+                href: Routes.Post(attributes.slug.value || ""),
+              })),
             },
-            {
-              id: "tags",
-              children: "태그",
-              icon: () => <Tag {...iconStyle} />,
-              href: Routes.Tag(),
-            },
-          ],
-        },
-        {
-          heading: `다른 포스트 (${posts.length - 1})`,
-          id: "posts",
-          items: posts
-            .filter(({ attributes }) => attributes.slug.value !== params?.slug)
-            .map(({ attributes }) => ({
-              id: attributes.slug.value || "",
-              icon: () => DocumentIcon,
-              children: attributes.title.value,
-              showType: false,
-              href: Routes.Post(attributes.slug.value || ""),
-            })),
-        },
-      ],
-      searchKeyword,
-    );
+          ]
+        : []),
+    ];
 
     return (
       <Command

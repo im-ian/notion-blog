@@ -12,6 +12,7 @@ import { HeaderContainerClassName, HeaderIconClassName } from "./index.css";
 
 const { title } = getSiteConfig("site");
 const { showToggle: showThemeToggle } = getSiteConfig("theme");
+const { showInHeader: showSearchInHeader } = getSiteConfig("search");
 
 export function Header() {
   const { theme, toggleTheme, mounted } = useTheme();
@@ -38,14 +39,16 @@ export function Header() {
                   {theme === "light" ? <Moon size={24} /> : <Sun size={24} />}
                 </Box>
               )}
-              <Box
-                className={HeaderIconClassName}
-                onClick={() => {
-                  commandRef.current?.open();
-                }}
-              >
-                <Search size={24} />
-              </Box>
+              {showSearchInHeader && (
+                <Box
+                  className={HeaderIconClassName}
+                  onClick={() => {
+                    commandRef.current?.open();
+                  }}
+                >
+                  <Search size={24} />
+                </Box>
+              )}
             </FlexItem>
           </Flex>
         </Layout>
