@@ -4,10 +4,13 @@ import Link from "next/link";
 import { Routes } from "@/constants";
 import type { Post } from "@/types/notion";
 import { getOptionColor } from "@/utils/color";
+import { getSiteConfig } from "@/utils/config";
 import { Box, Card } from "../Layouts";
 import { Tag } from "../Tags";
 import { FormattedDate, Heading, Text } from "../Texts";
 import { PostCardThumbnailClassNames } from "./index.css";
+
+const { showSummary } = getSiteConfig("posts");
 
 interface PostCardProps {
   block: Post["block"];
@@ -40,9 +43,11 @@ export function PostCard({ block }: PostCardProps) {
           <Heading size={{ mobile: "1.5x", tablet: "2x" }}>
             {title.value}
           </Heading>
-          <Box sprinkle={{ marginY: "medium" }}>
-            <Text>{summary.value}</Text>
-          </Box>
+          {showSummary && summary.value && (
+            <Box sprinkle={{ marginY: "medium" }}>
+              <Text>{summary.value}</Text>
+            </Box>
+          )}
           <Box sprinkle={{ marginY: "medium" }}>
             {date.value && <FormattedDate date={date.value} />}
           </Box>
