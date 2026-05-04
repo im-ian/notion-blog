@@ -11,7 +11,22 @@ import "../css/global.css";
 import "../css/prism-theme.css";
 import "react-notion-x/src/styles.css";
 
-export const metadata = getSiteConfig("meta");
+const metaConfig = getSiteConfig("meta");
+const { siteUrl, ogImage, ...metaRest } = metaConfig;
+
+export const metadata = {
+  ...metaRest,
+  ...(siteUrl ? { metadataBase: new URL(siteUrl) } : {}),
+  ...(ogImage
+    ? {
+        openGraph: {
+          ...(metaRest.openGraph || {}),
+          images: [{ url: ogImage }],
+        },
+      }
+    : {}),
+};
+
 const { lang } = getSiteConfig("site");
 const { mode: defaultTheme } = getSiteConfig("theme");
 const { googleSearchConsole, ga } = getSiteConfig("google");

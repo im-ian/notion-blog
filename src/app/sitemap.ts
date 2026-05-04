@@ -1,20 +1,22 @@
 import type { MetadataRoute } from "next";
 
 import { PostStatus } from "@/types/notion";
+import { getSiteConfig } from "@/utils/config";
 import { getPosts } from "@/utils/notion";
 
 export const revalidate = 600;
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const posts = await getPosts();
+  const { siteUrl } = getSiteConfig("meta");
 
-  if (process.env.NODE_ENV === "production" && !process.env.SITE_URL) {
+  if (process.env.NODE_ENV === "production" && !siteUrl) {
     throw new Error(
-      "SITE_URL environment variable is required for sitemap generation in production",
+      "meta.siteUrl (or SITE_URL env) is required for sitemap generation in production",
     );
   }
 
-  const baseUrl = process.env.SITE_URL || "http://localhost:3000";
+  const baseUrl = siteUrl || "http://localhost:3000";
 
   const postEntries = posts.blocks
     .filter(

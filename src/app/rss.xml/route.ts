@@ -27,13 +27,14 @@ export async function GET() {
   const description =
     typeof meta.description === "string" ? meta.description : "";
 
-  if (process.env.NODE_ENV === "production" && !process.env.SITE_URL) {
+  const { siteUrl } = meta;
+  if (process.env.NODE_ENV === "production" && !siteUrl) {
     throw new Error(
-      "SITE_URL environment variable is required for RSS feed generation in production",
+      "meta.siteUrl (or SITE_URL env) is required for RSS feed generation in production",
     );
   }
 
-  const baseUrl = process.env.SITE_URL || "http://localhost:3000";
+  const baseUrl = siteUrl || "http://localhost:3000";
   const posts = await getPosts();
 
   const items = posts.blocks

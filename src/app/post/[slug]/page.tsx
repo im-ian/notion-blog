@@ -37,7 +37,8 @@ export async function generateMetadata({ params }: PageProps) {
 
   const title = attributes.title.value;
   const description = attributes.summary.value;
-  const image = attributes.thumbnail.value;
+  const { ogImage: fallbackOgImage } = getSiteConfig("meta");
+  const image = attributes.thumbnail.value || fallbackOgImage;
 
   return {
     title,
