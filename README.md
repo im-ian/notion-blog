@@ -78,11 +78,25 @@ you can customize below information on `site.config.ts`
 - github profile
 - notion
 - metadata(SEO)
-- site
-  - title
-  - cache revaliate time
-  - google analytics
+- site (아래 옵션 표 참고)
 - sentry
+
+### `site` 옵션
+
+| 키 | 타입 | 기본값 | 설명 |
+|----|------|--------|------|
+| `lang` | `string` | `"ko"` | `<html lang>` 속성 값 |
+| `title` | `string` | — | 사이트 타이틀, 헤더에 표시 |
+| `useSearchShortcut` | `boolean` | `true` | 검색 단축키(⌘/Ctrl+K) 활성화 |
+| `useScheduledPosts` | `boolean` | `true` | `true`일 때 Public 포스트는 작성일을 넘어야 리스트에 노출 (예약 게시). `false`면 작성일과 무관하게 노출 |
+| `useStickyProfile` | `boolean` | `false` | 메인 페이지 데스크탑 좌측 프로필 섹션이 스크롤 시 따라다닐지 여부 |
+| `defaultTheme` | `"auto" \| "light" \| "dark"` | `"auto"` | 첫 방문 기본 테마. `auto`는 OS 설정 추종. 사용자가 토글로 변경하면 localStorage 값이 우선 |
+| `useComments` | `boolean` | `true` | utterances 댓글 영역 노출 여부 (`profile.repo`가 있어야 동작) |
+| `useRssFeed` | `boolean` | `true` | `/rss.xml` 피드 활성화. `SITE_URL` 환경변수 필요. `false`면 404 |
+| `showThemeToggle` | `boolean` | `true` | 헤더의 다크모드 토글 버튼 노출. `defaultTheme`을 강제하고 싶을 때 `false` |
+| `showScrollProgress` | `boolean` | `true` | 포스트 페이지 상단 스크롤 진행바 노출 |
+| `postsPerPage` | `number` | `10` | 페이지당 포스트 개수 (1 미만이면 1로 보정) |
+| `paginationMode` | `"infinite" \| "numbered"` | `"infinite"` | `infinite`는 인피니티 스크롤(뒤로가기 시 노출 개수·스크롤 위치 복원). `numbered`는 숫자 페이지 + Prev/Next 버튼, URL은 `?page=N` 사용 |
 
 ```ts
 export const vars = createGlobalTheme(":root", {
