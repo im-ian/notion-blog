@@ -79,7 +79,6 @@ async function PostPage({ params }: PageProps) {
             mobile: "small",
             tablet: "large",
           },
-          paddingBottom: "xxlarge",
         }}
       >
         <Box

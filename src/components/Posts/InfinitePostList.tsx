@@ -61,7 +61,10 @@ export function InfinitePostList({ items, pageSize }: InfinitePostListProps) {
     const stored = readStored(storageKey);
     if (!stored) return;
 
-    const restoredCount = Math.min(items.length, Math.max(initialCount, stored.count));
+    const restoredCount = Math.min(
+      items.length,
+      Math.max(initialCount, stored.count),
+    );
     if (restoredCount > initialCount) {
       setVisibleCount(restoredCount);
     }

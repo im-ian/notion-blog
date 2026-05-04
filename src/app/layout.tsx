@@ -101,6 +101,7 @@ export default async function RootLayout({
               mobile: "720px",
             },
             margin: "center",
+            paddingBottom: "xxlarge",
           }}
         >
           {children}

@@ -1,4 +1,4 @@
-import ProfileWithPostList from "@/components/Pages/ProfileWIthPostList";
+import ProfileWithPostList from "@/components/Pages/ProfileWithPostList";
 import { getPosts, paginatePosts } from "@/utils/notion";
 
 interface HomeProps {
