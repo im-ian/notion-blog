@@ -1,6 +1,5 @@
 import Link from "next/link";
 
-import { Box, Flex } from "@/components/Layouts";
 import {
   PaginationContainerStyle,
   PaginationItemActiveStyle,
@@ -33,63 +32,61 @@ export function Pagination({
   const hasNext = safeCurrent < totalPages;
 
   return (
-    <Box className={PaginationContainerStyle}>
-      <Flex gap={"small"} alignItems={"center"} justifyContent={"center"}>
-        {hasPrev ? (
-          <Link
-            className={PaginationItemStyle}
-            href={buildHref(basePath, safeCurrent - 1)}
-            rel={"prev"}
-          >
-            {"« Prev"}
-          </Link>
-        ) : (
-          <span
-            className={`${PaginationItemStyle} ${PaginationItemDisabledStyle}`}
-          >
-            {"« Prev"}
-          </span>
-        )}
+    <nav className={PaginationContainerStyle} aria-label={"Pagination"}>
+      {hasPrev ? (
+        <Link
+          className={PaginationItemStyle}
+          href={buildHref(basePath, safeCurrent - 1)}
+          rel={"prev"}
+        >
+          {"« Prev"}
+        </Link>
+      ) : (
+        <span
+          className={`${PaginationItemStyle} ${PaginationItemDisabledStyle}`}
+        >
+          {"« Prev"}
+        </span>
+      )}
 
-        {pages.map((page) => {
-          if (page === safeCurrent) {
-            return (
-              <span
-                key={page}
-                className={`${PaginationItemStyle} ${PaginationItemActiveStyle}`}
-                aria-current={"page"}
-              >
-                {page}
-              </span>
-            );
-          }
+      {pages.map((page) => {
+        if (page === safeCurrent) {
           return (
-            <Link
+            <span
               key={page}
-              className={PaginationItemStyle}
-              href={buildHref(basePath, page)}
+              className={`${PaginationItemStyle} ${PaginationItemActiveStyle}`}
+              aria-current={"page"}
             >
               {page}
-            </Link>
+            </span>
           );
-        })}
-
-        {hasNext ? (
+        }
+        return (
           <Link
+            key={page}
             className={PaginationItemStyle}
-            href={buildHref(basePath, safeCurrent + 1)}
-            rel={"next"}
+            href={buildHref(basePath, page)}
           >
-            {"Next »"}
+            {page}
           </Link>
-        ) : (
-          <span
-            className={`${PaginationItemStyle} ${PaginationItemDisabledStyle}`}
-          >
-            {"Next »"}
-          </span>
-        )}
-      </Flex>
-    </Box>
+        );
+      })}
+
+      {hasNext ? (
+        <Link
+          className={PaginationItemStyle}
+          href={buildHref(basePath, safeCurrent + 1)}
+          rel={"next"}
+        >
+          {"Next »"}
+        </Link>
+      ) : (
+        <span
+          className={`${PaginationItemStyle} ${PaginationItemDisabledStyle}`}
+        >
+          {"Next »"}
+        </span>
+      )}
+    </nav>
   );
 }

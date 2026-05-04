@@ -1,12 +1,28 @@
 import { style } from "@vanilla-extract/css";
 
+import { MediaSize } from "@/constants";
 import { sprinkles } from "@/css/sprinkles.css";
+import { vars } from "@/css/vars.css";
 
-export const PaginationContainerStyle = sprinkles({
-  paddingY: "large",
-  paddingX: "medium",
-  marginTop: "large",
-});
+export const PaginationContainerStyle = style([
+  sprinkles({
+    paddingY: "large",
+    paddingX: "medium",
+    marginTop: "large",
+  }),
+  {
+    display: "flex",
+    flexWrap: "wrap",
+    alignItems: "center",
+    justifyContent: "center",
+    gap: vars.space.small,
+    "@media": {
+      [MediaSize.desktop]: {
+        justifyContent: "flex-start",
+      },
+    },
+  },
+]);
 
 export const PaginationItemStyle = style([
   sprinkles({
@@ -32,22 +48,20 @@ export const PaginationItemStyle = style([
   },
 ]);
 
-export const PaginationItemActiveStyle = style([
-  sprinkles({
-    color: {
-      lightMode: "white",
-      darkMode: "black",
+export const PaginationItemActiveStyle = style({
+  fontWeight: 600,
+  cursor: "default",
+  selectors: {
+    "&&": {
+      color: vars.color.white,
+      background: vars.color.black,
     },
-    background: {
-      lightMode: "black",
-      darkMode: "white",
+    ".dark-mode &&": {
+      color: vars.color.black,
+      background: vars.color.white,
     },
-  }),
-  {
-    fontWeight: 600,
-    cursor: "default",
   },
-]);
+});
 
 export const PaginationItemDisabledStyle = style({
   opacity: 0.35,
