@@ -63,6 +63,12 @@ const CONFIG: Config = {
     // true: 노출 (기본값)
     // false: 숨김
     showScrollProgress: true,
+    // 페이지당 포스트 개수 (1 미만이면 1로 보정)
+    postsPerPage: 10,
+    // 페이지네이션 모드
+    // "infinite": 인피니티 스크롤 (기본값)
+    // "numbered": 숫자 페이지 + 이전/다음 버튼 (?page=N)
+    paginationMode: "infinite",
     // Google Analytics Tracking ID
   },
   sentry: {

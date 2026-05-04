@@ -26,6 +26,8 @@ type SiteConfig = {
   useRssFeed: boolean;
   showThemeToggle: boolean;
   showScrollProgress: boolean;
+  postsPerPage: number;
+  paginationMode: "infinite" | "numbered";
 };
 
 type SentryConfig = {

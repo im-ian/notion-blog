@@ -1,10 +1,16 @@
 import ProfileWithPostList from "@/components/Pages/ProfileWIthPostList";
-import { getPosts } from "@/utils/notion";
+import { getPosts, paginatePosts } from "@/utils/notion";
 
-async function Home() {
-  const posts = await getPosts();
+interface HomeProps {
+  searchParams: Promise<{ page?: string | string[] }>;
+}
 
-  return <ProfileWithPostList posts={posts} />;
+async function Home({ searchParams }: HomeProps) {
+  const { page } = await searchParams;
+  const allPosts = await getPosts();
+  const { posts, pagination } = paginatePosts(allPosts, page, "/");
+
+  return <ProfileWithPostList posts={posts} pagination={pagination} />;
 }
 
 export default Home;

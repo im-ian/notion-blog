@@ -13,15 +13,72 @@ import { getDateValue, getTextContent } from "notion-utils";
 import {
   type Post,
   type PostAttribute,
-  type Posts,
   PostStatus,
+  type Posts,
   type PostTag,
 } from "@/types/notion";
 import { getOptionColor } from "./color";
 import { getSiteConfig } from "./config";
 
 const { blogPageId } = getSiteConfig("notion");
-const { useScheduledPosts } = getSiteConfig("site");
+const { useScheduledPosts, postsPerPage, paginationMode } =
+  getSiteConfig("site");
+
+export type PaginationInfo = {
+  mode: "infinite" | "numbered";
+  pageSize: number;
+  currentPage: number;
+  totalPages: number;
+  totalCount: number;
+  basePath: string;
+};
+
+export function paginatePosts(
+  posts: Posts,
+  pageParam: string | string[] | undefined,
+  basePath: string,
+): { posts: Posts; pagination: PaginationInfo } {
+  const pageSize = Math.max(1, postsPerPage);
+  const totalCount = posts.blocks.length;
+  const totalPages = Math.max(1, Math.ceil(totalCount / pageSize));
+
+  const rawPage = Array.isArray(pageParam) ? pageParam[0] : pageParam;
+  const parsed = Number.parseInt(rawPage ?? "", 10);
+  const requestedPage = Number.isFinite(parsed) && parsed > 0 ? parsed : 1;
+  const currentPage = Math.min(requestedPage, totalPages);
+
+  if (paginationMode === "infinite") {
+    return {
+      posts,
+      pagination: {
+        mode: "infinite",
+        pageSize,
+        currentPage: 1,
+        totalPages,
+        totalCount,
+        basePath,
+      },
+    };
+  }
+
+  const start = (currentPage - 1) * pageSize;
+  const slicedBlocks = posts.blocks.slice(start, start + pageSize);
+
+  return {
+    posts: {
+      schema: posts.schema,
+      blocks: slicedBlocks,
+    },
+    pagination: {
+      mode: "numbered",
+      pageSize,
+      currentPage,
+      totalPages,
+      totalCount,
+      basePath,
+    },
+  };
+}
 
 const TAGS_CACHE = new Set<PostTag>();
 

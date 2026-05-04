@@ -4,7 +4,7 @@ import { PostStatus } from "@/types/notion";
 import { getSiteConfig } from "@/utils/config";
 import { getPosts } from "@/utils/notion";
 
-export const revalidate = 600;
+export const dynamic = "force-dynamic";
 
 const { useRssFeed } = getSiteConfig("site");
 

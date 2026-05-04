@@ -1,13 +1,30 @@
 import { Box, Flex, Layout } from "@/components/Layouts";
+import { Pagination } from "@/components/Pagination";
 import { PostCard } from "@/components/Posts";
+import { InfinitePostList } from "@/components/Posts/InfinitePostList";
 import { ResponsiveProfile } from "@/components/Profile";
 import { Heading } from "@/components/Texts";
 import type { Posts } from "@/types/notion";
+import type { PaginationInfo } from "@/utils/notion";
 
-function ProfileWithPostList({ posts, tag }: { posts: Posts; tag?: string }) {
+interface ProfileWithPostListProps {
+  posts: Posts;
+  tag?: string;
+  pagination: PaginationInfo;
+}
+
+function ProfileWithPostList({
+  posts,
+  tag,
+  pagination,
+}: ProfileWithPostListProps) {
   const heading = tag
-    ? `${tag}/Posts(${posts.blocks.length})`
-    : `Posts(${posts.blocks.length})`;
+    ? `${tag}/Posts(${pagination.totalCount})`
+    : `Posts(${pagination.totalCount})`;
+
+  const cards = posts.blocks.map((block) => (
+    <PostCard key={block.attributes.slug.value} block={block} />
+  ));
 
   return (
     <Flex
@@ -38,9 +55,18 @@ function ProfileWithPostList({ posts, tag }: { posts: Posts; tag?: string }) {
         <Box sprinkle={{ paddingX: "medium" }}>
           <Heading size={"3x"}>{heading}</Heading>
         </Box>
-        {posts.blocks.map((block) => {
-          return <PostCard key={block.attributes.slug.value} block={block} />;
-        })}
+        {pagination.mode === "infinite" ? (
+          <InfinitePostList items={cards} pageSize={pagination.pageSize} />
+        ) : (
+          <>
+            {cards}
+            <Pagination
+              basePath={pagination.basePath}
+              currentPage={pagination.currentPage}
+              totalPages={pagination.totalPages}
+            />
+          </>
+        )}
       </Layout>
     </Flex>
   );
