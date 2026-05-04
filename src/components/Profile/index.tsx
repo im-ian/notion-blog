@@ -10,6 +10,7 @@ import {
   ResponsiveProfileContainerStyle,
   ResponsiveProfileImageStyle,
   ResponsiveProfileInnerStyle,
+  ResponsiveProfileStickyStyle,
 } from "./index.css";
 
 function ProfileSnsIcons() {
@@ -53,9 +54,14 @@ function ProfileSnsIcons() {
 
 export async function ResponsiveProfile() {
   const { name, profileImage, bio } = getSiteConfig("profile");
+  const { useStickyProfile } = getSiteConfig("site");
+
+  const containerClassName = useStickyProfile
+    ? `${ResponsiveProfileContainerStyle} ${ResponsiveProfileStickyStyle}`
+    : ResponsiveProfileContainerStyle;
 
   return (
-    <Box className={ResponsiveProfileContainerStyle}>
+    <Box className={containerClassName}>
       <Box className={ResponsiveProfileInnerStyle}>
         <Flex flexDirection={"column"} gap={"medium"}>
           {profileImage && (

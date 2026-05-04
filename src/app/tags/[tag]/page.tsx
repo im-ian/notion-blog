@@ -9,9 +9,10 @@ type PageProps = {
 
 async function TagPage({ params }: PageProps) {
   const { tag } = await params;
-  const posts = await getPostsByTag(decodeURIComponent(tag));
+  const decodedTag = decodeURIComponent(tag);
+  const posts = await getPostsByTag(decodedTag);
 
-  return <ProfileWithPostList posts={posts} />;
+  return <ProfileWithPostList posts={posts} tag={decodedTag} />;
 }
 
 export default TagPage;

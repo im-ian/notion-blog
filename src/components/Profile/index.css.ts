@@ -27,6 +27,16 @@ export const ResponsiveProfileContainerStyle = sprinkles({
   },
 });
 
+export const ResponsiveProfileStickyStyle = style({
+  "@media": {
+    [MediaSize.desktop]: {
+      position: "sticky",
+      top: 80,
+      alignSelf: "flex-start",
+    },
+  },
+});
+
 export const ResponsiveProfileInnerStyle = sprinkles({
   paddingY: {
     tablet: "large",

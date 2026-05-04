@@ -12,7 +12,7 @@ import "../css/prism-theme.css";
 import "react-notion-x/src/styles.css";
 
 export const metadata = getSiteConfig("meta");
-const { lang } = getSiteConfig("site");
+const { lang, defaultTheme } = getSiteConfig("site");
 const { googleSearchConsole, ga } = getSiteConfig("google");
 const { naverSearchAdvisor } = getSiteConfig("naver");
 
@@ -69,9 +69,17 @@ export default async function RootLayout({
           dangerouslySetInnerHTML={{
             __html: `
               (function() {
-                var theme = localStorage.getItem("theme");
-                var systemDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
-                if (theme === "dark" || (!theme && systemDark)) {
+                var defaultTheme = ${JSON.stringify(defaultTheme)};
+                var saved = localStorage.getItem("theme");
+                var resolved;
+                if (saved === "dark" || saved === "light") {
+                  resolved = saved;
+                } else if (defaultTheme === "light" || defaultTheme === "dark") {
+                  resolved = defaultTheme;
+                } else {
+                  resolved = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+                }
+                if (resolved === "dark") {
                   document.documentElement.classList.add("dark-mode");
                 } else {
                   document.documentElement.classList.remove("dark-mode");

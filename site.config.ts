@@ -33,6 +33,20 @@ const CONFIG: Config = {
     title: "다람쥐 헌 쳇바퀴에 타고파",
     // 검색 단축키 사용 여부
     useSearchShortcut: true,
+    // 예약 게시 사용 여부
+    // true: Public 포스트가 작성일을 넘어가야 리스트에 노출 (기본값)
+    // false: Public 포스트가 작성일과 무관하게 노출
+    useScheduledPosts: true,
+    // 메인 페이지의 PC(데스크탑) 좌측 프로필 섹션 sticky 여부
+    // true: 스크롤 시 프로필 섹션이 따라다님
+    // false: 최상단에 고정 (기본값)
+    useStickyProfile: false,
+    // 기본 테마 모드
+    // "auto": 시스템 설정을 따름 (기본값)
+    // "light": 라이트 모드 고정
+    // "dark": 다크 모드 고정
+    // 사용자가 토글로 직접 변경한 경우 localStorage 값이 우선
+    defaultTheme: "auto",
     // Google Analytics Tracking ID
   },
   sentry: {

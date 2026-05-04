@@ -1,6 +1,23 @@
 import { useEffect, useState } from "react";
 
+import { getSiteConfig } from "@/utils/config";
+
 type Theme = "light" | "dark";
+
+const { defaultTheme } = getSiteConfig("site");
+
+function resolveInitialTheme(): Theme {
+  if (typeof window === "undefined") return "light";
+
+  const saved = localStorage.getItem("theme");
+  if (saved === "dark" || saved === "light") return saved;
+
+  if (defaultTheme === "light" || defaultTheme === "dark") return defaultTheme;
+
+  return window.matchMedia("(prefers-color-scheme: dark)").matches
+    ? "dark"
+    : "light";
+}
 
 export function useTheme() {
   const [theme, setTheme] = useState<Theme>("light");
@@ -8,20 +25,12 @@ export function useTheme() {
 
   useEffect(() => {
     setMounted(true);
-    const savedTheme = localStorage.getItem("theme") as Theme | null;
-    if (savedTheme) {
-      setTheme(savedTheme);
-      if (savedTheme === "dark") {
-        document.documentElement.classList.add("dark-mode");
-      }
+    const resolved = resolveInitialTheme();
+    setTheme(resolved);
+    if (resolved === "dark") {
+      document.documentElement.classList.add("dark-mode");
     } else {
-      const systemPrefersDark = window.matchMedia(
-        "(prefers-color-scheme: dark)",
-      ).matches;
-      if (systemPrefersDark) {
-        setTheme("dark");
-        document.documentElement.classList.add("dark-mode");
-      }
+      document.documentElement.classList.remove("dark-mode");
     }
   }, []);
 

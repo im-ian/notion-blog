@@ -4,7 +4,11 @@ import { ResponsiveProfile } from "@/components/Profile";
 import { Heading } from "@/components/Texts";
 import type { Posts } from "@/types/notion";
 
-function ProfileWithPostList({ posts }: { posts: Posts }) {
+function ProfileWithPostList({ posts, tag }: { posts: Posts; tag?: string }) {
+  const heading = tag
+    ? `[${tag}]/Posts(${posts.blocks.length})`
+    : `Posts(${posts.blocks.length})`;
+
   return (
     <Flex
       flexDirection={{
@@ -32,12 +36,10 @@ function ProfileWithPostList({ posts }: { posts: Posts }) {
         }}
       >
         <Box sprinkle={{ paddingX: "medium" }}>
-          <Heading size={"3x"}>{`Posts(${posts.blocks.length})`}</Heading>
+          <Heading size={"3x"}>{heading}</Heading>
         </Box>
         {posts.blocks.map((block) => {
-          return (
-            <PostCard key={block.attributes.slug.value} block={block} />
-          );
+          return <PostCard key={block.attributes.slug.value} block={block} />;
         })}
       </Layout>
     </Flex>

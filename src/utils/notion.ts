@@ -15,6 +15,7 @@ import { getOptionColor } from "./color";
 import { getSiteConfig } from "./config";
 
 const { blogPageId } = getSiteConfig("notion");
+const { useScheduledPosts } = getSiteConfig("site");
 
 const TAGS_CACHE = new Set<PostTag>();
 
@@ -36,7 +37,7 @@ async function fetchPageWithRetry(
         error?.code === 429;
 
       if (is429 && attempt < maxRetries) {
-        const delay = Math.pow(2, attempt) * 1000 + Math.random() * 500;
+        const delay = 2 ** attempt * 1000 + Math.random() * 500;
         await new Promise((resolve) => setTimeout(resolve, delay));
         continue;
       }
@@ -95,6 +96,15 @@ export async function getPosts(pageId: string = blogPageId) {
             (process.env.NODE_ENV === "development" &&
               page.attributes.status.value === "Editing")),
       )
+      .filter((page) => {
+        if (!useScheduledPosts) return true;
+        if (page.attributes.status.value !== "Public") return true;
+        const dateValue = page.attributes?.date?.value;
+        if (!dateValue) return true;
+        const postDate = new Date(dateValue).getTime();
+        if (Number.isNaN(postDate)) return true;
+        return postDate <= Date.now();
+      })
       .sort((a, b) => {
         const aDate = +new Date(a?.attributes?.date?.value || 0);
         const bDate = +new Date(b?.attributes?.date?.value || 0);
@@ -221,7 +231,12 @@ export function getPostList(block: BlockMap) {
 function unwrapRecord<T>(box: NotionMapBox<T> | undefined): T | undefined {
   if (!box) return undefined;
   const value = box.value;
-  if (value && typeof value === "object" && "value" in value && "role" in value) {
+  if (
+    value &&
+    typeof value === "object" &&
+    "value" in value &&
+    "role" in value
+  ) {
     return (value as any).value;
   }
   return value as T;

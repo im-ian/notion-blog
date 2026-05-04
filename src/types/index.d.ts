@@ -19,6 +19,9 @@ type SiteConfig = {
   lang: string;
   title: string;
   useSearchShortcut: boolean;
+  useScheduledPosts: boolean;
+  useStickyProfile: boolean;
+  defaultTheme: "auto" | "light" | "dark";
 };
 
 type SentryConfig = {
