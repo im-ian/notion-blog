@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { GitHub, Instagram, Linkedin } from "react-feather";
+import { AtSign, GitHub, Instagram, Linkedin, Twitter } from "react-feather";
 
 import { Box, Flex } from "@/components/Layouts";
 import { Heading, Text } from "@/components/Texts";
@@ -14,7 +14,8 @@ import {
 } from "./index.css";
 
 function ProfileSnsIcons() {
-  const { github, linkedin, instagram } = getSiteConfig("profile");
+  const { github, linkedin, instagram, twitter, threads } =
+    getSiteConfig("profile");
 
   return (
     <Flex gap={"small"}>
@@ -46,6 +47,28 @@ function ProfileSnsIcons() {
           rel={"noreferrer"}
         >
           <Instagram size={"20px"} style={{ color: "inherit" }} />
+        </a>
+      )}
+      {twitter && (
+        <a
+          className={ProfileIconStyle}
+          href={twitter}
+          target={"_blank"}
+          rel={"noreferrer"}
+          aria-label={"Twitter / X"}
+        >
+          <Twitter size={"20px"} style={{ color: "inherit" }} />
+        </a>
+      )}
+      {threads && (
+        <a
+          className={ProfileIconStyle}
+          href={threads}
+          target={"_blank"}
+          rel={"noreferrer"}
+          aria-label={"Threads"}
+        >
+          <AtSign size={"20px"} style={{ color: "inherit" }} />
         </a>
       )}
     </Flex>
