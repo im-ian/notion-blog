@@ -10,7 +10,10 @@ import { Tag } from "@/components/Tags";
 import { FormattedDate, Heading } from "@/components/Texts";
 import { Routes } from "@/constants";
 import { getOptionColor } from "@/utils/color";
+import { getSiteConfig } from "@/utils/config";
 import { getBlockByPageId, getPost } from "@/utils/notion";
+
+const { useComments } = getSiteConfig("site");
 
 type PageProps = {
   params: Promise<{
@@ -119,9 +122,11 @@ async function PostPage({ params }: PageProps) {
         <Box sprinkle={{ marginTop: "xlarge" }}>
           <HorizontalProfile />
         </Box>
-        <Box sprinkle={{ marginTop: "large" }}>
-          <Comment />
-        </Box>
+        {useComments && (
+          <Box sprinkle={{ marginTop: "large" }}>
+            <Comment />
+          </Box>
+        )}
       </Layout>
     </>
   );

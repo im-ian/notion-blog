@@ -47,6 +47,10 @@ const CONFIG: Config = {
     // "dark": 다크 모드 고정
     // 사용자가 토글로 직접 변경한 경우 localStorage 값이 우선
     defaultTheme: "auto",
+    // 댓글(utterances) 사용 여부 (profile.repo가 있을 때만 동작)
+    // true: 댓글 영역 노출 (기본값)
+    // false: 댓글 영역 비활성
+    useComments: true,
     // Google Analytics Tracking ID
   },
   sentry: {

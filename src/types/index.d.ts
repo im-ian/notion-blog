@@ -22,6 +22,7 @@ type SiteConfig = {
   useScheduledPosts: boolean;
   useStickyProfile: boolean;
   defaultTheme: "auto" | "light" | "dark";
+  useComments: boolean;
 };
 
 type SentryConfig = {
