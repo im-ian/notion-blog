@@ -202,6 +202,38 @@ export async function getPost(slug: string): Promise<Post> {
   };
 }
 
+export type AdjacentPosts = {
+  prev: { slug: string; title: string } | null;
+  next: { slug: string; title: string } | null;
+};
+
+export async function getAdjacentPosts(slug: string): Promise<AdjacentPosts> {
+  const posts = await getPosts();
+  const index = posts.blocks.findIndex(
+    (block) => block.attributes.slug.value === slug,
+  );
+
+  if (index === -1) return { prev: null, next: null };
+
+  // posts.blocks는 작성일 desc 정렬. 더 최신 = index 작음, 더 이전 = index 큼.
+  // UX: prev = 더 최신, next = 더 오래된 — 다른 정의도 가능하지만 인접 인덱스 그대로 사용.
+  const prevBlock = posts.blocks[index - 1];
+  const nextBlock = posts.blocks[index + 1];
+
+  const toLink = (block?: Posts["blocks"][number]) => {
+    if (!block) return null;
+    const slugValue = block.attributes.slug.value;
+    const titleValue = block.attributes.title?.value;
+    if (!slugValue) return null;
+    return { slug: slugValue, title: titleValue || slugValue };
+  };
+
+  return {
+    prev: toLink(prevBlock),
+    next: toLink(nextBlock),
+  };
+}
+
 export async function getTags() {
   if (TAGS_CACHE.size) return Array.from(TAGS_CACHE);
 

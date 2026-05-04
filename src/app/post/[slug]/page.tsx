@@ -5,16 +5,17 @@ import Comment from "@/components/Comment";
 import { Box, Flex, Layout } from "@/components/Layouts";
 import { NotionPage } from "@/components/NotionRenderer";
 import ScrollProgressBar from "@/components/Pages/ScrollProgressBar";
+import { PrevNext } from "@/components/Posts/PrevNext";
 import { HorizontalProfile } from "@/components/Profile";
 import { Tag } from "@/components/Tags";
 import { FormattedDate, Heading } from "@/components/Texts";
 import { Routes } from "@/constants";
 import { getOptionColor } from "@/utils/color";
 import { getSiteConfig } from "@/utils/config";
-import { getBlockByPageId, getPost } from "@/utils/notion";
+import { getAdjacentPosts, getBlockByPageId, getPost } from "@/utils/notion";
 
 const { use: useComments } = getSiteConfig("comments");
-const { showScrollProgress } = getSiteConfig("posts");
+const { showScrollProgress, showPrevNext } = getSiteConfig("posts");
 
 type PageProps = {
   params: Promise<{
@@ -66,6 +67,9 @@ async function PostPage({ params }: PageProps) {
 
   const { title, tags, date } = attributes;
   const renderBlock = await getBlockByPageId(block.id);
+  const adjacent = showPrevNext
+    ? await getAdjacentPosts(slug)
+    : { prev: null, next: null };
 
   const tagList = tags.value?.split(",") || [];
 
@@ -120,6 +124,7 @@ async function PostPage({ params }: PageProps) {
             <NotionPage recordMap={renderBlock} />
           </Box>
         )}
+        {showPrevNext && <PrevNext adjacent={adjacent} />}
         <Box sprinkle={{ marginTop: "xlarge" }}>
           <HorizontalProfile />
         </Box>
