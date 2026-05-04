@@ -68,7 +68,7 @@ const CONFIG: Config = {
     // 페이지네이션 모드
     // "infinite": 인피니티 스크롤 (기본값)
     // "numbered": 숫자 페이지 + 이전/다음 버튼 (?page=N)
-    paginationMode: "infinite",
+    paginationMode: "numbered",
     // Google Analytics Tracking ID
   },
   sentry: {
