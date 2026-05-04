@@ -17,6 +17,7 @@
     "@vanilla-extract/next-plugin": "^2.4.8",
     "@vanilla-extract/recipes": "^0.5.5",
     "@vanilla-extract/sprinkles": "^1.6.3",
+    "dayjs": "^1.11.20",
     "next": "^15.5.7",
     "notion-client": "^7.8.3",
     "notion-utils": "^7.7.3",

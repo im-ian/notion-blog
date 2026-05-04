@@ -1,3 +1,7 @@
+import dayjs from "dayjs";
+
+import { getSiteConfig } from "./config";
+
 export const cx = (classes: (string | undefined | null)[]) =>
   classes
     .filter((cls) => Boolean(cls))
@@ -8,14 +12,12 @@ export const padZero = (num: number) => {
   return num < 10 ? `0${num}` : `${num}`;
 };
 
-export const toDateFormat = (dateString: string) => {
-  const date = new Date(dateString);
-
-  const y = date.getFullYear();
-  const m = padZero(date.getMonth() + 1);
-  const d = padZero(date.getDate());
-
-  return `${y}년 ${m}월 ${d}일`;
+export const toDateFormat = (dateString: string, format?: string) => {
+  const fallback = "YYYY년 MM월 DD일";
+  const pattern = format ?? getSiteConfig("posts").dateFormat ?? fallback;
+  const parsed = dayjs(dateString);
+  if (!parsed.isValid()) return dateString;
+  return parsed.format(pattern);
 };
 
 export const toRelativeDateFormat = (dateString: string) => {
