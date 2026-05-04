@@ -6,7 +6,7 @@ import type { Posts } from "@/types/notion";
 
 function ProfileWithPostList({ posts, tag }: { posts: Posts; tag?: string }) {
   const heading = tag
-    ? `[${tag}]/Posts(${posts.blocks.length})`
+    ? `${tag}/Posts(${posts.blocks.length})`
     : `Posts(${posts.blocks.length})`;
 
   return (
