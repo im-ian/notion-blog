@@ -1,6 +1,7 @@
 import Script from "next/script";
 
 import { Box } from "@/components/Layouts";
+import { Footer } from "@/components/Pages/Footer";
 import { Header } from "@/components/Pages/Header";
 import PostProvider from "@/contexts/Posts";
 import { themeBackground } from "@/css/theme.css";
@@ -122,6 +123,7 @@ export default async function RootLayout({
         >
           {children}
         </Box>
+        <Footer />
       </body>
     </html>
   );
