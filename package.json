@@ -2,6 +2,8 @@
   "name": "notion-blog",
   "version": "0.1.0",
   "private": true,
+  "license": "MIT",
+  "author": "임대호 (im-ian) <im-ian@naver.com>",
   "scripts": {
     "dev": "next dev",
     "build": "next build",

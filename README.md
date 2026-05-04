@@ -186,3 +186,9 @@ export const vars = createGlobalTheme(":root", {
 ```
 
 If you want to edit color or size, edit file `sprinkles.css.ts` or `vars.css.ts`
+
+<br />
+
+## 📄 License
+
+Released under the [MIT License](./LICENSE). 자유롭게 포크해서 자기 블로그로 사용 가능.
