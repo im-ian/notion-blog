@@ -39,7 +39,7 @@ export default forwardRef<CommandPaletteHandle>(
     }));
 
     useEffect(() => {
-      const { useSearchShortcut } = getSiteConfig("site");
+      const { shortcut: useSearchShortcut } = getSiteConfig("search");
       if (!useSearchShortcut) return;
 
       function handleKeyDown(e: KeyboardEvent) {

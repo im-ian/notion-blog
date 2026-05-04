@@ -4,7 +4,7 @@ import { getSiteConfig } from "@/utils/config";
 
 type Theme = "light" | "dark";
 
-const { defaultTheme } = getSiteConfig("site");
+const { mode: defaultTheme } = getSiteConfig("theme");
 
 function resolveInitialTheme(): Theme {
   if (typeof window === "undefined") return "light";

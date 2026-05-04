@@ -6,7 +6,7 @@ import { getPosts } from "@/utils/notion";
 
 export const dynamic = "force-dynamic";
 
-const { useRssFeed } = getSiteConfig("site");
+const { use: useRssFeed } = getSiteConfig("rss");
 
 function escapeXml(input: string): string {
   return input

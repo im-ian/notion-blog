@@ -12,7 +12,8 @@ import "../css/prism-theme.css";
 import "react-notion-x/src/styles.css";
 
 export const metadata = getSiteConfig("meta");
-const { lang, defaultTheme } = getSiteConfig("site");
+const { lang } = getSiteConfig("site");
+const { mode: defaultTheme } = getSiteConfig("theme");
 const { googleSearchConsole, ga } = getSiteConfig("google");
 const { naverSearchAdvisor } = getSiteConfig("naver");
 

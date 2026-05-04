@@ -54,7 +54,7 @@ function ProfileSnsIcons() {
 
 export async function ResponsiveProfile() {
   const { name, profileImage, bio } = getSiteConfig("profile");
-  const { useStickyProfile } = getSiteConfig("site");
+  const { stickyProfile: useStickyProfile } = getSiteConfig("site");
 
   const containerClassName = useStickyProfile
     ? `${ResponsiveProfileContainerStyle} ${ResponsiveProfileStickyStyle}`

@@ -10,7 +10,8 @@ import { Box, Flex, FlexItem, Layout } from "../../Layouts";
 import { Heading } from "../../Texts";
 import { HeaderContainerClassName, HeaderIconClassName } from "./index.css";
 
-const { title, showThemeToggle } = getSiteConfig("site");
+const { title } = getSiteConfig("site");
+const { showToggle: showThemeToggle } = getSiteConfig("theme");
 
 export function Header() {
   const { theme, toggleTheme, mounted } = useTheme();

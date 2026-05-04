@@ -21,8 +21,11 @@ import { getOptionColor } from "./color";
 import { getSiteConfig } from "./config";
 
 const { blogPageId } = getSiteConfig("notion");
-const { useScheduledPosts, postsPerPage, paginationMode } =
-  getSiteConfig("site");
+const {
+  useScheduled: useScheduledPosts,
+  perPage: postsPerPage,
+  paginationMode,
+} = getSiteConfig("posts");
 
 export type PaginationInfo = {
   mode: "infinite" | "numbered";

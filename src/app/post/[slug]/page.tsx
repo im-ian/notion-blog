@@ -13,7 +13,8 @@ import { getOptionColor } from "@/utils/color";
 import { getSiteConfig } from "@/utils/config";
 import { getBlockByPageId, getPost } from "@/utils/notion";
 
-const { useComments, showScrollProgress } = getSiteConfig("site");
+const { use: useComments } = getSiteConfig("comments");
+const { showScrollProgress } = getSiteConfig("posts");
 
 type PageProps = {
   params: Promise<{
