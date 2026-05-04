@@ -10,7 +10,13 @@ import type {
 } from "notion-types";
 import { getDateValue, getTextContent } from "notion-utils";
 
-import type { Post, PostAttribute, Posts, PostTag } from "@/types/notion";
+import {
+  type Post,
+  type PostAttribute,
+  type Posts,
+  PostStatus,
+  type PostTag,
+} from "@/types/notion";
 import { getOptionColor } from "./color";
 import { getSiteConfig } from "./config";
 
@@ -92,13 +98,13 @@ export async function getPosts(pageId: string = blogPageId) {
       .filter(
         (page) =>
           page.attributes.slug.value &&
-          (page.attributes.status.value === "Public" ||
+          (page.attributes.status.value === PostStatus.Public ||
             (process.env.NODE_ENV === "development" &&
-              page.attributes.status.value === "Editing")),
+              page.attributes.status.value === PostStatus.Editing)),
       )
       .filter((page) => {
         if (!useScheduledPosts) return true;
-        if (page.attributes.status.value !== "Public") return true;
+        if (page.attributes.status.value !== PostStatus.Public) return true;
         const dateValue = page.attributes?.date?.value;
         if (!dateValue) return true;
         const postDate = new Date(dateValue).getTime();

@@ -6,6 +6,14 @@ import type {
   SelectOption,
 } from "notion-types";
 
+export const PostStatus = {
+  Public: "Public",
+  Private: "Private",
+  Editing: "Editing",
+} as const;
+
+export type PostStatus = (typeof PostStatus)[keyof typeof PostStatus];
+
 export type PostAttribute = Record<
   string,
   {

@@ -1,5 +1,6 @@
 import { notFound } from "next/navigation";
 
+import { PostStatus } from "@/types/notion";
 import { getSiteConfig } from "@/utils/config";
 import { getPosts } from "@/utils/notion";
 
@@ -39,7 +40,7 @@ export async function GET() {
     .filter(
       (post) =>
         post.attributes.slug.value &&
-        post.attributes.status.value === "Public",
+        post.attributes.status.value === PostStatus.Public,
     )
     .map((post) => {
       const slug = post.attributes.slug.value || "";

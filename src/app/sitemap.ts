@@ -1,5 +1,6 @@
 import type { MetadataRoute } from "next";
 
+import { PostStatus } from "@/types/notion";
 import { getPosts } from "@/utils/notion";
 
 export const revalidate = 600;
@@ -19,7 +20,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     .filter(
       (post) =>
         post.attributes.slug.value &&
-        post.attributes.status.value === "Public",
+        post.attributes.status.value === PostStatus.Public,
     )
     .map((post) => ({
       url: `${baseUrl}/post/${post.attributes.slug.value}`,
