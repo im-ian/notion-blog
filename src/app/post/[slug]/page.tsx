@@ -13,7 +13,7 @@ import { getOptionColor } from "@/utils/color";
 import { getSiteConfig } from "@/utils/config";
 import { getBlockByPageId, getPost } from "@/utils/notion";
 
-const { useComments } = getSiteConfig("site");
+const { useComments, showScrollProgress } = getSiteConfig("site");
 
 type PageProps = {
   params: Promise<{
@@ -69,7 +69,7 @@ async function PostPage({ params }: PageProps) {
 
   return (
     <>
-      <ScrollProgressBar />
+      {showScrollProgress && <ScrollProgressBar />}
       <Layout
         sprinkle={{
           width: {

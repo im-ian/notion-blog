@@ -25,6 +25,7 @@ type SiteConfig = {
   useComments: boolean;
   useRssFeed: boolean;
   showThemeToggle: boolean;
+  showScrollProgress: boolean;
 };
 
 type SentryConfig = {

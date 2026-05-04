@@ -59,6 +59,10 @@ const CONFIG: Config = {
     // true: 노출 (기본값)
     // false: 숨김 (defaultTheme을 강제하고 싶을 때 유용)
     showThemeToggle: true,
+    // 포스트 페이지 상단 스크롤 진행바 노출 여부
+    // true: 노출 (기본값)
+    // false: 숨김
+    showScrollProgress: true,
     // Google Analytics Tracking ID
   },
   sentry: {
