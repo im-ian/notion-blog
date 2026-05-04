@@ -74,29 +74,95 @@ const CONFIG: Config = {
   // ...
 }
 ```
-you can customize below information on `site.config.ts`
-- github profile
+you can customize below information on `site.config.ts` (자세한 옵션 표는 아래 참고)
+- profile
 - notion
-- metadata(SEO)
-- site (아래 옵션 표 참고)
+- meta (SEO)
+- site
+- theme
+- search
+- posts
+- comments
+- rss
+- footer
 - sentry
 
-### `site` 옵션
+### `profile`
+
+| 키 | 타입 | 설명 |
+|----|------|------|
+| `name` | `string` | 표시 이름 |
+| `profileImage` | `string \| undefined` | 아바타 URL |
+| `bio` | `string \| undefined` | 한 줄 소개 |
+| `repo` | `string \| undefined` | utterances 연동용 GitHub 레포 (`owner/repo`). 미설정 시 댓글 비활성 |
+| `github` | `string \| undefined` | GitHub username |
+| `linkedin` | `string \| undefined` | LinkedIn URL |
+| `instagram` | `string \| undefined` | Instagram URL |
+| `twitter` | `string \| undefined` | Twitter/X URL |
+| `threads` | `string \| undefined` | Threads URL |
+
+### `meta`
+
+`Next.js Metadata`를 그대로 받으며 다음 키가 추가됨.
+
+| 키 | 타입 | 설명 |
+|----|------|------|
+| `siteUrl` | `string \| undefined` | 카논컬 도메인. sitemap, RSS, layout `metadataBase`에 사용. 미설정 시 `process.env.SITE_URL` fallback (production에선 둘 중 하나 필수) |
+| `ogImage` | `string \| undefined` | 기본 OG 이미지. 포스트 썸네일이 없을 때 fallback으로도 사용 |
+
+### `site`
 
 | 키 | 타입 | 기본값 | 설명 |
 |----|------|--------|------|
-| `lang` | `string` | `"ko"` | `<html lang>` 속성 값 |
+| `lang` | `string` | `"ko"` | `<html lang>` 값 |
 | `title` | `string` | — | 사이트 타이틀, 헤더에 표시 |
-| `useSearchShortcut` | `boolean` | `true` | 검색 단축키(⌘/Ctrl+K) 활성화 |
-| `useScheduledPosts` | `boolean` | `true` | `true`일 때 Public 포스트는 작성일을 넘어야 리스트에 노출 (예약 게시). `false`면 작성일과 무관하게 노출 |
-| `useStickyProfile` | `boolean` | `false` | 메인 페이지 데스크탑 좌측 프로필 섹션이 스크롤 시 따라다닐지 여부 |
-| `defaultTheme` | `"auto" \| "light" \| "dark"` | `"auto"` | 첫 방문 기본 테마. `auto`는 OS 설정 추종. 사용자가 토글로 변경하면 localStorage 값이 우선 |
-| `useComments` | `boolean` | `true` | utterances 댓글 영역 노출 여부 (`profile.repo`가 있어야 동작) |
-| `useRssFeed` | `boolean` | `true` | `/rss.xml` 피드 활성화. `SITE_URL` 환경변수 필요. `false`면 404 |
-| `showThemeToggle` | `boolean` | `true` | 헤더의 다크모드 토글 버튼 노출. `defaultTheme`을 강제하고 싶을 때 `false` |
-| `showScrollProgress` | `boolean` | `true` | 포스트 페이지 상단 스크롤 진행바 노출 |
-| `postsPerPage` | `number` | `10` | 페이지당 포스트 개수 (1 미만이면 1로 보정) |
-| `paginationMode` | `"infinite" \| "numbered"` | `"infinite"` | `infinite`는 인피니티 스크롤(뒤로가기 시 노출 개수·스크롤 위치 복원). `numbered`는 숫자 페이지 + Prev/Next 버튼, URL은 `?page=N` 사용 |
+| `stickyProfile` | `boolean` | `false` | 데스크탑 좌측 프로필 섹션 스크롤 추종 |
+
+### `theme`
+
+| 키 | 타입 | 기본값 | 설명 |
+|----|------|--------|------|
+| `mode` | `"auto" \| "light" \| "dark"` | `"auto"` | 첫 방문 기본 테마. `auto`는 OS 설정 추종. 사용자가 토글로 바꾸면 localStorage가 우선 |
+| `showToggle` | `boolean` | `true` | 헤더의 다크모드 토글 버튼 노출. `mode`를 강제하고 싶을 때 `false` |
+
+### `search`
+
+| 키 | 타입 | 기본값 | 설명 |
+|----|------|--------|------|
+| `shortcut` | `boolean` | `true` | 검색 단축키(⌘/Ctrl+K) 활성화 |
+| `scope` | `"title" \| "title+summary" \| "all"` | `"all"` | 검색 매칭 범위. `all`은 title + summary + tags |
+| `showInHeader` | `boolean` | `true` | 헤더 검색 아이콘 노출 (단축키만 쓰고 싶다면 `false`) |
+
+### `posts`
+
+| 키 | 타입 | 기본값 | 설명 |
+|----|------|--------|------|
+| `perPage` | `number` | `10` | 페이지당 포스트 개수 (1 미만이면 1로 보정) |
+| `paginationMode` | `"infinite" \| "numbered"` | `"infinite"` | `infinite`는 인피니티 스크롤(뒤로가기 시 노출 개수·스크롤 위치 복원). `numbered`는 숫자 페이지 + Prev/Next 버튼, URL은 `?page=N` |
+| `useScheduled` | `boolean` | `true` | `true`일 때 Public 포스트가 작성일을 넘어야 리스트에 노출 (예약 게시) |
+| `showSummary` | `boolean` | `true` | 포스트 카드의 summary 노출 |
+| `showPrevNext` | `boolean` | `true` | 포스트 페이지 하단 인접(이전/다음) 포스트 네비게이션 |
+| `dateFormat` | `string` | `"YYYY년 MM월 DD일"` | dayjs 토큰 (e.g. `"YYYY-MM-DD"`, `"YYYY/MM/DD HH:mm"`) |
+| `showScrollProgress` | `boolean` | `true` | 포스트 페이지 상단 스크롤 진행바 |
+
+### `comments`
+
+| 키 | 타입 | 기본값 | 설명 |
+|----|------|--------|------|
+| `use` | `boolean` | `true` | utterances 댓글 영역 노출 (`profile.repo` 필수) |
+
+### `rss`
+
+| 키 | 타입 | 기본값 | 설명 |
+|----|------|--------|------|
+| `use` | `boolean` | `true` | `/rss.xml` 활성화. `meta.siteUrl` (또는 `SITE_URL` env) 필요. `false`면 404 |
+
+### `footer`
+
+| 키 | 타입 | 기본값 | 설명 |
+|----|------|--------|------|
+| `show` | `boolean` | `true` | 사이트 전역 footer 영역 노출 |
+| `text` | `string` | `"© ..."` | 표시할 텍스트 |
 
 ```ts
 export const vars = createGlobalTheme(":root", {
