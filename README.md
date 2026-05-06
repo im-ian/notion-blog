@@ -101,6 +101,27 @@ you can customize below information on `site.config.ts` (자세한 옵션 표는
 | `twitter` | `string \| undefined` | Twitter/X URL |
 | `threads` | `string \| undefined` | Threads URL |
 
+### `notion`
+
+| 키 | 타입 | 설명 |
+|----|------|------|
+| `blogPageId` | `string` | Notion DB 페이지 ID. `NOTION_BLOG_PAGE_ID` env로 주입 |
+| `viewId` | `string` | Notion view ID. `NOTION_VIEW_ID` env로 주입. URL의 `?v=...` 부분 |
+| `useViewIdFilter` | `boolean` | `true`로 두면 Notion view의 필터/정렬을 그대로 사용. 코드 측 `posts.useScheduled` 및 status==Public 필터는 비활성 (view에 위임). 기본 `false` |
+
+#### `useViewIdFilter` 동작
+
+| 값 | 동작 |
+|----|------|
+| `false` (기본) | 모든 포스트를 가져온 뒤 코드의 `posts.useScheduled`, `status==Public` 등으로 필터 |
+| `true` | Notion에서 만든 view의 결과만 사용. 정렬·필터·hidden 컬럼 모두 view에 따름. viewId가 잘못되면 자동으로 기본 동작으로 fallback (콘솔 경고 출력) |
+
+view를 직접 만들고 싶다면:
+1. Notion에서 블로그 DB 우상단 `+` → 새 view 추가 (필터/정렬 자유 설정)
+2. 해당 view를 연 상태에서 URL의 `?v=<viewId>` 부분 복사
+3. `NOTION_VIEW_ID` env에 저장
+4. `notion.useViewIdFilter`를 `true`로 토글
+
 ### `meta`
 
 `Next.js Metadata`를 그대로 받으며 다음 키가 추가됨.

@@ -20,7 +20,7 @@ import {
 import { getOptionColor } from "./color";
 import { getSiteConfig } from "./config";
 
-const { blogPageId } = getSiteConfig("notion");
+const { blogPageId, viewId, useViewIdFilter } = getSiteConfig("notion");
 const {
   useScheduled: useScheduledPosts,
   perPage: postsPerPage,
@@ -146,7 +146,22 @@ export async function getPosts(pageId: string = blogPageId) {
     };
 
   const schema = getSchema(pageContent.collection);
-  const pageList = getPostList(pageContent.block);
+
+  // useViewIdFilter=true 이고 viewId가 record map에 존재하면 view 결과로 대체.
+  // 그렇지 않으면(false 또는 viewId 누락/오류) 모든 page block을 끌어오고 코드 측 필터를 적용.
+  const viewList =
+    useViewIdFilter && viewId
+      ? getPostListByView(pageContent, viewId)
+      : null;
+
+  if (useViewIdFilter && viewId && viewList === null) {
+    console.warn(
+      `[notion] useViewIdFilter=true이지만 viewId='${viewId}'를 record map에서 찾지 못해 기본 동작으로 fallback합니다.`,
+    );
+  }
+
+  const usingView = viewList !== null;
+  const pageList = viewList ?? getPostList(pageContent.block);
 
   const posts: Posts = {
     schema: schema || {},
@@ -155,14 +170,19 @@ export async function getPosts(pageId: string = blogPageId) {
         ...page,
         attributes: getPostAttribute(page, schema || {}),
       }))
-      .filter(
-        (page) =>
-          page.attributes.slug.value &&
-          (page.attributes.status.value === PostStatus.Public ||
-            (process.env.NODE_ENV === "development" &&
-              page.attributes.status.value === PostStatus.Editing)),
-      )
+      // slug 누락된 row만 제외. 나머지 노출 규칙은 view 모드일 때 view에 위임.
       .filter((page) => {
+        if (!page.attributes.slug.value) return false;
+        if (usingView) return true;
+        const status = page.attributes.status.value;
+        return (
+          status === PostStatus.Public ||
+          (process.env.NODE_ENV === "development" &&
+            status === PostStatus.Editing)
+        );
+      })
+      .filter((page) => {
+        if (usingView) return true;
         if (!useScheduledPosts) return true;
         if (page.attributes.status.value !== PostStatus.Public) return true;
         const dateValue = page.attributes?.date?.value;
@@ -170,14 +190,17 @@ export async function getPosts(pageId: string = blogPageId) {
         const postDate = new Date(dateValue).getTime();
         if (Number.isNaN(postDate)) return true;
         return postDate <= Date.now();
-      })
-      .sort((a, b) => {
-        const aDate = +new Date(a?.attributes?.date?.value || 0);
-        const bDate = +new Date(b?.attributes?.date?.value || 0);
-
-        return bDate - aDate;
       }),
   };
+
+  // view 모드면 view의 정렬을 그대로 신뢰. 기본 모드는 작성일 desc로 직접 정렬.
+  if (!usingView) {
+    posts.blocks.sort((a, b) => {
+      const aDate = +new Date(a?.attributes?.date?.value || 0);
+      const bDate = +new Date(b?.attributes?.date?.value || 0);
+      return bDate - aDate;
+    });
+  }
 
   return posts;
 }
@@ -324,6 +347,29 @@ export function getPostList(block: BlockMap) {
     .filter((b): b is Block => !!b);
 
   return blocks.filter((b) => b.type === "page");
+}
+
+// 지정된 viewId의 collection_query 결과(필터/정렬 적용)를 그대로 페이지 블록 배열로 반환.
+// viewId가 record map에 없으면 null을 반환해 호출자가 fallback 처리하도록 함.
+export function getPostListByView(
+  record: ExtendedRecordMap,
+  targetViewId: string,
+): Block[] | null {
+  if (!targetViewId) return null;
+
+  const collection = unwrapRecord(Object.values(record.collection || {})[0]);
+  const collectionId = collection?.id;
+  if (!collectionId) return null;
+
+  const queryView = record.collection_query?.[collectionId]?.[targetViewId];
+  if (!queryView) return null;
+
+  const ids = queryView.collection_group_results?.blockIds;
+  if (!ids) return null;
+
+  return ids
+    .map((id) => unwrapRecord(record.block[id]))
+    .filter((b): b is Block => !!b && b.type === "page");
 }
 
 function unwrapRecord<T>(box: NotionMapBox<T> | undefined): T | undefined {
