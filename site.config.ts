@@ -93,11 +93,6 @@ const CONFIG: Config = {
     show: true,
     text: "© 임대호(ian, daeho im). All rights reserved.",
   },
-  // 에러/성능 모니터링 (4개 env 모두 있어야 활성)
-  sentry: {
-    authToken: process.env.SENTRY_AUTH_TOKEN,
-    dsn: process.env.SENTRY_DSN,
-  },
   // Google Search Console + Analytics
   google: {
     googleSearchConsole: {
