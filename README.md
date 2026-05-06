@@ -1,80 +1,83 @@
 # Notion Blog Project
+
+[한국어](./README.md) · [English](./README.en.md)
+
 [![DEMO](https://img.shields.io/badge/BLOG%20DEMO-2d55ff)](https://www.chipmunk-world.com/)
 
-  - ✏️ Write your posts using Notion
-  - ⚙️ Easily configure site
-  - 🎨 Easily customize theme (with [vanilla-extract](https://github.com/vanilla-extract-css/vanilla-extract))
-  - 📊 Google Analytics Support
-  - 🤖 Sentry Support
+- ✏️ Notion으로 포스트 작성
+- ⚙️ 코드 수정 없이 다양한 사이트 옵션 설정
+- 🎨 [vanilla-extract](https://github.com/vanilla-extract-css/vanilla-extract) 기반 테마 커스터마이징
+- 📊 Google Analytics 지원
+- 🤖 Sentry 지원
 
 <br />
 
-## 🚀 Getting Started
+## 🚀 시작하기
 
 ![image](https://github.com/im-ian/notion-blog/assets/38205068/fdc98dfd-c6df-4f1e-9909-e756ee08b29b)
 
-Fork this repository and clone on your workspace.
+이 저장소를 fork해서 작업 공간에 clone합니다.
 
 ![image](https://github.com/im-ian/notion-blog/assets/38205068/56ade899-23bd-4544-8625-154ecad129ae)
 
-Copy [this Notion template](https://imian.notion.site/7cdd2b347b734b7caeb754d8701a4b57?v=c9d11f25b61b4d249d45f3b4dde4c2f2&pvs=4)
+[Notion 템플릿](https://imian.notion.site/7cdd2b347b734b7caeb754d8701a4b57?v=c9d11f25b61b4d249d45f3b4dde4c2f2&pvs=4)을 자기 워크스페이스로 복제합니다.
 
 ![image](https://github.com/im-ian/notion-blog/assets/38205068/0dff2c40-8464-4140-92c2-f865e5067cf2)
 
-Input your ![#f03c15](https://placehold.co/13x13/f03c15/f03c15.png) `NOTION_BLOG_PAGE_ID` and ![#1589F0](https://placehold.co/13x13/1589F0/1589F0.png) `NOTION_VIEW_ID`
+자기 페이지의 ![#f03c15](https://placehold.co/13x13/f03c15/f03c15.png) `NOTION_BLOG_PAGE_ID`와 ![#1589F0](https://placehold.co/13x13/1589F0/1589F0.png) `NOTION_VIEW_ID`를 확인합니다.
 
 ![image](https://github.com/im-ian/notion-blog/assets/38205068/62d3c169-d47b-4e78-80d4-192fe446b1c6)
 
-Add your `env` values in Vercel `Environment Variables`
+Vercel `Environment Variables`에 위 값들을 입력합니다.
 
-If you need sentry debugging, add your sentry configure in environment
+Sentry로 에러를 추적하려면 다음 4개 env를 모두 설정해야 합니다.
+
 - `SENTRY_ORG`
 - `SENTRY_PROJECT`
 - `SENTRY_AUTH_TOKEN`
 - `SENTRY_DSN`
 
-`Sentry.init()` will not proceed unless you add all four Sentry settings.
+4개가 모두 있어야 `Sentry.init()`이 활성화됩니다.
 
 ![image](https://github.com/im-ian/notion-blog/assets/38205068/47731fd6-e4b0-4bfa-a0b4-c9ef9471f409)
 
-Deploy your repository on [Vercel](https://vercel.com/)!
+[Vercel](https://vercel.com/)에 배포하면 끝입니다.
 
 <br />
 
-## 💻 Development
+## 💻 개발
 
 ```shell
 cp .env.example .env
-
 ```
 
-if you try develop this project, copy `.env.example` to `.env` and
+로컬 개발은 `.env.example`을 `.env`로 복사한 뒤 다음을 실행합니다.
 
 ```shell
 yarn && yarn dev
-# or
+# 또는
 npm install && npm dev
 ```
 
 <br />
 
-## 🎨 Customize
+## 🎨 커스터마이징
 
 ```ts
 import type { Config } from "@/types";
 
 const CONFIG: Config = {
-  // Profile
   profile: {
-    // 댓글 기능을 위한 레포명, 입력하지 않으면 댓글 기능이 비활성화됩니다.
+    // 댓글(utterances) 연동용 owner/repo. 미설정 시 댓글 비활성
     repo: "im-ian/notion-blog",
-    // 페이지 상단 Github 아이콘 링크
-    github: "https://github.com/im-ian",
+    github: "im-ian",
   },
   // ...
-}
+};
 ```
-you can customize below information on `site.config.ts` (자세한 옵션 표는 아래 참고)
+
+`site.config.ts`에서 다음 그룹을 조정할 수 있습니다 (자세한 옵션은 아래 표 참고).
+
 - profile
 - notion
 - meta (SEO)
@@ -85,7 +88,6 @@ you can customize below information on `site.config.ts` (자세한 옵션 표는
 - comments
 - rss
 - footer
-- sentry
 
 ### `profile`
 
@@ -117,6 +119,7 @@ you can customize below information on `site.config.ts` (자세한 옵션 표는
 | `true` | Notion에서 만든 view의 결과만 사용. 정렬·필터·hidden 컬럼 모두 view에 따름. viewId가 잘못되면 자동으로 기본 동작으로 fallback (콘솔 경고 출력) |
 
 view를 직접 만들고 싶다면:
+
 1. Notion에서 블로그 DB 우상단 `+` → 새 view 추가 (필터/정렬 자유 설정)
 2. 해당 view를 연 상태에서 URL의 `?v=<viewId>` 부분 복사
 3. `NOTION_VIEW_ID` env에 저장
@@ -124,7 +127,7 @@ view를 직접 만들고 싶다면:
 
 ### `meta`
 
-`Next.js Metadata`를 그대로 받으며 다음 키가 추가됨.
+`Next.js Metadata`를 그대로 받으며 다음 키가 추가됩니다.
 
 | 키 | 타입 | 설명 |
 |----|------|------|
@@ -163,7 +166,7 @@ view를 직접 만들고 싶다면:
 | `useScheduled` | `boolean` | `true` | `true`일 때 Public 포스트가 작성일을 넘어야 리스트에 노출 (예약 게시) |
 | `showSummary` | `boolean` | `true` | 포스트 카드의 summary 노출 |
 | `showPrevNext` | `boolean` | `true` | 포스트 페이지 하단 인접(이전/다음) 포스트 네비게이션 |
-| `dateFormat` | `string` | `"YYYY년 MM월 DD일"` | dayjs 토큰 (e.g. `"YYYY-MM-DD"`, `"YYYY/MM/DD HH:mm"`) |
+| `dateFormat` | `string` | `"YYYY년 MM월 DD일"` | dayjs 토큰 (예: `"YYYY-MM-DD"`, `"YYYY/MM/DD HH:mm"`) |
 | `showScrollProgress` | `boolean` | `true` | 포스트 페이지 상단 스크롤 진행바 |
 
 ### `comments`
@@ -202,14 +205,14 @@ export const vars = createGlobalTheme(":root", {
     "gray-600": "#4b5563",
     "gray-700": "#374151",
     // ...
-  }
+  },
 });
 ```
 
-If you want to edit color or size, edit file `sprinkles.css.ts` or `vars.css.ts`
+색상이나 사이즈를 바꾸려면 `sprinkles.css.ts` 또는 `vars.css.ts`를 수정하세요.
 
 <br />
 
-## 📄 License
+## 📄 라이선스
 
-Released under the [MIT License](./LICENSE). 자유롭게 포크해서 자기 블로그로 사용 가능.
+[MIT 라이선스](./LICENSE) 하에 공개되었습니다. 자유롭게 fork해서 자기 블로그로 사용 가능합니다.
