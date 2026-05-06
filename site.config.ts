@@ -23,7 +23,9 @@ const CONFIG: Config = {
   // SEO/Metadata 전역 기본값
   meta: {
     title: {
+      // title이 없는 페이지에서 사용되는 기본 타이틀
       default: "다람쥐 헌 쳇바퀴에 타고파",
+      // title이 있는 페이지에 적용되는 포맷 (%s = 해당 페이지 title, 예: "%s | My Blog")
       template: "%s",
     },
     description: "Solving problems through code.",
