@@ -5,7 +5,7 @@
 [![DEMO](https://img.shields.io/badge/BLOG%20DEMO-2d55ff)](https://www.chipmunk-world.com/)
 
 - ✏️ Notion으로 포스트 작성
-- ⚙️ 간단한 사이트 설정
+- ⚙️ 코드 수정 없이 다양한 사이트 옵션 설정
 - 🎨 [vanilla-extract](https://github.com/vanilla-extract-css/vanilla-extract) 기반 테마 커스터마이징
 - 📊 Google Analytics 지원
 - 🤖 Sentry 지원

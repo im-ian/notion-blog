@@ -5,7 +5,7 @@
 [![DEMO](https://img.shields.io/badge/BLOG%20DEMO-2d55ff)](https://www.chipmunk-world.com/)
 
 - ✏️ Write your posts in Notion
-- ⚙️ Easy site configuration
+- ⚙️ Rich site options without touching code
 - 🎨 Theme customization powered by [vanilla-extract](https://github.com/vanilla-extract-css/vanilla-extract)
 - 📊 Google Analytics support
 - 🤖 Sentry support
