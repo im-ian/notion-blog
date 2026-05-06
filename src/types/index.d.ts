@@ -62,11 +62,6 @@ type FooterConfig = {
   text: string;
 };
 
-type SentryConfig = {
-  dsn: string | undefined;
-  authToken: string | undefined;
-};
-
 type GoogleConfig = {
   googleSearchConsole: {
     siteVerification: string | undefined;
@@ -93,7 +88,6 @@ export type Config = {
   comments: CommentsConfig;
   rss: RssConfig;
   footer: FooterConfig;
-  sentry: SentryConfig;
   google: GoogleConfig;
   naver: NaverConfig;
 };
