@@ -19,6 +19,10 @@ const CONFIG: Config = {
   notion: {
     blogPageId: process.env.NOTION_BLOG_PAGE_ID || "",
     viewId: process.env.NOTION_VIEW_ID || "",
+    // Notion view의 필터/정렬을 그대로 사용
+    // true: view 기준 결과만 사용. 코드 측 status/useScheduled 필터 비활성 (view에 위임)
+    // false: 모든 포스트 가져온 뒤 코드 옵션으로 필터 (기본)
+    useViewIdFilter: false,
   },
   // SEO/Metadata 전역 기본값
   meta: {

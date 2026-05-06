@@ -15,6 +15,7 @@ type Profile = {
 type NotionConfig = {
   blogPageId: string;
   viewId: string;
+  useViewIdFilter: boolean;
 };
 
 type MetaConfig = Metadata & {
