@@ -85,7 +85,16 @@ export function paginatePosts(
 
 const TAGS_CACHE = new Set<PostTag>();
 
-const api = new NotionAPI();
+// 2026-08부터 Cloudflare가 User-Agent 없는 Node fetch를 403으로 차단함.
+// https://github.com/NotionX/react-notion-x/issues/710
+const api = new NotionAPI({
+  ofetchOptions: {
+    headers: {
+      "User-Agent":
+        "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36",
+    },
+  },
+});
 
 const inflight = new Map<string, Promise<ExtendedRecordMap>>();
 
